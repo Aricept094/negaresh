@@ -1,0 +1,1580 @@
+{
+ "_about": "Samiee's lists of expressions to avoid in formal prose, each with recommended forms; all entries are suggestions (advisory) unless level is convention, and each note gives the condition.",
+ "entries": [
+  {
+   "avoid": "آنچه که",
+   "prefer": [
+    "آنچه"
+   ],
+   "kind": "redundancy",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۴"
+  },
+  {
+   "avoid": "انجام انتخابات",
+   "prefer": [
+    "برگزاری انتخابات"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۴"
+  },
+  {
+   "avoid": "انجام طرح",
+   "prefer": [
+    "اجرای طرح"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۴"
+  },
+  {
+   "avoid": "در حال انجام است",
+   "prefer": [
+    "در دست اجراست"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۵"
+  },
+  {
+   "avoid": "انجام مقدمات",
+   "prefer": [
+    "تهیهٔ مقدمات"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۵"
+  },
+  {
+   "avoid": "در انجام تکلیف",
+   "prefer": [
+    "در ادای تکلیف"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۵"
+  },
+  {
+   "avoid": "مورد استفاده قرار گرفتن",
+   "prefer": [
+    "استفاده شدن"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "note": "با «از»: «از ... استفاده شد»",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۱، ۱۷۵"
+  },
+  {
+   "avoid": "مورد استفاده قرار گرفت",
+   "prefer": [
+    "استفاده شد"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "note": "با «از»: «از ... استفاده شد»",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۱، ۱۷۵"
+  },
+  {
+   "avoid": "مورد استفاده قرار می‌گیرد",
+   "prefer": [
+    "استفاده می‌شود"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "note": "با «از»: «از ... استفاده می‌شود»",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۱، ۱۷۵"
+  },
+  {
+   "avoid": "مورد استفاده قرار نگرفت",
+   "prefer": [
+    "استفاده نشد"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "note": "با «از»: «از ... استفاده نشد»",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۱، ۱۷۵"
+  },
+  {
+   "avoid": "مورد بررسی قرار گرفت",
+   "prefer": [
+    "بررسی شد"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۲"
+  },
+  {
+   "avoid": "مورد بررسی قرار می‌گیرد",
+   "prefer": [
+    "بررسی می‌شود"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۲"
+  },
+  {
+   "avoid": "مورد تشویق قرار گرفت",
+   "prefer": [
+    "تشویق شد"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۱"
+  },
+  {
+   "avoid": "مورد هدف",
+   "prefer": [
+    "هدف"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۱",
+   "note": "کتاب «آماج» را می‌آورد؛ در نثر عادی «هدف» روشن‌تر است"
+  },
+  {
+   "avoid": "استفاده به عمل آمد",
+   "prefer": [
+    "استفاده شد"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "note": "با «از»",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۶"
+  },
+  {
+   "avoid": "به عمل آوردن",
+   "prefer": [
+    "(فعل خاصِ همان اسم: بررسی کرد، پذیرایی کرد)"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "note": "جانشین به اسمِ پیش از آن بستگی دارد",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۳، ۱۷۶"
+  },
+  {
+   "avoid": "به عمل آورد",
+   "prefer": [
+    "(فعل خاصِ همان اسم: بررسی کرد، پذیرایی کرد)"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "note": "جانشین به اسمِ پیش از آن بستگی دارد",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۳، ۱۷۶"
+  },
+  {
+   "avoid": "را تشکیل می‌دهد",
+   "prefer": [
+    "است"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "note": "فقط به معنای «بودن»؛ «جلسه تشکیل داد» به معنای برپا کردن درست است",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۶"
+  },
+  {
+   "avoid": "را تشکیل می‌دهند",
+   "prefer": [
+    "هستند"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "note": "فقط به معنای «بودن»؛ یا صورت پیوستهٔ «‑اند»",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۶"
+  },
+  {
+   "avoid": "لازم به یادآوری است",
+   "prefer": [
+    "یادآوری این نکته لازم است",
+    "باید یادآور شد"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۰"
+  },
+  {
+   "avoid": "به طور سریع",
+   "prefer": [
+    "به‌سرعت"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۵"
+  },
+  {
+   "avoid": "به طور همه‌جانبه",
+   "prefer": [
+    "همه‌جانبه"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۶"
+  },
+  {
+   "avoid": "طبق گزارش",
+   "prefer": [
+    "به گزارش"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۵"
+  },
+  {
+   "avoid": "ناآگاه نیست",
+   "prefer": [
+    "آگاه است"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "note": "نفی دوگانه",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۵"
+  },
+  {
+   "avoid": "چه هنگام",
+   "prefer": [
+    "کی"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "note": "در پرسش؛ در متن ادبی رواست",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۵"
+  },
+  {
+   "avoid": "به اجرا گذاشتن",
+   "prefer": [
+    "اجرا کردن"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۷"
+  },
+  {
+   "avoid": "به اجرا گذاشت",
+   "prefer": [
+    "اجرا کرد"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۷"
+  },
+  {
+   "avoid": "به سود خود پایان داد",
+   "prefer": [
+    "برد",
+    "برنده شد"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "note": "برای بازی و مسابقه",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۶"
+  },
+  {
+   "avoid": "بدون شک و تردید",
+   "prefer": [
+    "بی‌گمان"
+   ],
+   "kind": "redundancy",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۵"
+  },
+  {
+   "avoid": "منبع و منشأ",
+   "prefer": [
+    "منشأ"
+   ],
+   "kind": "redundancy",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۷"
+  },
+  {
+   "avoid": "بسیار زیاد و بی‌شمار",
+   "prefer": [
+    "بی‌شمار"
+   ],
+   "kind": "redundancy",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۷"
+  },
+  {
+   "avoid": "به این دلایل ذکر شده",
+   "prefer": [
+    "به این دلایل",
+    "به دلایل مذکور"
+   ],
+   "kind": "redundancy",
+   "level": "advisory",
+   "rule": "USG-021",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۸"
+  },
+  {
+   "avoid": "با این وجود",
+   "prefer": [
+    "با وجود این",
+    "با این همه",
+    "با این وصف",
+    "مع‌الوصف"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "«مع‌الوصف» را کتاب پیشنهاد می‌کند؛ برای خوانندهٔ عام صورت‌های فارسی روشن‌ترند (STY-008)",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۵"
+  },
+  {
+   "avoid": "به خود اختصاص دادن",
+   "prefer": [
+    "حائز ... شدن",
+    "برندهٔ ... شدن",
+    "... را کسب کردن"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "تعبیر قالبی",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۵"
+  },
+  {
+   "avoid": "به خود اختصاص داد",
+   "prefer": [
+    "حائز ... شد",
+    "برندهٔ ... شد",
+    "... را کسب کرد"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "تعبیر قالبی",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۵"
+  },
+  {
+   "avoid": "به خود اختصاص داده است",
+   "prefer": [
+    "حائز ... شده است",
+    "... را کسب کرده است"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "تعبیر قالبی",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۵"
+  },
+  {
+   "avoid": "تجربه کردن",
+   "prefer": [
+    "از سر گذراندن",
+    "دچار ... شدن",
+    "حس کردن"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "note": "برای درد، احساس، جنگ یا دوره‌ای از زندگی",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۶، ۱۸۰–۱۸۱"
+  },
+  {
+   "avoid": "تجربه کرد",
+   "prefer": [
+    "از سر گذراند",
+    "دچار ... شد"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "note": "برای درد، احساس، جنگ یا دوره‌ای از زندگی",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۶، ۱۸۰–۱۸۱"
+  },
+  {
+   "avoid": "تجربه می‌کند",
+   "prefer": [
+    "از سر می‌گذراند",
+    "می‌گذراند"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "note": "برای درد، احساس، جنگ یا دوره‌ای از زندگی",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۶، ۱۸۰–۱۸۱"
+  },
+  {
+   "avoid": "حرف اول را زدن",
+   "prefer": [
+    "حرف آخر را زدن",
+    "مقام اول را احراز کردن"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "note": "در فارسی «حرف آخر» سخن قاطع است",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۵۳، ۱۵۷"
+  },
+  {
+   "avoid": "حرف اول را می‌زند",
+   "prefer": [
+    "حرف آخر را می‌زند",
+    "مقام اول را دارد"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "note": "در فارسی «حرف آخر» سخن قاطع است",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۵۳، ۱۵۷"
+  },
+  {
+   "avoid": "صدای مرا دارید",
+   "prefer": [
+    "صدای مرا می‌شنوید"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۷"
+  },
+  {
+   "avoid": "دست‌اندرکاران",
+   "prefer": [
+    "متصدیان",
+    "مجریان",
+    "متولیان",
+    "برنامه‌ریزان",
+    "همکاران"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "تعبیر قالبی؛ واژه را با بافت برگزینید",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۸، ۱۶۹"
+  },
+  {
+   "avoid": "زمان بردن",
+   "prefer": [
+    "طول کشیدن"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۹"
+  },
+  {
+   "avoid": "زمان می‌برد",
+   "prefer": [
+    "طول می‌کشد"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۹"
+  },
+  {
+   "avoid": "طیف وسیعی",
+   "prefer": [
+    "انواع",
+    "انواع گوناگون"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "جز در متن علمی که «طیف» اصطلاح است",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۰، ۱۷۶"
+  },
+  {
+   "avoid": "فرازی از",
+   "prefer": [
+    "سخنی از"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "به معنای سخن یا بخشی از گفتار",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۰"
+  },
+  {
+   "avoid": "نقطه‌نظر",
+   "prefer": [
+    "دیدگاه",
+    "نظرگاه",
+    "نظر"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۵۳، ۱۶۱"
+  },
+  {
+   "avoid": "نقطه نظر",
+   "prefer": [
+    "دیدگاه",
+    "نظرگاه",
+    "نظر"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۵۳، ۱۶۱"
+  },
+  {
+   "avoid": "مثل یک قهرمان",
+   "prefer": [
+    "قهرمانانه"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۸۰"
+  },
+  {
+   "avoid": "خود را آشکار می‌کند",
+   "prefer": [
+    "آشکار می‌شود",
+    "جلوه‌گر می‌شود"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "note": "وقتی نهاد بی‌جان است",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۸۰"
+  },
+  {
+   "avoid": "خود را بروز می‌دهد",
+   "prefer": [
+    "بروز می‌کند"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "note": "وقتی نهاد بی‌جان است",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۸۱"
+  },
+  {
+   "avoid": "خود را بروز می‌دهند",
+   "prefer": [
+    "بروز می‌کنند"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "note": "وقتی نهاد بی‌جان است",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۸۱"
+  },
+  {
+   "avoid": "به طور مساوی",
+   "prefer": [
+    "هر دو"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "note": "فقط به معنای «هر دو»؛ «به طور مساوی تقسیم کرد» درست است",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۸۱"
+  },
+  {
+   "avoid": "در کوران",
+   "prefer": [
+    "در جریان"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "به معنای «در جریانِ»",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۹"
+  },
+  {
+   "avoid": "ریسک کردن",
+   "prefer": [
+    "خطر کردن",
+    "خطر پذیرفتن"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۹"
+  },
+  {
+   "avoid": "شاپینگ سنتر",
+   "prefer": [
+    "مرکز خرید",
+    "بازار",
+    "بازارچه"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۵۳"
+  },
+  {
+   "avoid": "الاهم فی الاهم",
+   "prefer": [
+    "الاهم فالاهم"
+   ],
+   "kind": "replacement",
+   "level": "convention",
+   "note": "عبارت عربی را درست بنویسید",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۹"
+  },
+  {
+   "avoid": "من بعد از این",
+   "prefer": [
+    "من‌بعد",
+    "از این پس"
+   ],
+   "kind": "replacement",
+   "level": "convention",
+   "note": "کتاب آن را به هیچ روی پذیرفتنی نمی‌داند",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۹"
+  },
+  {
+   "avoid": "شامل عفو",
+   "prefer": [
+    "مشمول عفو"
+   ],
+   "kind": "replacement",
+   "level": "convention",
+   "note": "وقتی کسی زیر حکم یا عفو می‌آید",
+   "rule": "USG-017",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۹–۱۶۰"
+  },
+  {
+   "avoid": "معرف حضور",
+   "prefer": [
+    "معروف حضور"
+   ],
+   "kind": "replacement",
+   "level": "convention",
+   "rule": "USG-017",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۱"
+  },
+  {
+   "avoid": "سر به فرمان",
+   "prefer": [
+    "گوش به فرمان"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-019",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۰"
+  },
+  {
+   "avoid": "ابتدایی‌ترین کاری",
+   "prefer": [
+    "کمترین کاری"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "به معنای کمترین",
+   "rule": "USG-019",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۰"
+  },
+  {
+   "avoid": "از سمع و نظر",
+   "prefer": [
+    "از نظر ... گذشت و به سمع ... رسید"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-019",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۶"
+  },
+  {
+   "avoid": "ملاحظه بفرمایید به",
+   "prefer": [
+    "توجه بفرمایید به"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-019",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۶"
+  },
+  {
+   "avoid": "متفاوت از",
+   "prefer": [
+    "متفاوت با"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "سمیعی: از ترجمه آمده است؛ امروز بسیار رایج است",
+   "rule": "USG-008",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۸"
+  },
+  {
+   "avoid": "علاقه برای",
+   "prefer": [
+    "علاقه به"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-008",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۸"
+  },
+  {
+   "avoid": "تعلق نسبت به",
+   "prefer": [
+    "تعلق به"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-009",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۸"
+  },
+  {
+   "avoid": "در ارتباط با",
+   "prefer": [
+    "دربارهٔ",
+    "راجع به"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "گاهی زائد است و می‌توان حذفش کرد",
+   "rule": "USG-009",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۷–۱۵۸"
+  },
+  {
+   "avoid": "در رابطه با",
+   "prefer": [
+    "دربارهٔ",
+    "راجع به"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "گاهی زائد است و می‌توان حذفش کرد",
+   "rule": "USG-009",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۹"
+  },
+  {
+   "avoid": "این جور وقت‌ها",
+   "prefer": [
+    "در چنین مواقعی",
+    "در چنین اوقاتی"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "در نثر رسمی",
+   "rule": "USG-014",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۹"
+  },
+  {
+   "avoid": "به درد نمی‌خورد",
+   "prefer": [
+    "به کار نمی‌آید"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "در نثر رسمی",
+   "rule": "USG-014",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۹"
+  },
+  {
+   "avoid": "به درد نمی‌خورند",
+   "prefer": [
+    "به کار نمی‌آیند"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "در نثر رسمی",
+   "rule": "USG-014",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۹"
+  },
+  {
+   "avoid": "می‌باشد",
+   "prefer": [
+    "است"
+   ],
+   "kind": "replacement",
+   "level": "convention",
+   "note": "«باشد» التزامی درست است",
+   "rule": "USG-015",
+   "source": "samiee-1386",
+   "loc": "ص ۵۹، ۱۶۱"
+  },
+  {
+   "avoid": "می‌باشند",
+   "prefer": [
+    "هستند"
+   ],
+   "kind": "replacement",
+   "level": "convention",
+   "note": "یا صورت پیوستهٔ «‑اند»",
+   "rule": "USG-015",
+   "source": "samiee-1386",
+   "loc": "ص ۵۹، ۱۶۱"
+  },
+  {
+   "avoid": "می‌باشیم",
+   "prefer": [
+    "هستیم"
+   ],
+   "kind": "replacement",
+   "level": "convention",
+   "note": "یا صورت پیوستهٔ «‑ایم»",
+   "rule": "USG-015",
+   "source": "samiee-1386",
+   "loc": "ص ۵۹، ۱۶۱"
+  },
+  {
+   "avoid": "می‌باشم",
+   "prefer": [
+    "هستم"
+   ],
+   "kind": "replacement",
+   "level": "convention",
+   "note": "یا صورت پیوستهٔ «‑ام»",
+   "rule": "USG-015",
+   "source": "samiee-1386",
+   "loc": "ص ۵۹، ۱۶۱"
+  },
+  {
+   "avoid": "می‌باشید",
+   "prefer": [
+    "هستید"
+   ],
+   "kind": "replacement",
+   "level": "convention",
+   "note": "یا صورت پیوستهٔ «‑اید»",
+   "rule": "USG-015",
+   "source": "samiee-1386",
+   "loc": "ص ۵۹، ۱۶۱"
+  },
+  {
+   "avoid": "نمی‌باشد",
+   "prefer": [
+    "نیست"
+   ],
+   "kind": "replacement",
+   "level": "convention",
+   "rule": "USG-015",
+   "source": "samiee-1386",
+   "loc": "ص ۵۹، ۱۶۱"
+  },
+  {
+   "avoid": "نمی‌باشند",
+   "prefer": [
+    "نیستند"
+   ],
+   "kind": "replacement",
+   "level": "convention",
+   "rule": "USG-015",
+   "source": "samiee-1386",
+   "loc": "ص ۵۹، ۱۶۱"
+  },
+  {
+   "avoid": "چه هست",
+   "prefer": [
+    "چیست"
+   ],
+   "kind": "replacement",
+   "level": "convention",
+   "rule": "USG-015",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۴"
+  },
+  {
+   "avoid": "غیرقابل انکار",
+   "prefer": [
+    "انکارناپذیر",
+    "مسلم",
+    "قطعی"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-020",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۰، ۱۷۵"
+  },
+  {
+   "avoid": "غیرقابل بازگشت",
+   "prefer": [
+    "بازگشت‌ناپذیر",
+    "بازنگشتنی"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-020",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۰، ۱۷۵"
+  },
+  {
+   "avoid": "غیرقابل تحمل",
+   "prefer": [
+    "تحمل‌ناپذیر",
+    "طاقت‌فرسا"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-020",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۰"
+  },
+  {
+   "avoid": "غیرقابل عمل",
+   "prefer": [
+    "غیرعملی"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-020",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۰"
+  },
+  {
+   "avoid": "غیرقابل بخشش",
+   "prefer": [
+    "نابخشودنی"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-020",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۵"
+  },
+  {
+   "avoid": "قابل حدس زدن",
+   "prefer": [
+    "حدس‌زدنی"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-020",
+   "source": "samiee-1386",
+   "loc": "ص ۱۷۵"
+  },
+  {
+   "avoid": "قابل اهمیت",
+   "prefer": [
+    "مهم",
+    "درخور توجه"
+   ],
+   "kind": "replacement",
+   "level": "convention",
+   "note": "کتاب آن را به هیچ روی پذیرفتنی نمی‌داند",
+   "rule": "USG-020",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۹"
+  },
+  {
+   "avoid": "عدم وجود",
+   "prefer": [
+    "فقدان"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-020",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۰"
+  },
+  {
+   "avoid": "عدم اشتغال",
+   "prefer": [
+    "بیکاری"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-020",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۰"
+  },
+  {
+   "avoid": "عدم همت",
+   "prefer": [
+    "بی‌همتی"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-020",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۰"
+  },
+  {
+   "avoid": "عدم برخورداری",
+   "prefer": [
+    "محرومیت"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-020",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۰"
+  },
+  {
+   "avoid": "عدم گل‌زنی",
+   "prefer": [
+    "گل نزدن"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-020",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۰"
+  },
+  {
+   "avoid": "غیرپخته",
+   "prefer": [
+    "ناپخته",
+    "نپخته",
+    "خام"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-020",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۰"
+  },
+  {
+   "avoid": "توسط",
+   "prefer": [
+    "(جملهٔ معلوم)",
+    "با",
+    "از راهِ"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "سمیعی: جملهٔ معلوم بسازید؛ برای ابزار و راه «با» یا «از راهِ»؛ کنشگری که متن نگفته است نسازید (INT-002)",
+   "rule": "GRM-014",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۶، ۱۶۳"
+  },
+  {
+   "avoid": "به توسط",
+   "prefer": [
+    "(جملهٔ معلوم)",
+    "با",
+    "از راهِ"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "note": "سمیعی: جملهٔ معلوم بسازید؛ برای ابزار و راه «با» یا «از راهِ»؛ کنشگری که متن نگفته است نسازید (INT-002)",
+   "rule": "GRM-014",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۴، ۱۶۳"
+  },
+  {
+   "avoid": "چونان",
+   "prefer": [
+    "مانند",
+    "مثل",
+    "چون"
+   ],
+   "kind": "archaism",
+   "level": "advisory",
+   "note": "در متن ادبی رواست",
+   "rule": "STY-012",
+   "source": "samiee-1386",
+   "loc": "ص ۵۰، ۵۲"
+  },
+  {
+   "avoid": "آگندن",
+   "prefer": [
+    "پر کردن"
+   ],
+   "kind": "archaism",
+   "level": "advisory",
+   "note": "در متن ادبی رواست",
+   "rule": "STY-012",
+   "source": "samiee-1386",
+   "loc": "ص ۵۲"
+  },
+  {
+   "avoid": "ایدون",
+   "prefer": [
+    "این چنین"
+   ],
+   "kind": "archaism",
+   "level": "advisory",
+   "note": "در متن ادبی رواست",
+   "rule": "STY-012",
+   "source": "samiee-1386",
+   "loc": "ص ۵۲"
+  },
+  {
+   "avoid": "ازیرا",
+   "prefer": [
+    "از این رو"
+   ],
+   "kind": "archaism",
+   "level": "advisory",
+   "note": "در متن ادبی رواست",
+   "rule": "STY-012",
+   "source": "samiee-1386",
+   "loc": "ص ۵۲"
+  },
+  {
+   "avoid": "چکاد",
+   "prefer": [
+    "قله"
+   ],
+   "kind": "archaism",
+   "level": "advisory",
+   "note": "در متن ادبی رواست",
+   "rule": "STY-012",
+   "source": "samiee-1386",
+   "loc": "ص ۵۰، ۵۲"
+  },
+  {
+   "avoid": "روزان و شبان",
+   "prefer": [
+    "روزها و شب‌ها"
+   ],
+   "kind": "archaism",
+   "level": "advisory",
+   "note": "در متن ادبی رواست",
+   "rule": "STY-012",
+   "source": "samiee-1386",
+   "loc": "ص ۵۲"
+  },
+  {
+   "avoid": "گوییم",
+   "prefer": [
+    "می‌گوییم"
+   ],
+   "kind": "archaism",
+   "level": "advisory",
+   "note": "جز در شعر و نقل متن کهن",
+   "rule": "STY-012",
+   "source": "samiee-1386",
+   "loc": "ص ۵۲"
+  },
+  {
+   "avoid": "ناپسندش افتاد",
+   "prefer": [
+    "خوشش نیامد"
+   ],
+   "kind": "archaism",
+   "level": "advisory",
+   "note": "در متن ادبی رواست",
+   "rule": "STY-012",
+   "source": "samiee-1386",
+   "loc": "ص ۵۲"
+  },
+  {
+   "avoid": "گفته آمد",
+   "prefer": [
+    "گفته شد"
+   ],
+   "kind": "archaism",
+   "level": "advisory",
+   "note": "مجهول با «آمدن»",
+   "rule": "STY-012",
+   "source": "samiee-1386",
+   "loc": "ص ۴۹–۵۰"
+  },
+  {
+   "avoid": "تواند بود",
+   "prefer": [
+    "می‌تواند باشد"
+   ],
+   "kind": "archaism",
+   "level": "advisory",
+   "note": "در متن ادبی رواست",
+   "rule": "STY-012",
+   "source": "samiee-1386",
+   "loc": "ص ۴۹–۵۰"
+  },
+  {
+   "avoid": "تواند کرد",
+   "prefer": [
+    "می‌تواند ... کند"
+   ],
+   "kind": "archaism",
+   "level": "advisory",
+   "note": "در متن ادبی رواست",
+   "rule": "STY-012",
+   "source": "samiee-1386",
+   "loc": "ص ۴۹–۵۰"
+  },
+  {
+   "avoid": "فروافکندن",
+   "prefer": [
+    "حذف کردن"
+   ],
+   "kind": "purism",
+   "level": "advisory",
+   "note": "به معنای حذف کردن",
+   "rule": "STY-013",
+   "source": "samiee-1386",
+   "loc": "ص ۵۲–۵۳"
+  },
+  {
+   "avoid": "میوه کوشش",
+   "prefer": [
+    "ثمرهٔ کوشش"
+   ],
+   "kind": "purism",
+   "level": "advisory",
+   "note": "واژهٔ رایج عربی را سره نکنید",
+   "rule": "STY-013",
+   "source": "samiee-1386",
+   "loc": "ص ۵۲–۵۳"
+  },
+  {
+   "avoid": "میوه‌بخش",
+   "prefer": [
+    "ثمربخش"
+   ],
+   "kind": "purism",
+   "level": "advisory",
+   "rule": "STY-013",
+   "source": "samiee-1386",
+   "loc": "ص ۵۲–۵۳"
+  },
+  {
+   "avoid": "از نگاه فرهنگی",
+   "prefer": [
+    "از نظر فرهنگی"
+   ],
+   "kind": "purism",
+   "level": "advisory",
+   "rule": "STY-013",
+   "source": "samiee-1386",
+   "loc": "ص ۵۲–۵۳"
+  },
+  {
+   "avoid": "دین‌گرا",
+   "prefer": [
+    "متدین",
+    "دین‌دار"
+   ],
+   "kind": "ornament",
+   "level": "advisory",
+   "note": "در متن اطلاع‌رسان، به معنای دین‌دار",
+   "rule": "STY-014",
+   "source": "samiee-1386",
+   "loc": "ص ۴۹–۵۰"
+  },
+  {
+   "avoid": "به عنوان نماینده",
+   "prefer": [
+    "به نمایندگی"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۵"
+  },
+  {
+   "avoid": "در جای‌جای",
+   "prefer": [
+    "در سرتاسر",
+    "در همه‌جای"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۷"
+  },
+  {
+   "avoid": "طرح را پیاده",
+   "prefer": [
+    "طرح را اجرا"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۵۳، ۱۵۶",
+   "note": "پیاده کردن مسافر درست است"
+  },
+  {
+   "avoid": "برنامه را پیاده",
+   "prefer": [
+    "برنامه را اجرا"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۵۳، ۱۵۶",
+   "note": "پیاده کردن مسافر درست است"
+  },
+  {
+   "avoid": "قانون را پیاده",
+   "prefer": [
+    "قانون را اجرا"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۵۳، ۱۵۶",
+   "note": "پیاده کردن مسافر درست است"
+  },
+  {
+   "avoid": "سیاست را پیاده",
+   "prefer": [
+    "سیاست را اجرا"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۵۳، ۱۵۶",
+   "note": "پیاده کردن مسافر درست است"
+  },
+  {
+   "avoid": "روش را دنبال",
+   "prefer": [
+    "از روش پیروی",
+    "روش را به کار"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۸",
+   "note": "دنبال کردن خبر یا کسی درست است"
+  },
+  {
+   "avoid": "سیاست را دنبال",
+   "prefer": [
+    "از سیاست پیروی",
+    "سیاست را به کار"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-016",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۸",
+   "note": "دنبال کردن خبر یا کسی درست است"
+  },
+  {
+   "avoid": "از آلودگی برخوردار",
+   "prefer": [
+    "آلودگی دارد",
+    "دچار آلودگی است"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-018",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۵",
+   "note": "«برخوردار» برای بهره و نعمت است"
+  },
+  {
+   "avoid": "از مشکل برخوردار",
+   "prefer": [
+    "مشکل دارد",
+    "دچار مشکل است"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-018",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۵",
+   "note": "«برخوردار» برای بهره و نعمت است"
+  },
+  {
+   "avoid": "از کمبود برخوردار",
+   "prefer": [
+    "کمبود دارد",
+    "دچار کمبود است"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-018",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۵",
+   "note": "«برخوردار» برای بهره و نعمت است"
+  },
+  {
+   "avoid": "از ضعف برخوردار",
+   "prefer": [
+    "ضعف دارد",
+    "دچار ضعف است"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-018",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۵",
+   "note": "«برخوردار» برای بهره و نعمت است"
+  },
+  {
+   "avoid": "از بیماری برخوردار",
+   "prefer": [
+    "بیماری دارد",
+    "دچار بیماری است"
+   ],
+   "kind": "calque",
+   "level": "advisory",
+   "rule": "USG-018",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۵",
+   "note": "«برخوردار» برای بهره و نعمت است"
+  },
+  {
+   "avoid": "جهت اطلاع",
+   "prefer": [
+    "برای اطلاع"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-009",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۹",
+   "note": "«جهت» به معنای «سو» درست است"
+  },
+  {
+   "avoid": "جهت رفع",
+   "prefer": [
+    "برای رفع"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-009",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۹",
+   "note": "«جهت» به معنای «سو» درست است"
+  },
+  {
+   "avoid": "جهت بررسی",
+   "prefer": [
+    "برای بررسی"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-009",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۹",
+   "note": "«جهت» به معنای «سو» درست است"
+  },
+  {
+   "avoid": "جهت تأمین",
+   "prefer": [
+    "برای تأمین"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-009",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۹",
+   "note": "«جهت» به معنای «سو» درست است"
+  },
+  {
+   "avoid": "جهت انجام",
+   "prefer": [
+    "برای انجام"
+   ],
+   "kind": "replacement",
+   "level": "advisory",
+   "rule": "USG-009",
+   "source": "samiee-1386",
+   "loc": "ص ۱۶۹",
+   "note": "«جهت» به معنای «سو» درست است"
+  },
+  {
+   "avoid": "متعجب هستم",
+   "prefer": [
+    "متعجبم"
+   ],
+   "kind": "padding",
+   "level": "advisory",
+   "rule": "USG-015",
+   "source": "samiee-1386",
+   "loc": "ص ۱۵۴"
+  }
+ ]
+}

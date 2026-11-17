@@ -1,0 +1,12 @@
+{
+  "name": "negaresh",
+  "version": "0.2.0",
+  "description": "Persian (Farsi) writing guide: rules for natural Persian sentences, grammar, usage, orthography and punctuation, with mechanical checks.",
+  "contextFileName": "GEMINI.md",
+  "mcpServers": {
+    "negaresh": {
+      "command": "uvx",
+      "args": ["--from", "${extensionPath}", "negaresh", "serve"]
+    }
+  }
+}

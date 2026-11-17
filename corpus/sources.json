@@ -1,0 +1,42 @@
+[
+  {
+    "id": "dastur-khat-1401",
+    "short": "دستور خطّ فارسی (۱۴۰۱)",
+    "citation": "فرهنگستان زبان و ادب فارسی، دستور خطّ فارسی (ویراست جدید)، تهران: نشر آثار، چاپ اوّل ۱۴۰۱، شابک 978-622-5305-22-9.",
+    "role": "official_orthography",
+    "locator_kind": "printed page",
+    "note": "Locators are printed page numbers. Forms were read from an OCR transcription and not yet checked against the page images."
+  },
+  {
+    "id": "anvari-givi-1",
+    "short": "انوری و احمدی گیوی، دستور ۱",
+    "citation": "حسن احمدی گیوی و حسن انوری، دستور زبان فارسی ۱، ویرایش چهارم، تهران: انتشارات فاطمی.",
+    "role": "descriptive_grammar",
+    "locator_kind": "part and section heading, printed page",
+    "note": "Locators give the section and the printed page. Checked against the page images on 15 Nov 2026."
+  },
+  {
+    "id": "anvari-givi-2",
+    "short": "انوری و احمدی گیوی، دستور ۲",
+    "citation": "حسن انوری و حسن احمدی گیوی، دستور زبان فارسی ۲، ویرایش چهارم، تهران: انتشارات فاطمی.",
+    "role": "descriptive_grammar",
+    "locator_kind": "section number, printed page",
+    "note": "Locators give the book's section number (chapter-section) and the printed page. Checked against the page images on 15 Nov 2026."
+  },
+  {
+    "id": "arjang-1374",
+    "short": "ارژنگ، دستور زبان فارسی امروز",
+    "citation": "غلامرضا ارژنگ، دستور زبان فارسی امروز، تهران: نشر قطره، چاپ اوّل ۱۳۷۴.",
+    "role": "descriptive_grammar",
+    "locator_kind": "chapter heading, printed page",
+    "note": "Locators give the heading and the printed page. Checked against the page images on 15 Nov 2026."
+  },
+  {
+    "id": "samiee-1386",
+    "short": "سمیعی، نگارش و ویرایش",
+    "citation": "احمد سمیعی (گیلانی)، نگارش و ویرایش، تهران: سازمان مطالعه و تدوین کتب علوم انسانی دانشگاه‌ها (سمت)، چاپ هشتم ۱۳۸۶ (چاپ اول ۱۳۷۸).",
+    "role": "writing_and_editing_guide",
+    "locator_kind": "section heading, printed page",
+    "note": "Locators give the section and the printed page, checked on the page images. Written before the Academy's 1401 orthography; where they differ, the rule says so."
+  }
+]

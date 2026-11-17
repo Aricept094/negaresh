@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "negaresh"
+version = "0.2.0"
+description = "Persian (Farsi) writing guide: sourced rule set, mechanical checks and a local MCP server"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE", "NOTICE.md"]
+requires-python = ">=3.11"
+dependencies = ["mcp==2.3.0", "pydantic>=2.12,<3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+negaresh = "negaresh.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+negaresh = ["data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

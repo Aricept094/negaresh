@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "negaresh": {
+      "command": "uvx",
+      "args": ["--from", "${CLAUDE_PLUGIN_ROOT}", "negaresh", "serve"]
+    }
+  }
+}

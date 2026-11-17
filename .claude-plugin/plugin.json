@@ -1,0 +1,21 @@
+{
+  "name": "negaresh",
+  "version": "0.2.0",
+  "description": "Persian (Farsi) writing guide: a sourced rule set for natural Persian sentence structure, verb and tense choice, paragraph flow, grammar, usage, Academy orthography and punctuation, with a skill for writing and editing and a local MCP server for mechanical checks and patch validation.",
+  "author": {
+    "name": "negaresh contributors"
+  },
+  "license": "MIT",
+  "keywords": [
+    "persian",
+    "farsi",
+    "فارسی",
+    "ویرایش",
+    "writing",
+    "editing",
+    "proofreading",
+    "style"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

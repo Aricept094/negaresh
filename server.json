@@ -1,0 +1,28 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.aricept094/negaresh",
+  "title": "negaresh",
+  "description": "Persian (Farsi) writing rules and checks: natural sentences, grammar, orthography.",
+  "repository": {
+    "url": "https://github.com/Aricept094/negaresh",
+    "source": "github"
+  },
+  "version": "0.2.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
+      "identifier": "negaresh",
+      "version": "0.2.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "serve"
+        }
+      ]
+    }
+  ]
+}

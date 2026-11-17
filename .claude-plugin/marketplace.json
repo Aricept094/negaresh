@@ -1,0 +1,12 @@
+{
+  "name": "negaresh",
+  "owner": {"name": "negaresh"},
+  "plugins": [
+    {
+      "name": "negaresh",
+      "source": "./",
+      "description": "Persian (Farsi) writing guide: rule set, writing and editing skill, and a local MCP server for mechanical checks.",
+      "version": "0.2.0"
+    }
+  ]
+}
