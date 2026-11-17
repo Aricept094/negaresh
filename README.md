@@ -1,6 +1,6 @@
 # negaresh (نگارش)
 
-[![ci](https://github.com/Aricept094/negaresh/actions/workflows/ci.yml/badge.svg)](https://github.com/Aricept094/negaresh/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![ci](https://github.com/Aricept094/negaresh/actions/workflows/ci.yml/badge.svg)](https://github.com/Aricept094/negaresh/actions/workflows/ci.yml) [![PyPI](https://img.shields.io/pypi/v/negaresh.svg)](https://pypi.org/project/negaresh/) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 A Persian (Farsi) writing guide for AI assistants and editors. It has three parts that work together or alone:
 
@@ -33,10 +33,10 @@ The rules were built from five books: the Academy's «دستور خطّ فارس
 
 ## Install
 
-The server command is the same everywhere:
+The server is on [PyPI](https://pypi.org/project/negaresh/) and in the [official MCP Registry](https://registry.modelcontextprotocol.io/) as `io.github.Aricept094/negaresh`. The command is the same everywhere:
 
 ```
-uvx --from git+https://github.com/Aricept094/negaresh negaresh serve
+uvx negaresh serve
 ```
 
 ### Claude Code (plugin: skill and MCP server together)
@@ -67,7 +67,7 @@ Add the server to `claude_desktop_config.json` (Settings → Developer → Edit 
   "mcpServers": {
     "negaresh": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/Aricept094/negaresh", "negaresh", "serve"]
+      "args": ["negaresh", "serve"]
     }
   }
 }
@@ -86,7 +86,7 @@ Two ways, both in [clients/chatgpt](clients/chatgpt/README.md): an MCP connector
 ### Codex CLI
 
 ```bash
-codex mcp add negaresh -- uvx --from git+https://github.com/Aricept094/negaresh negaresh serve
+codex mcp add negaresh -- uvx negaresh serve
 ```
 
 For the skill, copy `skills/negaresh` to `~/.codex/skills/negaresh`.
@@ -99,21 +99,22 @@ gemini extensions install https://github.com/Aricept094/negaresh
 
 ### Cursor
 
-[Install in Cursor](cursor://anysphere.cursor-deeplink/mcp/install?name=negaresh&config=eyJjb21tYW5kIjoidXZ4IiwiYXJncyI6WyItLWZyb20iLCJnaXQraHR0cHM6Ly9naXRodWIuY29tL0FyaWNlcHQwOTQvbmVnYXJlc2giLCJuZWdhcmVzaCIsInNlcnZlIl19), or add the JSON block above to `~/.cursor/mcp.json`.
+[Install in Cursor](cursor://anysphere.cursor-deeplink/mcp/install?name=negaresh&config=eyJjb21tYW5kIjoidXZ4IiwiYXJncyI6WyJuZWdhcmVzaCIsInNlcnZlIl19), or add the JSON block above to `~/.cursor/mcp.json`.
 
 ### VS Code
 
-[Install in VS Code](https://insiders.vscode.dev/redirect/mcp/install?name=negaresh&config=%7B%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22--from%22%2C%22git%2Bhttps%3A//github.com/Aricept094/negaresh%22%2C%22negaresh%22%2C%22serve%22%5D%7D), or:
+[Install in VS Code](https://insiders.vscode.dev/redirect/mcp/install?name=negaresh&config=%7B%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22negaresh%22%2C%22serve%22%5D%7D), or:
 
 ```bash
-code --add-mcp "{\"name\":\"negaresh\",\"command\":\"uvx\",\"args\":[\"--from\",\"git+https://github.com/Aricept094/negaresh\",\"negaresh\",\"serve\"]}"
+code --add-mcp "{\"name\":\"negaresh\",\"command\":\"uvx\",\"args\":[\"negaresh\",\"serve\"]}"
 ```
 
 ### Any other MCP client
 
-- stdio: `uvx --from git+https://github.com/Aricept094/negaresh negaresh serve`
-- Streamable HTTP: `uvx --from git+https://github.com/Aricept094/negaresh negaresh serve --http --port 8000`, then connect to `http://127.0.0.1:8000/mcp`. Use `--allowed-host <name>` for a proxy or tunnel host.
-- With pip: `pip install git+https://github.com/Aricept094/negaresh`, then `negaresh serve`.
+- stdio: `uvx negaresh serve`
+- Streamable HTTP: `uvx negaresh serve --http --port 8000`, then connect to `http://127.0.0.1:8000/mcp`. Use `--allowed-host <name>` for a proxy or tunnel host.
+- With pip: `pip install negaresh`, then `negaresh serve`.
+- Development version from GitHub: `uvx --from git+https://github.com/Aricept094/negaresh negaresh serve`.
 
 ### Skill only (any client that reads Agent Skills)
 

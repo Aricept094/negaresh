@@ -9,7 +9,7 @@ ChatGPT connects only to remote MCP servers over HTTPS, so you run the server on
 1. Start the server in HTTP mode:
 
    ```bash
-   uvx --from git+https://github.com/Aricept094/negaresh negaresh serve --http --port 8000
+   uvx negaresh serve --http --port 8000
    ```
 
 2. Expose it over HTTPS with a tunnel of your choice, for example:
@@ -21,7 +21,7 @@ ChatGPT connects only to remote MCP servers over HTTPS, so you run the server on
 3. Restart the server so that it accepts the tunnel's host name (replace the host):
 
    ```bash
-   uvx --from git+https://github.com/Aricept094/negaresh negaresh serve --http --port 8000 --allowed-host your-name.trycloudflare.com
+   uvx negaresh serve --http --port 8000 --allowed-host your-name.trycloudflare.com
    ```
 
 4. In ChatGPT, create a connector with the URL `https://your-name.trycloudflare.com/mcp` and no authentication.
