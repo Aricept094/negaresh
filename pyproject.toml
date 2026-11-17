@@ -12,6 +12,20 @@ license-files = ["LICENSE", "NOTICE.md"]
 requires-python = ">=3.11"
 dependencies = ["mcp==2.3.0", "pydantic>=2.12,<3"]
 
+keywords = ["persian", "farsi", "writing", "editing", "mcp", "mcp-server", "agent-skills"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Natural Language :: Persian",
+    "Programming Language :: Python :: 3",
+    "Topic :: Text Processing :: Linguistic",
+]
+
+[project.urls]
+Homepage = "https://github.com/Aricept094/negaresh"
+Repository = "https://github.com/Aricept094/negaresh"
+Changelog = "https://github.com/Aricept094/negaresh/blob/main/CHANGELOG.md"
+
 [project.optional-dependencies]
 dev = ["pytest>=8"]
 

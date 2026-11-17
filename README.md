@@ -177,7 +177,7 @@ Do not edit generated files: `src/negaresh/data/corpus.json`, `skills/negaresh/r
 
 To make the release files (wheel, skill zip, clean folder): `python tools/package.py`.
 
-<!-- mcp-name: io.github.aricept094/negaresh -->
+<!-- mcp-name: io.github.Aricept094/negaresh -->
 
 ## Limits
 
