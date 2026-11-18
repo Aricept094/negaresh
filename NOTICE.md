@@ -22,6 +22,13 @@ Some rules also cite these journal articles and editing columns:
 | faghiri-samvelian-2021 | Faghiri and Samvelian, clefts in Persian, *Faits de Langues* 52(1), 2021 |
 | tabibzadeh-2025 | امید طبیب‌زاده، «مقایسهٔ صورت‌های شکسته در خط فارسی و انگلیسی»، *Persian Language and Iranian Dialects* 10(1), 2025 |
 | ahmadi-darani-karamatian-1401 | علی‌اکبر احمدی دارانی و طناز کرامتیان‌فرد، «نقد و تحلیل شیوه‌نامه‌های نگارش و ویرایش فارسی (مطالعهٔ موردی: نشانه‌گذاری)»، فنون ادبی ۱۴(۴)، ۱۴۰۱ |
+| esmaeili-1394 | اصغر اسمعیلی، «الگوهای زبانی غیرمعیار فارسی در مکاتبات اداری»، جستارهای زبانی ۶(۷)، ۱۳۹۴ |
+| alaei-abuzar-1403 | الهام علائی‌ابوذر، «بررسی افعال سبک در دو پیکرهٔ تخصصی فارسی»، زبان و زبان‌شناسی ۲۰(۳۹)، ۱۴۰۳ |
+| zolfaghari-1387 | حسن ذوالفقاری، «الگوهای غیرمعیار در زبان مطبوعات»، مطالعات ملی ۹(۱)، ۱۳۸۷ |
+| faghiri-samvelian-2014 | Faghiri and Samvelian, "Constituent Ordering in Persian and the Weight Factor", *Empirical Issues in Syntax and Semantics* 10, 2014 |
+| taghavi-hashemi-1401 | مرتضی تقوی و محمدرضا هاشمی، «جهانی‌های ترجمه در بوتهٔ نقد پیکره‌ای: مقایسهٔ فارسی ترجمه‌ای با فارسی تألیفی»، جستارهای زبانی ۱۳(۱)، ۱۴۰۱ |
+| mirtorabi-kalantari-1405 | سعیده میرترابی و فاطمه کلانتری، کاربرد اسنادی «هست»، «هستش» و «هس» در فارسی محاورهٔ نوشتاری، نامهٔ فرهنگستان ۲۵(۱)، ۱۴۰۵ |
+| kermani-sasani-1403 | معصومه کرمانی و فرهاد ساسانی، «الگوهای شرط در فارسی بر پایهٔ صورت‌های فعلی»، پژوهش‌های زبان‌شناسی ۱۶(۱)، ۱۴۰۳ |
 
 Full citations with links are in `corpus/sources.json` and in the rule book.
 
@@ -29,4 +36,4 @@ Full citations with links are in `corpus/sources.json` and in the rule book.
 
 The author bought the books, scanned them with OCR for personal use, and extracted the rules from them. The rules were then rewritten and tuned to the author's needs, with new examples. The books are not part of this project and cannot be read or searched through the skill or the server. The skill does not check sentences against the books; it applies the rules. Each sourced rule names the book and page it comes from; the few rules with no book behind them are marked as editorial practice.
 
-The articles were found and read with AI research tools. Their findings (counts, examples, conclusions) are summarized in the author's own words and cited; no article text is copied. A human editor then checked each cited finding against the article.
+The articles were found and read with AI research tools. Their findings (counts, examples, conclusions) are summarized in the author's own words and cited; no article text is copied. A human editor then checked each cited finding against the article, except for the sources the rule book marks as not yet checked.

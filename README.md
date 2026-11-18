@@ -14,7 +14,7 @@ A Persian (Farsi) writing guide for AI assistants and editors. It has three part
 
 The rules were built from five books: the Academy's «دستور خطّ فارسی» (1401), Anvari and Ahmadi-Givi's «دستور زبان فارسی» 1 and 2, Arzhang's «دستور زبان فارسی امروز», and Samiee's «نگارش و ویرایش». The author bought the books, scanned them with OCR, extracted the rules, and rewrote and tuned them to the author's needs. The books are not included, and the skill and server cannot read or search them; the skill applies the rules, not the books.
 
-Some rules also cite journal articles and editing columns: corpus studies of written and spoken Persian and of translated Persian, and published before-and-after edits. Their findings are summarized in the author's own words. A human editor checked each cited finding against the article. Full titles of the books and articles are in [NOTICE.md](https://github.com/Aricept094/negaresh/blob/main/NOTICE.md).
+Some rules also cite journal articles and editing columns: corpus studies of written and spoken Persian and of translated Persian, and published before-and-after edits. Their findings are summarized in the author's own words. A human editor checked each cited finding against the article, except where the rule book says a source is not yet checked. Full titles of the books and articles are in [NOTICE.md](https://github.com/Aricept094/negaresh/blob/main/NOTICE.md).
 
 ## What it does
 

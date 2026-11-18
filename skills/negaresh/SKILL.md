@@ -69,5 +69,6 @@ When you write, apply the same moves from the start: a real subject and a finite
 - Where a rule says two forms are both correct (for example GRM-002, GRM-013), do not change one to the other. Report inconsistency only.
 - If a sentence has two readings, ask. Do not choose for the author.
 - Do not cite a rule that is not in this set. If no rule covers the point, say that it is your own judgement.
+- Do not mark a word wrong only because a popular usage list (such as «غلط ننویسیم») calls it wrong; many such verdicts do not hold. If no rule here covers it, say that it is your own judgement.
 - Write the half-space as U+200C. Do not put it after ا د ذ ر ز ژ و (ORT-001).
 - Answer in the language the user wrote in. Rule text is Persian; explain it in English if the user writes English.
