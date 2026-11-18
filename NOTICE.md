@@ -17,7 +17,7 @@ Some rules also cite these journal articles and editing columns:
 | ramezankhani-rahbar-2023 | مریم رمضانخانی و بهزاد رهبر، «کاربرد ضمیر فاعلی در گونهٔ فارسی گفتاری و نوشتاری معیار؛ مقایسه‌ای پیکره‌بنیاد»، مطالعات زبان‌ها و گویش‌های غرب ایران ۱۱(۳)، ۲۰۲۳ |
 | pakar-motarjem-56 | الناز پاکار، «جملهٔ اسمی یا جملهٔ فعلی؟»، فصلنامهٔ مترجم، سال ۲۴، شمارهٔ ۵۶، ۱۳۹۴ |
 | delzendeh-rouy-motarjem-3 | سمیه دل‌زنده‌روی، «آموزش ترجمه؛ ویرایش مجدد (۳)»، فصلنامهٔ مترجم، شمارهٔ ۸۰، ۱۴۰۲ |
-| bahrami-golfam-2013 | Bahrami-Khorshid and Golfam, agented passives in Persian, *International Journal of Humanities* 20(4), 2013 |
+| bahrami-golfam-2013 | Bahrami-Khorshid and Golfam, "Encoding the Agent in Persian Passive Construction: A Cognitive Approach", *International Journal of Humanities* 20(4), 2013 |
 | amuzadeh-shahnaseri-1390 | محمد عموزاده و شادی شاه‌ناصری، «بررسی پیامدهای ترجمه از انگلیسی بر مقولهٔ وجهیت در فارسی»، پژوهش‌های زبانی ۲(۱)، ۱۳۹۰ |
 | faghiri-samvelian-2021 | Faghiri and Samvelian, clefts in Persian, *Faits de Langues* 52(1), 2021 |
 | tabibzadeh-2025 | امید طبیب‌زاده، «مقایسهٔ صورت‌های شکسته در خط فارسی و انگلیسی»، *Persian Language and Iranian Dialects* 10(1), 2025 |
