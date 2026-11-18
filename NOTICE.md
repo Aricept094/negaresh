@@ -14,6 +14,3 @@ The rules were built from these books:
 
 The author bought the books, scanned them with OCR for personal use, and extracted the rules from them. The rules were then rewritten and tuned to the author's needs, with new examples. The books are not part of this project and cannot be read or searched through the skill or the server. The skill does not check sentences against the books; it applies the rules. Each rule names the book and page it comes from.
 
-## Status
-
-All rules have the status `draft`. No human editor has approved them.

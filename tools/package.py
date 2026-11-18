@@ -36,7 +36,7 @@ INCLUDE = [
     "src",
     "corpus",
     "tests",
-    "docs/RULEBOOK__NEEDS-INPUT.md",
+    "docs/RULEBOOK.md",
     "tools/build.py",
     "tools/package.py",
     "pyproject.toml",

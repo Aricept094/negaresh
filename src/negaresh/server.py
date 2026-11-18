@@ -39,7 +39,7 @@ _FETCH_SCHEMA = {"type": "object", "required": ["id"],
                  "properties": {"id": {"type": "string", "description": "A rule id from search, such as STY-019"}}}
 INSTRUCTIONS = ("Persian writing rules and deterministic text checks for Iranian standard Persian. "
                 "Find rules with search_rules (or search) and read them with get_rule (or fetch); when editing a text, "
-                "use check_mechanics and validate_patches. Rules are drafts not yet reviewed by a human editor.")
+                "use check_mechanics and validate_patches.")
 
 
 def tool_definitions(chatgpt: bool = False) -> list[types.Tool]:

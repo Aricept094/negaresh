@@ -8,9 +8,7 @@ A Persian (Farsi) writing guide for AI assistants and editors. It has three part
 - **A skill** (standard Agent Skills `SKILL.md` folder) for Claude, Codex and other agents: how to write, copyedit, proofread or naturalize (روان‌سازی) a Persian text with the rules.
 - **An MCP server** (stdio and Streamable HTTP) for Claude, ChatGPT, Codex, Gemini CLI, Cursor, VS Code and any MCP client: deterministic checks (Arabic letters, digits, spacing, half-spaces, quotes, variant spellings, listed calques, and sentence shapes typical of machine Persian), rule search, and validation of edits before they are applied.
 
-> **Status: draft (0.2.0).** No human editor has approved the rules yet. Use them as suggestions and check important text yourself.
-
-راهنمای نگارش فارسی برای دستیارهای هوش مصنوعی و ویراستاران: ۱۶۳ قاعده دربارهٔ ساخت جمله، ترتیب طبیعی اجزا، زمان و وجه فعل، پیوند بندها، زدودن نثر ترجمه‌ای و ماشینی، دستور، کاربرد، نشانه‌گذاری و دستور خط فرهنگستان؛ با یک مهارت (skill) برای Claude و یک سرور MCP محلی برای بررسی‌های مکانیکی. همهٔ قاعده‌ها پیش‌نویس‌اند.
+راهنمای نگارش فارسی برای دستیارهای هوش مصنوعی و ویراستاران: ۱۶۳ قاعده دربارهٔ ساخت جمله، ترتیب طبیعی اجزا، زمان و وجه فعل، پیوند بندها، زدودن نثر ترجمه‌ای و ماشینی، دستور، کاربرد، نشانه‌گذاری و دستور خط فرهنگستان؛ با یک مهارت (skill) برای Claude و یک سرور MCP محلی برای بررسی‌های مکانیکی.
 
 ## Sources
 
@@ -123,7 +121,7 @@ The skill is a standard `SKILL.md` folder: [`skills/negaresh`](skills/negaresh).
 ### Rule set only
 
 - `corpus/rules/*.json`: the rules as JSON (one array per category).
-- `docs/RULEBOOK__NEEDS-INPUT.md`: the full rule book in Persian.
+- `docs/RULEBOOK.md`: the full rule book in Persian.
 - `corpus/lexicon/`: variant spellings, listed expressions and sentence-shape patterns.
 
 ## MCP tools
@@ -174,7 +172,7 @@ Each rule has a severity (`error`, `convention`, `advisory`) and an evidence cla
 2. Run `python tools/build.py`. It validates the corpus and regenerates the bundle, the skill references and the rule book.
 3. Run `pytest`.
 
-Do not edit generated files: `src/negaresh/data/corpus.json`, `skills/negaresh/references/rules-*.md`, `docs/RULEBOOK__NEEDS-INPUT.md`.
+Do not edit generated files: `src/negaresh/data/corpus.json`, `skills/negaresh/references/rules-*.md`, `docs/RULEBOOK.md`.
 
 To make the release files (wheel, skill zip, clean folder): `python tools/package.py`.
 
@@ -182,7 +180,6 @@ To make the release files (wheel, skill zip, clean folder): `python tools/packag
 
 ## Limits
 
-- The rules are drafts. No human editor has approved them.
 - The mechanical checker sees characters, listed expressions and a few sentence shapes. No finding does not mean that the prose is natural. Sentence and paragraph rebuilding is done by the model with the rules.
 - The «می» half-space check uses a closed list of verb stems.
 

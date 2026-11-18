@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+- The rules have been reviewed by a human editor. Rule status is now `reviewed`, and the draft notices are removed from the README, the skill, the server and the rule book (now `docs/RULEBOOK.md`).
+
 ## 0.2.0
 
 - Added Samiee «نگارش و ویرایش» as a source. New families: DSC (paragraphs and discourse), TRM (numbers, dates, citations, notes, names). Punctuation and style rules are now sourced where the book supports them.

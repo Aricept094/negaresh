@@ -6,8 +6,6 @@ description: Write, edit, proofread, naturalize or review Persian (Farsi) text w
 
 # negaresh: Persian writing guide
 
-All rules are drafts. No human editor has approved them. Say so if the user asks how reliable a rule is.
-
 ## What you have
 
 - `references/rules-index.md`: one line for each rule (ID, Persian title, English title). Read it first.

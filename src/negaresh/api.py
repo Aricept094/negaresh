@@ -170,7 +170,7 @@ def get_profile(args: GetProfileInput) -> dict[str, Any]:
             "rule_count": len(corpus.rules),
             "categories": sorted({r["category"] for r in corpus.rules.values()}),
             "limits": {"max_text_code_points": MAX_TEXT, "search_limit": 8, "held_texts": patches.MAX_HELD_TEXTS},
-            "review_status": "All rules are drafts. No qualified human editor has reviewed them yet.",
+            "review_status": "Reviewed by a human editor.",
             "sources": list(corpus.sources.values()),
         }
         return envelope("ok", data)
