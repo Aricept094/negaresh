@@ -42,11 +42,11 @@
   {
     "id": "ramezankhani-rahbar-2023",
     "short": "رمضانخانی و رهبر، ضمیر فاعلی در گفتار و نوشتار",
-    "citation": "مریم رمضانخانی و بهزاد رهبر، «کاربرد ضمیر فاعلی در گونهٔ فارسی گفتاری و نوشتاری معیار؛ مقایسه‌ای پیکره‌بنیاد»، پژوهش‌های زبان‌ها و گویش‌های غرب ایران ۱۱(۳)، ۲۰۲۳، ص ۸۷–۱۰۹، doi 10.22126/jlw.2023.8876.1689.",
+    "citation": "مریم رمضانخانی و بهزاد رهبر، «کاربرد ضمیر فاعلی در گونهٔ فارسی گفتاری و نوشتاری معیار؛ مقایسه‌ای پیکره‌بنیاد»، مطالعات زبان‌ها و گویش‌های غرب ایران ۱۱(۳)، ۲۰۲۳، ص ۸۷–۱۰۹، doi 10.22126/jlw.2023.8876.1689.",
     "role": "research_article",
     "locator_kind": "table, printed page",
-    "note": "Findings were read and checked against the article with AI research tools and are cited in the author's own words. Not yet checked against the article by a human editor.",
-    "human_checked": false
+    "note": "Findings are cited in the author's own words and were checked against the article by a human editor.",
+    "human_checked": true
   },
   {
     "id": "pakar-motarjem-56",
@@ -54,8 +54,8 @@
     "citation": "الناز پاکار، «جملهٔ اسمی یا جملهٔ فعلی؟»، فصلنامهٔ مترجم، سال ۲۴، شمارهٔ ۵۶، بهار ۱۳۹۴.",
     "role": "research_article",
     "locator_kind": "printed page",
-    "note": "Findings were read and checked against the article with AI research tools and are cited in the author's own words. Not yet checked against the article by a human editor.",
-    "human_checked": false
+    "note": "Findings are cited in the author's own words and were checked against the article by a human editor.",
+    "human_checked": true
   },
   {
     "id": "delzendeh-rouy-motarjem-3",
@@ -63,8 +63,8 @@
     "citation": "سمیه دل‌زنده‌روی، «آموزش ترجمه؛ ویرایش مجدد (۳)»، فصلنامهٔ مترجم، شمارهٔ ۸۰، ۱۴۰۲، ص ۱۳۵–۱۴۰.",
     "role": "editing_column",
     "locator_kind": "printed page",
-    "note": "Findings were read and checked against the article with AI research tools and are cited in the author's own words. Not yet checked against the article by a human editor.",
-    "human_checked": false
+    "note": "Findings are cited in the author's own words and were checked against the article by a human editor.",
+    "human_checked": true
   },
   {
     "id": "bahrami-golfam-2013",
@@ -72,8 +72,8 @@
     "citation": "سحر بهرامی خورشید و ارسلان گلفام، بررسی مجهول کنشگردار در فارسی (پیکره‌ای از ۴۵۲ جملهٔ مجهول)، International Journal of Humanities 20(4)، ۲۰۱۳، ص ۷۹–۹۷.",
     "role": "research_article",
     "locator_kind": "section",
-    "note": "Findings were read and checked against the article with AI research tools and are cited in the author's own words. Not yet checked against the article by a human editor.",
-    "human_checked": false
+    "note": "Findings are cited in the author's own words and were checked against the article by a human editor.",
+    "human_checked": true
   },
   {
     "id": "amuzadeh-shahnaseri-1390",
@@ -81,8 +81,8 @@
     "citation": "محمد عموزاده و شادی شاه‌ناصری، «بررسی پیامدهای ترجمه از انگلیسی بر مقولهٔ وجهیت در فارسی»، پژوهش‌های زبانی ۲(۱)، ۱۳۹۰، ص ۲۱–۵۰.",
     "role": "research_article",
     "locator_kind": "table, printed page",
-    "note": "Findings were read and checked against the article with AI research tools and are cited in the author's own words. Not yet checked against the article by a human editor.",
-    "human_checked": false
+    "note": "Findings are cited in the author's own words and were checked against the article by a human editor.",
+    "human_checked": true
   },
   {
     "id": "faghiri-samvelian-2021",
@@ -90,8 +90,8 @@
     "citation": "Pegah Faghiri and Pollet Samvelian, 'A corpus-based description of cleft constructions in Persian', Faits de Langues 52(1), 2021, pp. 183-206, doi 10.1163/19589514-05201009.",
     "role": "research_article",
     "locator_kind": "section",
-    "note": "Findings were read and checked against the article with AI research tools and are cited in the author's own words. Not yet checked against the article by a human editor.",
-    "human_checked": false
+    "note": "Findings are cited in the author's own words and were checked against the article by a human editor.",
+    "human_checked": true
   },
   {
     "id": "tabibzadeh-2025",
@@ -99,8 +99,8 @@
     "citation": "امید طبیب‌زاده، «مقایسهٔ صورت‌های شکسته در خط فارسی و انگلیسی»، زبان فارسی و گویش‌های ایرانی ۱۰(۱)، ۲۰۲۵، ص ۷–۲۷، doi 10.22124/plid.2025.32165.1734.",
     "role": "research_article",
     "locator_kind": "printed page",
-    "note": "Findings were read and checked against the article with AI research tools and are cited in the author's own words. Not yet checked against the article by a human editor.",
-    "human_checked": false
+    "note": "Findings are cited in the author's own words and were checked against the article by a human editor.",
+    "human_checked": true
   },
   {
     "id": "ahmadi-darani-karamatian-1401",
@@ -108,7 +108,7 @@
     "citation": "علی‌اکبر احمدی دارانی و طناز کرامتیان‌فرد، «نقد و تحلیل شیوه‌نامه‌های نگارش و ویرایش فارسی (مطالعهٔ موردی: نشانه‌گذاری)»، فنون ادبی ۱۴(۴)، ۱۴۰۱، ص ۵۹–۹۰، doi 10.22108/liar.2023.135551.2198.",
     "role": "research_article",
     "locator_kind": "section",
-    "note": "Findings were read and checked against the article with AI research tools and are cited in the author's own words. Not yet checked against the article by a human editor.",
-    "human_checked": false
+    "note": "Findings are cited in the author's own words and were checked against the article by a human editor.",
+    "human_checked": true
   }
 ]

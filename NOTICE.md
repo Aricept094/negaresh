@@ -14,7 +14,7 @@ Some rules also cite these journal articles and editing columns:
 
 | Id | Article |
 | --- | --- |
-| ramezankhani-rahbar-2023 | Ramezankhani and Rahbar, subject pronouns in spoken and written Persian, *Research in Western Iranian Languages and Dialects* 11(3), 2023 |
+| ramezankhani-rahbar-2023 | مریم رمضانخانی و بهزاد رهبر، «کاربرد ضمیر فاعلی در گونهٔ فارسی گفتاری و نوشتاری معیار؛ مقایسه‌ای پیکره‌بنیاد»، مطالعات زبان‌ها و گویش‌های غرب ایران ۱۱(۳)، ۲۰۲۳ |
 | pakar-motarjem-56 | الناز پاکار، «جملهٔ اسمی یا جملهٔ فعلی؟»، فصلنامهٔ مترجم، سال ۲۴، شمارهٔ ۵۶، ۱۳۹۴ |
 | delzendeh-rouy-motarjem-3 | سمیه دل‌زنده‌روی، «آموزش ترجمه؛ ویرایش مجدد (۳)»، فصلنامهٔ مترجم، شمارهٔ ۸۰، ۱۴۰۲ |
 | bahrami-golfam-2013 | Bahrami-Khorshid and Golfam, agented passives in Persian, *International Journal of Humanities* 20(4), 2013 |
@@ -29,5 +29,4 @@ Full citations with links are in `corpus/sources.json` and in the rule book.
 
 The author bought the books, scanned them with OCR for personal use, and extracted the rules from them. The rules were then rewritten and tuned to the author's needs, with new examples. The books are not part of this project and cannot be read or searched through the skill or the server. The skill does not check sentences against the books; it applies the rules. Each sourced rule names the book and page it comes from; the few rules with no book behind them are marked as editorial practice.
 
-The articles were found and read with AI research tools, and the figures were checked against the article texts with the same tools. Their findings (counts, examples, conclusions) are summarized in the author's own words and cited; no article text is copied. These article citations have not yet all been checked against the articles by a human editor, and each article's entry in the rule book says so.
-
+The articles were found and read with AI research tools. Their findings (counts, examples, conclusions) are summarized in the author's own words and cited; no article text is copied. A human editor then checked each cited finding against the article.
