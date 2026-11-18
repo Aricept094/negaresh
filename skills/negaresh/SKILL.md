@@ -16,7 +16,7 @@ description: Write, edit, proofread, naturalize, rewrite or review Persian (Fars
 
 Each rule has a severity (`error`, `convention`, `advisory`) and an evidence class:
 
-- `sourced`: comes from one of five books (the Academy's «دستور خطّ فارسی» 1401, three grammars, and Samiee's «نگارش و ویرایش»). You can cite the source line of the rule. Parts marked «پیشنهاد ویراستاری» inside a sourced rule are editorial advice.
+- `sourced`: comes from one of five books (the Academy's «دستور خطّ فارسی» 1401, three grammars, and Samiee's «نگارش و ویرایش»). You can cite the source line of the rule. Parts marked «پیشنهاد ویراستاری» inside a sourced rule are editorial advice. Some sourced rules also cite a journal article or editing column (a corpus study, or a published edit); cite such a finding as that study's result, not as an Academy or book rule.
 - `editorial_synthesis`: editorial practice with no book in this set behind it (for example STY-018). Never present these as Academy or book rules.
 
 The evidence class only tells you how to cite a rule. How firmly to apply it comes from its severity: an `editorial_synthesis` rule with severity `convention` (for example INT-004, PUN-011) is applied like any other convention.

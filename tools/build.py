@@ -115,6 +115,10 @@ def render_rule(r: dict, sources: dict) -> str:
     if r.get("evidence"):
         cites = "؛ ".join(f"{sources[e['source']]['short']}، {e['loc']}" for e in r["evidence"])
         lines += ["", f"منبع: {cites}"]
+        unchecked = [sources[e["source"]]["short"] for e in r["evidence"]
+                     if sources[e["source"]].get("human_checked") is False]
+        if unchecked:
+            lines += ["", "هنوز با متن اصلی مقابله نشده است: " + "؛ ".join(dict.fromkeys(unchecked))]
     if r.get("checks"):
         lines += ["", "بررسی خودکار: " + "، ".join(r["checks"])]
     if r.get("verified"):
@@ -153,7 +157,9 @@ def main() -> None:
         body = "\n".join(render_rule(r, sources) for r in cat_rules)
         (OUT_REFS / f"rules-{cat}.md").write_text(f"# {title} ({len(cat_rules)} قاعده)\n\n{header}{body}", encoding="utf-8")
         book += [f"## {title}", "", body]
-    book += ["## منابع", ""] + [f"- **{s['short']}**: {s['citation']}" for s in sources_list]
+    book += ["## منابع", ""] + [f"- **{s['short']}**: {s['citation']}"
+                                 + (" (هنوز با متن اصلی مقابله نشده است.)" if s.get("human_checked") is False else "")
+                                 for s in sources_list]
     OUT_BOOK.parent.mkdir(parents=True, exist_ok=True)
     OUT_BOOK.write_text("\n".join(book) + "\n", encoding="utf-8")
 

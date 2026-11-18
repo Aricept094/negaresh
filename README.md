@@ -4,7 +4,7 @@
 
 A Persian (Farsi) writing guide for AI assistants and editors. It has three parts that work together or alone:
 
-- **A rule set**: 163 rules for Iranian standard Persian. They cover sentence structure and natural word order, verb tense and mood, paragraph flow, removing translated or machine-like Persian, grammar, usage, punctuation, numbers and citations, Academy orthography (نیم‌فاصله), and meaning preservation. Each rule has a test and examples; 157 of them cite the book and page they come from, and the other 6 are marked as editorial practice.
+- **A rule set**: 163 rules for Iranian standard Persian. They cover sentence structure and natural word order, verb tense and mood, paragraph flow, removing translated or machine-like Persian, grammar, usage, punctuation, numbers and citations, Academy orthography (نیم‌فاصله), and meaning preservation. Each rule has a test and examples; 157 of them cite the book and page they come from (some also cite a journal article), and the other 6 are marked as editorial practice.
 - **A skill** (standard Agent Skills `SKILL.md` folder) for Claude, Codex and other agents: how to write, copyedit, proofread or naturalize (روان‌سازی) a Persian text with the rules.
 - **An MCP server** (stdio and Streamable HTTP) for Claude, ChatGPT, Codex, Gemini CLI, Cursor, VS Code and any MCP client: deterministic checks (Arabic letters, digits, spacing, half-spaces, quotes, variant spellings, listed calques, and sentence shapes typical of machine Persian), rule search, and validation of edits before they are applied.
 
@@ -12,7 +12,9 @@ A Persian (Farsi) writing guide for AI assistants and editors. It has three part
 
 ## Sources
 
-The rules were built from five books: the Academy's «دستور خطّ فارسی» (1401), Anvari and Ahmadi-Givi's «دستور زبان فارسی» 1 and 2, Arzhang's «دستور زبان فارسی امروز», and Samiee's «نگارش و ویرایش». The author bought the books, scanned them with OCR, extracted the rules, and rewrote and tuned them to the author's needs. The books are not included, and the skill and server cannot read or search them; the skill applies the rules, not the books. Full titles are in [NOTICE.md](https://github.com/Aricept094/negaresh/blob/main/NOTICE.md).
+The rules were built from five books: the Academy's «دستور خطّ فارسی» (1401), Anvari and Ahmadi-Givi's «دستور زبان فارسی» 1 and 2, Arzhang's «دستور زبان فارسی امروز», and Samiee's «نگارش و ویرایش». The author bought the books, scanned them with OCR, extracted the rules, and rewrote and tuned them to the author's needs. The books are not included, and the skill and server cannot read or search them; the skill applies the rules, not the books.
+
+Some rules also cite journal articles and editing columns: corpus studies of written and spoken Persian and of translated Persian, and published before-and-after edits. Their findings are summarized in the author's own words. These article citations have not yet all been checked against the articles by a human editor; each such source says so in the rule book. Full titles of the books and articles are in [NOTICE.md](https://github.com/Aricept094/negaresh/blob/main/NOTICE.md).
 
 ## What it does
 
@@ -156,15 +158,15 @@ negaresh search "نیم‌فاصله می"
 | Prefix | Family | Rules | Main sources |
 | --- | --- | --- | --- |
 | ORT | Orthography and spacing | 44 | Academy «دستور خطّ فارسی» (1401) |
-| GRM | Grammar, word order, tense and mood | 39 | Anvari and Ahmadi-Givi 1 and 2; Arzhang; Samiee |
+| GRM | Grammar, word order, tense and mood | 39 | Anvari and Ahmadi-Givi 1 and 2; Arzhang; Samiee; corpus studies |
 | USG | Usage and calques | 23 | the three grammars; Samiee |
-| STY | Style and sentence building | 19 | Samiee; editorial synthesis |
+| STY | Style and sentence building | 19 | Samiee; editorial synthesis; translation studies |
 | PUN | Punctuation and characters | 18 | Samiee |
 | TRM | Numbers, dates, citations, notes, names | 9 | Samiee |
 | INT | Meaning preservation | 6 | Samiee; editorial synthesis |
 | DSC | Paragraphs and discourse | 5 | Samiee |
 
-Each rule has a severity (`error`, `convention`, `advisory`) and an evidence class. `sourced` rules name the book and page they come from; `editorial_synthesis` rules are editorial practice with no book behind them. The evidence class tells you how to cite a rule; the severity tells you how firmly to apply it.
+Each rule has a severity (`error`, `convention`, `advisory`) and an evidence class. `sourced` rules name the book and page they come from, and some also name a journal article; `editorial_synthesis` rules are editorial practice with no book behind them. The evidence class tells you how to cite a rule; the severity tells you how firmly to apply it.
 
 ## Edit the rules
 
