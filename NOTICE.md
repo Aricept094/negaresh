@@ -36,4 +36,4 @@ Full citations with links are in `corpus/sources.json` and in the rule book.
 
 The author bought the books, scanned them with OCR for personal use, and extracted the rules from them. The rules were then rewritten and tuned to the author's needs, with new examples. The books are not part of this project and cannot be read or searched through the skill or the server. The skill does not check sentences against the books; it applies the rules. Each sourced rule names the book and page it comes from; the few rules with no book behind them are marked as editorial practice.
 
-The articles were found and read with AI research tools. Their findings (counts, examples, conclusions) are summarized in the author's own words and cited; no article text is copied. A human editor then checked each cited finding against the article, except for the sources the rule book marks as not yet checked.
+The articles were found and read with AI research tools. Their findings (counts, examples, conclusions) are summarized in the author's own words and cited; no article text is copied. A human editor then checked each cited finding against the article.
