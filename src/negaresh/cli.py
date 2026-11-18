@@ -6,7 +6,6 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
-import sqlite3  # noqa: F401  (not used; kept out of runtime paths)
 import sys
 from importlib import metadata
 
@@ -73,11 +72,23 @@ def main(argv: list[str] | None = None) -> int:
     if args.cmd == "corpus-info":
         _out(api.call("get_profile", {})[0]["data"])
     elif args.cmd == "check":
-        text = open(args.file, encoding="utf-8").read()
+        try:
+            with open(args.file, encoding="utf-8") as fh:
+                text = fh.read()
+        except UnicodeDecodeError:
+            print(f"negaresh: {args.file} is not UTF-8 text", file=sys.stderr)
+            return 2
+        except OSError as exc:
+            print(f"negaresh: cannot read {args.file}: {exc.strerror}", file=sys.stderr)
+            return 2
         ctx = {"context": {"profile_id": args.profile}} if args.profile else {}
-        _out(api.call("check_mechanics", {"text": text, **ctx})[0])
+        env, is_error = api.call("check_mechanics", {"text": text, **ctx})
+        _out(env)
+        return 1 if is_error else 0
     elif args.cmd == "search":
-        _out(api.call("search_rules", {"query": args.query})[0])
+        env, is_error = api.call("search_rules", {"query": args.query})
+        _out(env)
+        return 1 if is_error else 0
     return 0
 
 

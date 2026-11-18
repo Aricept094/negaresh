@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.2
+
+Fixes from two red-team reviews.
+
+- Skill: «بازنویسی» now means one thing (rewrite, only on request); naturalizing rebuilds sentences and paragraph links but keeps the order of points. The literary-text exception now follows each rule's own exception. Protected content includes religious, legal and old texts. Rebuild step 4 keeps short evidentials and checks a sentence before deleting it. The evidence class says how to cite a rule, not whether to apply it.
+- Rules: GRM-037 drops only stacked hedges that mean the same; its «باید … شده باشد» example now shows the action did not happen. GRM-016 no longer picks a reading for the author, and offers «کم‌کم + مضارع» and «تحت درمان». STY-020 keeps «می‌توان گفت» as a hedge. DSC-005 reports in copyedit and fixes in naturalize. USG-015 allows emphatic «هم هست». USG-024 keeps operational definitions. GRM-014 half-space fixed.
+- Checker: linear time on hostile input (a 12,000-character text could take 20 seconds); tool calls run off the event loop. Auto patches next to a URL or code now validate; the auto patch set is capped at 256. Arabic letters in a cited word are flagged, not patched. A half-space before « ها» is no longer deleted. A double space that looks like a verse gap is flagged. M16 now catches «در حال بررسیِ …», «در حال تبدیل شدن به», «را به عنوان … در نظر گرفتند» and «در دنیای امروز».
+- Server: over HTTP the server keeps no texts between calls (send `original_text`), so clients cannot read or evict each other's texts. Tool schemas have no `$ref`. ChatGPT `search`/`fetch` report bad input as errors and link to the rule's anchor. A text over the limit returns `limit_exceeded`. The `naturalizing` edit level is accepted.
+- CLI: `check` and `search` exit 1 on an error; a non-UTF-8 file gives a clear message.
+- Release: a manual run publishes only from main; all version fields are checked; the corpus version follows pyproject.
+- README: links work on PyPI.
+
 ## 0.2.1
 
 - The rules have been reviewed by a human editor. Rule status is now `reviewed`, and the draft notices are removed from the README, the skill, the server and the rule book (now `docs/RULEBOOK.md`).

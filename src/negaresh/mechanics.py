@@ -8,13 +8,16 @@ from __future__ import annotations
 
 import re
 import unicodedata
+from functools import lru_cache
 from typing import Any
 
 from .corpus import Corpus, load
+from .patches import _touches
 from .textutil import ARABIC_DIGITS, DIACRITICS, LETTER_CLASS, NON_JOINING, PERSIAN_DIGITS, ZWNJ, is_persian_letter, revision_of
 
 MECHANICS_VERSION = "1"
 MAX_FINDINGS = 200
+MAX_AUTO_PATCHES = 256  # validate_patches accepts at most 256 patches
 DEFAULT_PATCH_CHECKS = {"M01", "M02", "M06", "M07"}
 
 L = LETTER_CLASS
@@ -43,6 +46,7 @@ _VERB_REST = (
     "|(?:" + "|".join(sorted(_PAST, key=len, reverse=True)) + ")(?:یم|ید|ند|م|ی)?"
     "|توان)"
 )
+_ZWNJ_SPACE_SUFFIX_RE = re.compile(r"([ \t]+)(ها|تر)")
 _MI_SPACE_RE = re.compile(rf"(?<![{L}{ZWNJ}])((?:بر|در|باز|فرا|فرو)?ن?می) (?={_VERB_REST}(?![{L}{ZWNJ}]))")
 _MI_JOINED_RE = re.compile(rf"(?<![{L}{ZWNJ}])((?:بر|در|باز|فرا|فرو)?ن?می)(?={_VERB_REST}(?![{L}{ZWNJ}]))")
 _HA_RE = re.compile(rf"([{L}]) (ها(?:ی(?:ی|م|ت|ش|مان|تان|شان)?)?)(?![{L}{ZWNJ}])")
@@ -73,13 +77,16 @@ class _Collector:
         self.off = off
         self.items: list[dict[str, Any]] = []
 
-    def _is_protected(self, start: int, end: int) -> bool:
-        return any(start < p["end"] and p["start"] < max(end, start + 1) for p in self.protected)
+    def _is_protected(self, start: int, end: int, after: str | None = None) -> bool:
+        return any(p["end"] > p["start"] and _touches(self.text, start, end, after, p["start"], p["end"])
+                   for p in self.protected)
 
     def add(self, check: str, start: int, end: int, message: str, *, after: str | None = None,
             severity: str = "convention", action_class: str = "mechanical", force_flag: bool = False) -> None:
         if check in self.off or self._is_protected(start, end):
             return
+        if after is not None and self._is_protected(start, end, after):
+            force_flag = True  # the fix would join text onto a URL or code: offer it, never apply it
         before = self.text[start:end]
         patch = None
         if end - start > 200:
@@ -94,25 +101,41 @@ class _Collector:
         })
 
 
-def _segment(text: str, i: int) -> str:
-    """The quotation «…» around position i, else the sentence or line around it."""
+def _segment_bounds(text: str, i: int) -> tuple[int, int, bool]:
+    """Bounds of the quotation «…» around position i, else of the sentence or line around it; True if a quotation."""
     qo, qc = text.rfind("«", 0, i), text.rfind("»", 0, i)
     if qo > qc:
         close = text.find("»", i)
-        return text[qo: close if close != -1 else len(text)]
+        return qo, close if close != -1 else len(text), True
     begin = max(text.rfind(ch, 0, i) for ch in ".!؟\n:") + 1
     ends = [e for e in (text.find(ch, i) for ch in ".!؟\n") if e != -1]
-    return text[begin: min(ends) if ends else len(text)]
+    return begin, min(ends) if ends else len(text), False
+
+
+@lru_cache(maxsize=4)
+def _near_tables(text: str) -> tuple[list[str], list[str]]:
+    """For each position, the nearest letter at or before it and at or after it (one linear pass each way)."""
+    n = len(text)
+    before, after = [""] * n, [""] * n
+    last = ""
+    for j, ch in enumerate(text):
+        if ch.isalpha():
+            last = ch
+        before[j] = last
+    last = ""
+    for j in range(n - 1, -1, -1):
+        if text[j].isalpha():
+            last = text[j]
+        after[j] = last
+    return before, after
 
 
 def _letter_near(text: str, i: int, step: int) -> str:
     """The nearest letter before (step=-1) or after (step=1) position i, skipping digits, spaces and marks."""
-    j = i
-    while 0 <= j < len(text):
-        if text[j].isalpha():
-            return text[j]
-        j += step
-    return ""
+    if not 0 <= i < len(text):
+        return ""
+    before, after = _near_tables(text)
+    return before[i] if step < 0 else after[i]
 
 
 def _is_latin(ch: str) -> bool:
@@ -125,12 +148,17 @@ def _looks_arabic(segment: str) -> bool:
 
 def _check_letters(c: _Collector) -> None:
     text = c.text
+    arabic_seen: dict[tuple[int, int], bool] = {}
     for m in re.finditer("[يكى]", text):
         ch = m.group()
         target = {"ي": "ی", "ك": "ک", "ى": "ی"}[ch]
-        if _looks_arabic(_segment(text, m.start())):
+        s, e, quoted = _segment_bounds(text, m.start())
+        if (s, e) not in arabic_seen:
+            arabic_seen[(s, e)] = _looks_arabic(text[s:e])
+        cited = (quoted and e - s <= 40) or "عربی" in text[max(0, m.start() - 40): m.end() + 40]
+        if arabic_seen[(s, e)] or cited:
             c.add("M01", m.start(), m.end(),
-                  f"حرف عربی «{ch}» در عبارتی که عربی به نظر می‌رسد؛ اگر نقل عربی است تغییر ندهید",
+                  f"حرف عربی «{ch}» در عبارتی که عربی به نظر می‌رسد یا نقل شده است؛ اگر نقل عربی است تغییر ندهید",
                   after=target, severity="advisory", force_flag=True)
         else:
             c.add("M01", m.start(), m.end(), f"حرف عربی «{ch}» در متن فارسی", after=target, force_flag=(ch == "ى"))
@@ -191,7 +219,11 @@ def _check_punct(c: _Collector) -> None:
 def _check_spaces(c: _Collector) -> None:
     text = c.text
     for m in re.finditer(r"(?<=[^\s|]) {2,}(?=[^\s|])", text):
-        if m.end() - m.start() == 2:
+        line_start = text.rfind("\n", 0, m.start()) + 1
+        line_end = text.find("\n", m.end())
+        line = text[line_start: line_end if line_end != -1 else len(text)]
+        verse_like = len(line) <= 90 and line.count("  ") == 1 and not re.search(r"[.!؟،؛:]", line)
+        if m.end() - m.start() == 2 and not verse_like:
             c.add("M06", m.start(), m.end(), "چند فاصلهٔ پیاپی", after=" ")
         else:
             c.add("M06", m.start(), m.end(), "چند فاصلهٔ پیاپی (شاید فاصلهٔ دو مصراع یا ستون‌بندی باشد)",
@@ -213,6 +245,12 @@ def _check_zwnj(c: _Collector) -> None:
             continue
         if any(ch and ord(ch) > 0x7F and "ARABIC" not in unicodedata.name(ch, "") for ch in (prev, nxt)):
             continue  # another script (e.g. Devanagari) uses ZWNJ for its own shaping
+        gap = _ZWNJ_SPACE_SUFFIX_RE.match(text, i + 1) if prev and is_persian_letter(prev) else None
+        if gap:
+            c.add("M07", i, gap.end(1),
+                  f"نیم‌فاصله و فاصله پیش از «{gap.group(2)}»؛ پسوند با نیم‌فاصله یا بی‌فاصله به واژه می‌پیوندد",
+                  after="" if prev in NON_JOINING else ZWNJ, action_class="contextual", force_flag=True)
+            continue
         if not prev or not nxt or prev.isspace() or nxt.isspace() or not (
             is_persian_letter(nxt) or nxt.isalnum()
         ) or not (is_persian_letter(prev) or prev.isalnum() or re.match(f"[{DIACRITICS}]", prev)):
@@ -469,14 +507,17 @@ def check(
         if f["action"] != "patch":
             continue
         a, b = cp["start"], cp["end"]
+        # Items are sorted by start and accepted patches do not overlap, so only the last one can clash.
         clash = any((a < e and s0 < b) or (a == b == s0) or (a == s0 and b == e) or (a == b == e) or (s0 == e == a)
-                    for s0, e in accepted)
+                    for s0, e in accepted[-1:])
         if clash:
             f["action"] = "flag"
             f["message"] += " (هم‌پوشان با اصلاح دیگری؛ پس از اعمال آن دوباره بررسی کنید)"
             continue
         accepted.append((a, b))
         auto_set.append({"patch_id": f"m{len(auto_set) + 1}", **cp, "action_class": f["action_class"]})
+    auto_omitted = max(0, len(auto_set) - MAX_AUTO_PATCHES)
+    auto_set = auto_set[:MAX_AUTO_PATCHES]
     omitted = max(0, len(items) - MAX_FINDINGS)
     return {
         "text_revision": revision_of(text),
@@ -490,5 +531,6 @@ def check(
         "detected_protected_spans": detected[:256],
         "detected_protected_spans_omitted": max(0, len(detected) - 256),
         "auto_patch_set": auto_set,
+        "auto_patch_set_omitted": auto_omitted,
         "note": "یافته‌نشدن خطا به معنای درستی کامل متن نیست؛ فقط بررسی‌های مکانیکی فهرست‌شده انجام شده است.",
     }

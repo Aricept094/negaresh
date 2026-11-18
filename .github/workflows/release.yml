@@ -11,6 +11,8 @@ on:
 
 jobs:
   build:
+    # A manual run publishes only from main, never from an untested branch.
+    if: github.event_name == 'release' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
       PYTHONUTF8: "1"
@@ -31,6 +33,10 @@ jobs:
           test "$v" = "$(jq -r .version server.json)"
           test "$v" = "$(jq -r '.packages[0].version' server.json)"
           test "$v" = "$(jq -r .version .claude-plugin/plugin.json)"
+          test "$v" = "$(jq -r '.plugins[0].version' .claude-plugin/marketplace.json)"
+          test "$v" = "$(jq -r .version gemini-extension.json)"
+          test "$v" = "$(python -c 'import negaresh; print(negaresh.__version__)')"
+          test "$v" = "$(python -c "import json;print(json.load(open('src/negaresh/data/corpus.json',encoding='utf-8'))['corpus_version'].split('+')[0])")"
       - name: Build
         run: uv build --out-dir dist
       - uses: actions/upload-artifact@v4

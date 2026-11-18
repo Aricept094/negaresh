@@ -4,15 +4,15 @@
 
 A Persian (Farsi) writing guide for AI assistants and editors. It has three parts that work together or alone:
 
-- **A rule set**: 163 rules for Iranian standard Persian. They cover sentence structure and natural word order, verb tense and mood, paragraph flow, removing translated or machine-like Persian, grammar, usage, punctuation, numbers and citations, Academy orthography (نیم‌فاصله), and meaning preservation. Each rule has a test, examples, and a citation to the book it comes from.
+- **A rule set**: 163 rules for Iranian standard Persian. They cover sentence structure and natural word order, verb tense and mood, paragraph flow, removing translated or machine-like Persian, grammar, usage, punctuation, numbers and citations, Academy orthography (نیم‌فاصله), and meaning preservation. Each rule has a test and examples; 157 of them cite the book and page they come from, and the other 6 are marked as editorial practice.
 - **A skill** (standard Agent Skills `SKILL.md` folder) for Claude, Codex and other agents: how to write, copyedit, proofread or naturalize (روان‌سازی) a Persian text with the rules.
 - **An MCP server** (stdio and Streamable HTTP) for Claude, ChatGPT, Codex, Gemini CLI, Cursor, VS Code and any MCP client: deterministic checks (Arabic letters, digits, spacing, half-spaces, quotes, variant spellings, listed calques, and sentence shapes typical of machine Persian), rule search, and validation of edits before they are applied.
 
-راهنمای نگارش فارسی برای دستیارهای هوش مصنوعی و ویراستاران: ۱۶۳ قاعده دربارهٔ ساخت جمله، ترتیب طبیعی اجزا، زمان و وجه فعل، پیوند بندها، زدودن نثر ترجمه‌ای و ماشینی، دستور، کاربرد، نشانه‌گذاری و دستور خط فرهنگستان؛ با یک مهارت (skill) برای Claude و یک سرور MCP محلی برای بررسی‌های مکانیکی.
+راهنمای نگارش فارسی برای دستیارهای هوش مصنوعی و ویراستاران. این راهنما ۱۶۳ قاعده دارد دربارهٔ ساخت جمله، ترتیب طبیعی اجزا، زمان و وجه فعل، پیوند بندها، زدودن نثر ترجمه‌ای و ماشینی، دستور، کاربرد، نشانه‌گذاری و دستور خط فرهنگستان. یک مهارت (skill) برای Claude و یک سرور MCP محلی برای بررسی‌های مکانیکی هم دارد.
 
 ## Sources
 
-The rules were built from five books: the Academy's «دستور خطّ فارسی» (1401), Anvari and Ahmadi-Givi's «دستور زبان فارسی» 1 and 2, Arzhang's «دستور زبان فارسی امروز», and Samiee's «نگارش و ویرایش». The author bought the books, scanned them with OCR, extracted the rules, and rewrote and tuned them to the author's needs. The books are not included, and the skill and server cannot read or search them; the skill applies the rules, not the books. Full titles are in [NOTICE.md](NOTICE.md).
+The rules were built from five books: the Academy's «دستور خطّ فارسی» (1401), Anvari and Ahmadi-Givi's «دستور زبان فارسی» 1 and 2, Arzhang's «دستور زبان فارسی امروز», and Samiee's «نگارش و ویرایش». The author bought the books, scanned them with OCR, extracted the rules, and rewrote and tuned them to the author's needs. The books are not included, and the skill and server cannot read or search them; the skill applies the rules, not the books. Full titles are in [NOTICE.md](https://github.com/Aricept094/negaresh/blob/main/NOTICE.md).
 
 ## What it does
 
@@ -79,7 +79,7 @@ Upload `negaresh-skill.zip` from the [latest release](https://github.com/Aricept
 
 ### ChatGPT
 
-Two ways, both in [clients/chatgpt](clients/chatgpt/README.md): an MCP connector in developer mode (run the server with `--http` behind an HTTPS tunnel), or a custom GPT with the rule files as knowledge.
+Two ways, both in [clients/chatgpt](https://github.com/Aricept094/negaresh/blob/main/clients/chatgpt/README.md): an MCP connector in developer mode (run the server with `--http` behind an HTTPS tunnel), or a custom GPT with the rule files as knowledge.
 
 ### Codex CLI
 
@@ -116,7 +116,7 @@ code --add-mcp "{\"name\":\"negaresh\",\"command\":\"uvx\",\"args\":[\"negaresh\
 
 ### Skill only (any client that reads Agent Skills)
 
-The skill is a standard `SKILL.md` folder: [`skills/negaresh`](skills/negaresh). Copy it into the client's skills folder (`~/.claude/skills/`, `~/.codex/skills/`, or the client's own location).
+The skill is a standard `SKILL.md` folder: [`skills/negaresh`](https://github.com/Aricept094/negaresh/tree/main/skills/negaresh). Copy it into the client's skills folder (`~/.claude/skills/`, `~/.codex/skills/`, or the client's own location).
 
 ### Rule set only
 
@@ -164,7 +164,7 @@ negaresh search "نیم‌فاصله می"
 | INT | Meaning preservation | 6 | Samiee; editorial synthesis |
 | DSC | Paragraphs and discourse | 5 | Samiee |
 
-Each rule has a severity (`error`, `convention`, `advisory`) and an evidence class. `sourced` rules name the book and page they come from; `editorial_synthesis` rules are editorial practice and are offered as suggestions only.
+Each rule has a severity (`error`, `convention`, `advisory`) and an evidence class. `sourced` rules name the book and page they come from; `editorial_synthesis` rules are editorial practice with no book behind them. The evidence class tells you how to cite a rule; the severity tells you how firmly to apply it.
 
 ## Edit the rules
 
@@ -185,4 +185,4 @@ To make the release files (wheel, skill zip, clean folder): `python tools/packag
 
 ## Licence
 
-MIT. See [LICENSE](LICENSE).
+MIT. See [LICENSE](https://github.com/Aricept094/negaresh/blob/main/LICENSE).

@@ -6,26 +6,59 @@ original. Texts are held in process memory only, keyed by revision.
 
 from __future__ import annotations
 
+import threading
 from collections import OrderedDict
 from typing import Any
 
 from .textutil import revision_of
 
 MAX_HELD_TEXTS = 8
+# A remote (HTTP) server is shared by many clients and keeps no texts: one client could otherwise read back
+# or evict another client's text. The stdio server serves one client and keeps the last few texts.
+HOLD_ENABLED = True
 _store: "OrderedDict[str, str]" = OrderedDict()
+_lock = threading.Lock()
 
 
 def hold(text: str) -> str:
     rev = revision_of(text)
-    _store[rev] = text
-    _store.move_to_end(rev)
-    while len(_store) > MAX_HELD_TEXTS:
-        _store.popitem(last=False)
+    if not HOLD_ENABLED:
+        return rev
+    with _lock:
+        _store[rev] = text
+        _store.move_to_end(rev)
+        while len(_store) > MAX_HELD_TEXTS:
+            _store.popitem(last=False)
     return rev
 
 
 def held(revision: str) -> str | None:
-    return _store.get(revision)
+    with _lock:
+        return _store.get(revision)
+
+
+def _touches(original: str, start: int, end: int, after: str | None, sp_start: int, sp_end: int) -> bool:
+    """True if a patch would change a protected span or join text onto it.
+
+    A patch may not overlap the span or insert inside it. At the span's edge it is allowed only if
+    whitespace still separates the span from what follows (or precedes) it; otherwise the next word
+    would join a URL or code. With `after` unknown (a flag with no patch), only overlap counts.
+    Shared by the checker and by validate_patches, so an automatic patch never fails validation."""
+    if sp_start < end and start < sp_end:
+        return True
+    if start == end and sp_start < start < sp_end:
+        return True
+    if after is None:
+        return False
+    if start == sp_end:
+        nxt = after[:1] or original[end:end + 1]
+        if nxt and not nxt.isspace():
+            return True
+    if end == sp_start:
+        prv = after[-1:] or original[start - 1:start]
+        if prv and not prv.isspace():
+            return True
+    return False
 
 
 def resolve_locator(original: str, text: str, prefix: str = "", suffix: str = "") -> tuple[int, int] | list[int]:
@@ -100,7 +133,7 @@ def validate(
                                "found": original[start:end][:80]})
                 continue
         for sp in protected:
-            if start <= sp["end"] and sp["start"] <= end and sp["end"] > sp["start"]:
+            if sp["end"] > sp["start"] and _touches(original, start, end, p["after"], sp["start"], sp["end"]):
                 issues.append({"code": "protected_span", "patch_id": pid, "span": sp})
                 break
         else:

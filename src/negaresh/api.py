@@ -29,7 +29,7 @@ class Context(_Strict):
     profile_id: ProfileId | None = Field(default=None, description="Kind of text. Sets which mechanical fixes are offered as automatic patches and which checks are off.")
     formality: Literal["formal", "neutral", "informal", "unspecified"] | None = Field(default=None, description="Informational only; does not change the checks.")
     domain: str | None = Field(default=None, max_length=128, description="Informational only; does not change the checks.")
-    edit_level: Literal["proofreading", "copyediting", "substantive"] | None = Field(default=None, description="Informational only; does not change the checks.")
+    edit_level: Literal["proofreading", "copyediting", "naturalizing", "substantive"] | None = Field(default=None, description="Informational only; does not change the checks.")
 
 
 class Locator(_Strict):
@@ -120,8 +120,8 @@ def envelope(status: str, data: Any = None, *, warnings: list[dict[str, Any]] | 
     }
 
 
-def _error(status: str, code: str, message: str, action: str) -> dict[str, Any]:
-    return envelope(status, error={"code": code, "message": message, "retryable": False, "suggested_action": action})
+def _error(status: str, code: str, message: str, action: str, retryable: bool = False) -> dict[str, Any]:
+    return envelope(status, error={"code": code, "message": message, "retryable": retryable, "suggested_action": action})
 
 
 def _summary(rule: dict[str, Any]) -> dict[str, Any]:
@@ -166,7 +166,7 @@ def get_profile(args: GetProfileInput) -> dict[str, Any]:
             "variety": "Iranian standard Persian (fa-IR)",
             "profiles": [{"id": p["id"], "title_fa": p["title_fa"]} for p in corpus.profiles.values()],
             "formality_values": ["formal", "neutral", "informal", "unspecified"],
-            "edit_levels": ["proofreading", "copyediting", "substantive"],
+            "edit_levels": ["proofreading", "copyediting", "naturalizing", "substantive"],
             "rule_count": len(corpus.rules),
             "categories": sorted({r["category"] for r in corpus.rules.values()}),
             "limits": {"max_text_code_points": MAX_TEXT, "search_limit": 8, "held_texts": patches.MAX_HELD_TEXTS},
@@ -186,16 +186,21 @@ def check_mechanics(args: CheckMechanicsInput) -> dict[str, Any]:
     patches.hold(args.text)
     profile = args.context.profile_id if args.context else None
     data = mechanics.check(args.text, profile_id=profile, protected_spans=spans)
-    return envelope("ok", data, truncated=data["findings_omitted"] > 0)
+    return envelope("ok", data, truncated=data["findings_omitted"] > 0 or data["auto_patch_set_omitted"] > 0)
 
 
 def validate_patches(args: ValidatePatchesInput) -> dict[str, Any]:
     original = args.original_text
     if original is None:
+        if not patches.HOLD_ENABLED:
+            return _error("needs_context", "original_text_required",
+                          "This server does not keep texts between calls; send the text you checked as original_text.",
+                          "Retry with original_text set to the exact text you sent to check_mechanics.", retryable=True)
         original = patches.held(args.text_revision)
         if original is None:
             return _error("needs_context", "text_not_held", "The server no longer holds this text.",
-                          "Call check_mechanics again with the exact text, then retry with the new text_revision.")
+                          "Call check_mechanics again with the exact text, then retry with the new text_revision.",
+                          retryable=True)
     elif revision_of(original) != args.text_revision:
         return _error("invalid_input", "revision_mismatch",
                       "original_text does not match text_revision; the text was altered when it was re-sent.",
@@ -228,12 +233,12 @@ TOOLS: dict[str, tuple[type[BaseModel], Any, str]] = {
                         "spacing and Latin marks, spaces, half-space (ZWNJ) misuse, half-space after «می/نمی» before common verb stems "
                         "and before «ها/تر/ترین», quotes, kashida, invisible characters, mixed ezafe marks, brackets, preferred spellings "
                         "(Academy and Samiee lists), listed expressions to replace (M15) and sentence-shape patterns typical of translated or machine Persian (M16, flags pointing to a rebuild rule). Returns findings with exact code-point offsets, "
-                        "candidate patches with rule IDs, auto_patch_set (low-risk, non-overlapping fixes, ready for validate_patches) "
+                        "candidate patches with rule IDs, auto_patch_set (low-risk, non-overlapping fixes, at most 256, ready for validate_patches) "
                         "and text_revision. Flags need judgement. Check complete_scan. It does not judge grammar, meaning or style, "
                         "and never changes the text."),
     "validate_patches": (ValidatePatchesInput, validate_patches,
                          "Validate proposed edits against the exact original and return the rebuilt text. Pass text_revision from "
-                         "check_mechanics (do not re-send the original). Each patch gives 'before', 'after' and either offsets or a "
+                         "check_mechanics (do not re-send the original; a remote server that keeps no texts asks for original_text). Each patch gives 'before', 'after' and either offsets or a "
                          "locator with adjacent prefix/suffix. Rejects stale, ambiguous, overlapping edits and edits that touch or "
                          "change protected spans (URLs, e-mail, code, given spans). Present the "
                          "returned revised_text as it is; do not retype it. Meaning is not assessed."),
@@ -249,8 +254,13 @@ def call(name: str, arguments: dict[str, Any] | None) -> tuple[dict[str, Any], b
         args = model.model_validate(arguments or {})
     except ValidationError as exc:
         details = [{"field": ".".join(str(p) for p in e["loc"]), "problem": e["type"]} for e in exc.errors()[:12]]
-        env = _error("invalid_input", "argument_validation", "Arguments rejected. Unknown or mistyped fields are not ignored.",
-                     "Correct the listed fields and call again.")
+        too_long = [d for d in details if d["problem"] == "string_too_long" and d["field"] in ("text", "original_text")]
+        if too_long:
+            env = _error("limit_exceeded", "text_too_long", f"The text is longer than {MAX_TEXT} code points.",
+                         "Split the text at paragraph borders and check each part separately.")
+        else:
+            env = _error("invalid_input", "argument_validation", "Arguments rejected. Unknown or mistyped fields are not ignored.",
+                         "Correct the listed fields and call again.")
         env["data"] = {"fields": details}
         return env, True
     try:

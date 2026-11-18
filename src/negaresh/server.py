@@ -8,14 +8,16 @@ ChatGPT connectors and deep research expect."""
 
 from __future__ import annotations
 
+import copy
 import json
 from typing import Any
 
+import anyio
 import mcp_types as types
 from mcp.server import CacheHint, Server, ServerRequestContext
 from mcp.server.stdio import stdio_server
 
-from . import __version__, api
+from . import __version__, api, patches
 
 SERVER_NAME = "negaresh"
 REPO_URL = "https://github.com/Aricept094/negaresh"
@@ -42,9 +44,29 @@ INSTRUCTIONS = ("Persian writing rules and deterministic text checks for Iranian
                 "use check_mechanics and validate_patches.")
 
 
+def _inline_refs(schema: dict[str, Any]) -> dict[str, Any]:
+    """Replace local $ref with the definitions they point to, so clients that do not follow $ref
+    (some function-calling APIs) still see the whole schema. The tool models have no recursion."""
+    defs = schema.get("$defs", {})
+
+    def walk(node: Any) -> Any:
+        if isinstance(node, dict):
+            ref = node.get("$ref")
+            if isinstance(ref, str) and ref.startswith("#/$defs/"):
+                target = copy.deepcopy(defs[ref.split("/")[-1]])
+                extra = {k: v for k, v in node.items() if k != "$ref"}
+                return walk({**target, **extra})
+            return {k: walk(v) for k, v in node.items() if k != "$defs"}
+        if isinstance(node, list):
+            return [walk(v) for v in node]
+        return node
+
+    return walk(schema)
+
+
 def tool_definitions(chatgpt: bool = False) -> list[types.Tool]:
     tools = [
-        types.Tool(name=name, description=desc, input_schema=model.model_json_schema(),
+        types.Tool(name=name, description=desc, input_schema=_inline_refs(model.model_json_schema()),
                    output_schema=_ENVELOPE_SCHEMA, annotations=_ANNOTATIONS)
         for name, (model, _fn, desc) in api.TOOLS.items()
     ]
@@ -59,7 +81,7 @@ def tool_definitions(chatgpt: bool = False) -> list[types.Tool]:
 
 
 def _rule_url(rule: dict[str, Any]) -> str:
-    return f"{REPO_URL}/blob/main/skills/negaresh/references/rules-{rule['category']}.md"
+    return f"{REPO_URL}/blob/main/skills/negaresh/references/rules-{rule['category']}.md#{rule['id'].lower()}"
 
 
 def _rule_text(rule: dict[str, Any]) -> str:
@@ -83,14 +105,22 @@ def _text_result(obj: Any, is_error: bool = False) -> types.CallToolResult:
 
 def _chatgpt_call(name: str, args: dict[str, Any]) -> types.CallToolResult:
     if name == "search":
-        env, _ = api.call("search_rules", {"query": str(args.get("query", "")), "limit": 8})
+        query = args.get("query")
+        if not isinstance(query, str) or not query.strip():
+            return _text_result({"error": "query must be a non-empty string"}, is_error=True)
+        env, err = api.call("search_rules", {"query": query, "limit": 8})
+        if err:
+            return _text_result({"error": (env.get("error") or {}).get("message", "search failed")}, is_error=True)
         rules = (env.get("data") or {}).get("results") or []
         return _text_result({"results": [{"id": r["id"], "title": f"{r['id']} {r['title_fa']} / {r['title_en']}",
                                           "url": _rule_url(r)} for r in rules]})
-    env, err = api.call("get_rule", {"rule_id": str(args.get("id", ""))})
+    rule_id = args.get("id")
+    if not isinstance(rule_id, str) or not rule_id.strip():
+        return _text_result({"error": "id must be a rule id string, such as STY-019"}, is_error=True)
+    env, err = api.call("get_rule", {"rule_id": rule_id})
     rule = None if err else (env.get("data") or {}).get("rule")
     if not rule:
-        return _text_result(env, is_error=True)
+        return _text_result({"error": f"no rule with id {rule_id}"}, is_error=True)
     return _text_result({"id": rule["id"], "title": f"{rule['id']} {rule['title_fa']}", "text": _rule_text(rule),
                          "url": _rule_url(rule), "metadata": {"category": rule["category"], "severity": rule["severity"]}})
 
@@ -100,9 +130,10 @@ def build_server(chatgpt: bool = False) -> Server:
         return types.ListToolsResult(tools=tool_definitions(chatgpt))
 
     async def call_tool(ctx: ServerRequestContext, params: types.CallToolRequestParams) -> types.CallToolResult:
+        # The checks are CPU-bound; run them off the event loop so one call does not stall the others.
         if chatgpt and params.name in ("search", "fetch"):
-            return _chatgpt_call(params.name, params.arguments or {})
-        env, is_error = api.call(params.name, params.arguments)
+            return await anyio.to_thread.run_sync(_chatgpt_call, params.name, params.arguments or {})
+        env, is_error = await anyio.to_thread.run_sync(api.call, params.name, params.arguments)
         text = json.dumps(env, ensure_ascii=False, separators=(",", ":"))
         return types.CallToolResult(content=[types.TextContent(type="text", text=text)], structured_content=env,
                                     is_error=is_error)
@@ -151,6 +182,7 @@ def http_app(allowed_hosts: list[str] | None = None, allow_any_host: bool = Fals
 
     @contextlib.asynccontextmanager
     async def lifespan(app: Any) -> Any:
+        patches.HOLD_ENABLED = False  # shared by many clients: keep no texts between calls
         async with manager.run():
             yield
 

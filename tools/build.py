@@ -95,7 +95,7 @@ def validate(rules: list[dict], sources: dict, profiles: list[dict]) -> None:
 
 
 def render_rule(r: dict, sources: dict) -> str:
-    lines = [f"### {r['id']} — {r['title_fa']}", ""]
+    lines = [f'<a id="{r["id"].lower()}"></a>', "", f"### {r['id']} — {r['title_fa']}", ""]
     meta = f"{SEVERITY[r['severity']]} · {'منبع‌دار' if r['evidence_class'] == 'sourced' else 'جمع‌بندی ویراستاری (بدون منبع کتابی)'}"
     if r["profiles"] != ["all"]:
         meta += " · فقط: " + "، ".join(r["profiles"])
@@ -133,7 +133,8 @@ def main() -> None:
         print(f"corpus OK: {len(rules)} rules"); return
 
     digest = hashlib.sha256(json.dumps([rules, profiles, sources_list, lexicon], ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:10]
-    version = f"0.2.1+{digest}"
+    pkg_version = re.search(r'^version = "([^"]+)"', (ROOT / "pyproject.toml").read_text(encoding="utf-8"), re.M).group(1)
+    version = f"{pkg_version}+{digest}"
     bundle = {"corpus_version": version, "rules": rules, "profiles": profiles, "sources": sources_list,
               "lexicon": lexicon, "tombstones": []}
     OUT_DATA.parent.mkdir(parents=True, exist_ok=True)

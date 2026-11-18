@@ -6,8 +6,8 @@
 | --- | --- | --- | --- |
 | proofreading | غلط‌گیری / نمونه‌خوانی | spelling, spacing, half-space, punctuation marks, characters | ORT, PUN |
 | copyediting | ویرایش زبانی | the above, plus grammar and usage errors and consistency; a sentence pass that **proposes** rebuilt sentences for STY-018 signs; a paragraph pass that reports (DSC-005) | ORT, PUN, GRM, USG, TRM, STY-006; STY-018 and the rules it points to, as proposals |
-| naturalizing | روان‌سازی | the above, with sentence and paragraph rebuilds **applied**; on request, or when the user says the text sounds translated or machine-written | all, with INT rules first |
-| substantive | بازنویسی | naturalizing plus reorganizing paragraphs and sections; only on request | all, with INT rules first |
+| naturalizing | روان‌سازی | the above, with sentence rebuilds and paragraph links (connectors, repeated closers) **applied**, keeping the order of points; on request, or when the user says the text sounds translated or machine-written | all, with INT rules first |
+| substantive | بازنویسی | naturalizing plus reordering and reorganizing paragraphs and sections; only when the user asks for بازنویسی (INT-005) | all, with INT rules first |
 
 At every level the INT rules apply.
 
@@ -23,11 +23,11 @@ For naturalizing and substantive editing, rebuild first and polish after, becaus
 
 For proofreading and copyediting:
 
-1. Protected content: mark quotations, verse, code, URLs, names, numbers.
+1. Protected content: mark quotations, verse, religious and legal text, code, URLs, names, numbers, dates and citations (INT-003, INT-004).
 2. Characters: Arabic ي/ك, digits, invisible characters (PUN-010 to PUN-012).
 3. Spacing and half-space (ORT-001 to ORT-019, ORT-028 to ORT-043).
 4. Spelling: hamza, tanvin, variant spellings (ORT-020 to ORT-027, ORT-042).
-5. Punctuation (PUN-001 to PUN-009).
+5. Punctuation (PUN-001 to PUN-009, PUN-013 to PUN-018).
 6. Grammar: agreement, «را», participial verbs, ellipsis, negation (GRM).
 7. Usage: plurals, tanvin on Persian words, prepositions, register (USG).
 8. Sentence pass (copyediting): for sentences with STY-018 signs, write a rebuilt version as a proposal. Paragraph pass: note missing points, summary closers and same-shape paragraphs (DSC-005, DSC-004).
