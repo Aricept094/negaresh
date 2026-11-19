@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.0
 
 From a review of the W3C Arabic & Persian Layout Requirements (alreq), the Unicode CLDR 49 data for Persian and a browser render test.
 
