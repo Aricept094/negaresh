@@ -61,8 +61,6 @@ A paragraph from an academic introduction, naturalized with the skill (profile: 
 | «بسیاری از موارد عود»، «حتی زمانی که» | «بسیاری از عودها»، «حتی وقتی» | STY-001: words that add nothing. |
 | «انگیزه جدی»، «پیچیده میان»، «از این رو،» | «انگیزهٔ جدی»، «پیچیدهٔ»، «از این رو» | ORT-019: the ezafe mark after a silent «ه»; no comma after a short connector. |
 
-**Kept on purpose.** «به شمار می‌رود» stays: it is natural Persian and a mild hedge, and «است» would make the claim stronger (INT-001). «نشان داده‌اند که» stays: in a literature review the report frame ties the claim to its sources (STY-020). «درک و تعدیل ...» stays as a subject, because a general verbal noun with no actor is fine (STY-003). The plural verbs with inanimate subjects («رخ می‌دهند»، «نیستند») are correct and are not changed (GRM-002).
-
 ## Requirements
 
 - For the MCP server: Python 3.11 or later and [uv](https://docs.astral.sh/uv/) (`uvx` must be on the PATH). The server needs no network access while it runs.
