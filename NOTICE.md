@@ -30,7 +30,7 @@ Some rules also cite these journal articles and editing columns:
 | mirtorabi-kalantari-1405 | سعیده میرترابی و فاطمه کلانتری، کاربرد اسنادی «هست»، «هستش» و «هس» در فارسی محاورهٔ نوشتاری، نامهٔ فرهنگستان ۲۵(۱)، ۱۴۰۵ |
 | kermani-sasani-1403 | معصومه کرمانی و فرهاد ساسانی، «الگوهای شرط در فارسی بر پایهٔ صورت‌های فعلی»، پژوهش‌های زبان‌شناسی ۱۶(۱)، ۱۴۰۳ |
 
-Technical references, for character encoding, number symbols and invisible characters only (paraphrased; not yet checked by a human editor):
+Technical references, for character encoding, number symbols and invisible characters only (paraphrased; checked against the originals by a human editor):
 
 | Id | Reference |
 | --- | --- |
