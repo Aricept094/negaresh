@@ -15,6 +15,12 @@ From a review of the W3C Arabic & Persian Layout Requirements (alreq), the Unico
 - Rules: PUN-003 (number separators, percent, negative numbers), PUN-007 (curly quotes), PUN-011 (letters of other languages, NFC, word ligatures are reported, not converted), PUN-012 (control characters in three tiers), TRM-001 (space between number and unit), ORT-003 («PDF‌ها»).
 - Sources: W3C alreq, Unicode CLDR 49 and the Unicode Character Database. A human editor checked the cited points against the originals.
 - STY-001: a list of three adjectives or nouns gets Samiee's padding test as an editorial suggestion (remove one item; if no meaning is lost, it was decoration). STY-018 points to it.
+- Sentence structure, from a page-by-page review of the four grammars and Samiee (167 rules):
+  - New: USG-026 («در حالی که» for a simultaneous action of the same subject: an adverb, «X که + past continuous», or «… می‌کرد که»), USG-027 (generic singular instead of a translated plural, narrow scope), DSC-006 (comparison sentences: parallel sides, correlative «همان‌قدر … که» and «بیشتر … تا», «هرچه … بیشتر»), USG-028 (reported speech: «گفت» or the verb that names the act; indirect speech is never turned into a quotation; the writer's judgement adverbs).
+  - Also extended: STY-001 («مختلف» after a plural; a rising series is not padding), USG-024 («نسبت به … شناخت دارید» becomes «با … آشنایید»), USG-023 («تکمیلِ X»، «در کوتاه‌ترین مدت»), DSC-005 (findings listed with no sentence from the writer), GRM-028 (merging clauses that differ in one part; «…، نه X»; verbless runs in narrative stay), GRM-038 (a repeated time or place phrase), USG-016 («رمانی از X»), STY-003 (Pakar: a verbal noun with its own subject), GRM-034 («نگارنده» with first-person verbs).
+  - Extended: GRM-014 (impersonal «باید … کرد» for a passive with no subject), STY-005 («یک + noun + adjective» becomes «…ـی», «یکی از»), GRM-036 (pluperfect for the earlier event), DSC-005 (circular "because": report only), GRM-027 (no resumptive «آن را» in a relative clause), GRM-024 (predicate adjective after its complement).
+  - Corrected: GRM-014 and GRM-017 now state Arzhang exactly (only «کردن» compounds lack a passive; «می‌توان + short infinitive» is current usage), GRM-039 (6) no longer recommends inverted forms, STY-003 keeps nominal sides in a correlative comparison, USG-014 and STY-007 (personal letters are not written in colloquial forms; chat is).
+  - STY-018 lists the new signs, so the copyedit sentence pass proposes them.
 
 ## 0.3.0
 
