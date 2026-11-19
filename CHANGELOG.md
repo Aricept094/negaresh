@@ -14,6 +14,7 @@ From a review of the W3C Arabic & Persian Layout Requirements (alreq), the Unico
   - M12 suggests «هٔ» for each «ۀ» and treats the two as one style when it checks mixed ezafe marks.
 - Rules: PUN-003 (number separators, percent, negative numbers), PUN-007 (curly quotes), PUN-011 (letters of other languages, NFC, word ligatures are reported, not converted), PUN-012 (control characters in three tiers), TRM-001 (space between number and unit), ORT-003 («PDF‌ها»).
 - Sources: W3C alreq, Unicode CLDR 49 and the Unicode Character Database. A human editor checked the cited points against the originals.
+- STY-001: a list of three adjectives or nouns gets Samiee's padding test as an editorial suggestion (remove one item; if no meaning is lost, it was decoration). STY-018 points to it.
 
 ## 0.3.0
 
