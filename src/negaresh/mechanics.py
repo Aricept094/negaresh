@@ -15,7 +15,7 @@ from .corpus import Corpus, load
 from .patches import _touches
 from .textutil import ARABIC_DIGITS, DIACRITICS, LETTER_CLASS, NON_JOINING, PERSIAN_DIGITS, ZWNJ, is_persian_letter, revision_of
 
-MECHANICS_VERSION = "1"
+MECHANICS_VERSION = "2"
 MAX_FINDINGS = 200
 MAX_AUTO_PATCHES = 256  # validate_patches accepts at most 256 patches
 DEFAULT_PATCH_CHECKS = {"M01", "M02", "M06", "M07"}
@@ -56,10 +56,24 @@ _CONTROL_NAMES = {
     "‎": "LEFT-TO-RIGHT MARK", "‏": "RIGHT-TO-LEFT MARK", "‪": "LRE", "‫": "RLE",
     "‬": "PDF", "‭": "LRO", "‮": "RLO", "⁦": "LRI", "⁧": "RLI", "⁨": "FSI",
     "⁩": "PDI", "﻿": "BYTE ORDER MARK", "­": "SOFT HYPHEN", " ": "NO-BREAK SPACE",
-    "‍": "ZERO WIDTH JOINER", "​": "ZERO WIDTH SPACE",
+    "‍": "ZERO WIDTH JOINER", "​": "ZERO WIDTH SPACE", "\u061C": "ARABIC LETTER MARK",
 }
 # Words that start like «می» + verb stem but are nouns; never flag them as a joined «می».
 _MI_NOUNS = tuple("میدان میان میز میوه میراث میل میهن میخ مینو میش میکروب میلیون میلی میزان میگو میهمان مینا میرا میراب".split())
+# Letters of other Arabic-script languages (Urdu, Kurdish, Sindhi, Pashto ...) that do not belong in Persian.
+# A target is given only where the letter is a common look-alike of a Persian letter.
+_FOREIGN_LETTERS = {
+    "\u06BE": "ه", "\u06C1": "ه", "\u06D5": "ه", "\u06D2": "ی", "\u06CD": "ی", "\u06D0": "ی", "\u06AA": "ک",
+    "\u06A4": None, "\u0679": None, "\u0688": None, "\u0691": None, "\u06BA": None, "\u06C6": None,
+    "\u06CE": None, "\u06B5": None, "\u0695": None, "\u0692": None, "\u067B": None, "\u0680": None,
+    "\u067A": None, "\u067F": None, "\u06A6": None, "\u0684": None, "\u0683": None, "\u0687": None,
+}
+_UNITS = ("کیلوگرم کیلومتر کیلووات کیلو میلی\u200cمتر میلی\u200cگرم میلی\u200cلیتر سانتی\u200cمتر سانت متر گرم لیتر "
+          "تن ساعت دقیقه ثانیه روز هفته ماه سال درصد تومان ریال دلار یورو نفر برابر مورد عدد").split()
+_UNIT_RE = re.compile(rf"([{PERSIAN_DIGITS}])(?=(?:{'|'.join(_UNITS)})(?![{L}{ZWNJ}]))")
+_NUM_SEP_RE = re.compile(rf"[{PERSIAN_DIGITS}]+(?:[,.،][{PERSIAN_DIGITS}]+)+")
+_BIDI_EMBED = "\u202A\u202B\u202D\u202E"
+_BIDI_ISOLATE = "\u2066\u2067\u2068"
 _AR_ONLY = re.compile("[ةىأإ\u064B-\u0652]|(?<![\u0622-\u06CC])ال(?=[\u0622-\u06CC])")
 _AR_PERSIAN_ONLY = re.compile("[پچژگ]")
 _PAIRS = {"(": ")", "«": "»", "[": "]", "{": "}"}
@@ -82,7 +96,8 @@ class _Collector:
                    for p in self.protected)
 
     def add(self, check: str, start: int, end: int, message: str, *, after: str | None = None,
-            severity: str = "convention", action_class: str = "mechanical", force_flag: bool = False) -> None:
+            severity: str = "convention", action_class: str = "mechanical", force_flag: bool = False,
+            rule_ids: list[str] | None = None) -> None:
         if check in self.off or self._is_protected(start, end):
             return
         if after is not None and self._is_protected(start, end, after):
@@ -99,6 +114,8 @@ class _Collector:
             "check": check, "start": start, "end": end, "text": before, "severity": severity,
             "action": action, "action_class": action_class, "message": message, "candidate_patch": patch,
         })
+        if rule_ids:
+            self.items[-1]["rule_ids_override"] = rule_ids
 
 
 def _segment_bounds(text: str, i: int) -> tuple[int, int, bool]:
@@ -162,6 +179,18 @@ def _check_letters(c: _Collector) -> None:
                   after=target, severity="advisory", force_flag=True)
         else:
             c.add("M01", m.start(), m.end(), f"حرف عربی «{ch}» در متن فارسی", after=target, force_flag=(ch == "ى"))
+    for m in re.finditer("[" + "".join(_FOREIGN_LETTERS) + "]", text):
+        ch = m.group()
+        target = _FOREIGN_LETTERS[ch]
+        msg = f"حرف «{ch}» (U+{ord(ch):04X}) از الفبای زبان دیگری است (اردو، کردی، ...) و در فارسی به کار نمی‌رود"
+        c.add("M01", m.start(), m.end(), msg + (f"؛ صورت فارسی: «{target}»" if target else ""),
+              after=target, force_flag=True)
+    for m in re.finditer("[\u0621-\u06FF][\u064B-\u065F\u0670]+", text):
+        run = m.group()
+        nfc = unicodedata.normalize("NFC", run)
+        if len(nfc) < len(run):
+            c.add("M02", m.start(), m.end(),
+                  f"حرف و نشانه جدا ذخیره شده‌اند؛ صورت یکپارچه «{nfc}» است (یکسان‌سازی NFC)", after=nfc)
     for m in re.finditer("[\uFB50-\uFDFF\uFE70-\uFEFC]+", text):
         run = m.group()
         if all(ch in "\uFD3E\uFD3F" for ch in run):
@@ -187,6 +216,31 @@ def _check_digits(c: _Collector) -> None:
     if has_fa and latin:
         m = latin[0]
         c.add("M03", m.start(), m.end(), "آمیختگی رقم فارسی و لاتین در یک متن؛ یک‌دست کنید", severity="advisory")
+    for m in _NUM_SEP_RE.finditer(text):
+        run = m.group()
+        seps = re.findall(r"[,.،]", run)
+        groups = re.split(r"[,.،]", run)
+        if len(seps) > 1 and not all(len(g) == 3 for g in groups[1:]):
+            continue  # a date or version number such as ۱۴۰۳.۰۵.۱۲
+        if all(len(g) == 3 for g in groups[1:]) and (len(seps) > 1 or seps[0] in ",،"):
+            fixed = re.sub(r"[,.،]", "٬", run)
+            c.add("M03", m.start(), m.end(), f"جداکنندهٔ هزارگان لاتین در عدد فارسی؛ «٬» (U+066C) بنویسید: {fixed}",
+                  after=fixed, force_flag=True, rule_ids=["PUN-003"])
+        elif len(seps) == 1 and seps[0] == "." and len(groups[1]) != 3:
+            fixed = run.replace(".", "٫")
+            c.add("M03", m.start(), m.end(), f"ممیز لاتین در عدد فارسی؛ «٫» (U+066B) بنویسید: {fixed}",
+                  after=fixed, force_flag=True, rule_ids=["PUN-003"])
+        else:
+            c.add("M03", m.start(), m.end(),
+                  "نقطه یا ویرگول لاتین در عدد فارسی؛ اعشار با «٫» و هزارگان با «٬» نوشته می‌شود", severity="advisory",
+                  rule_ids=["PUN-003"])
+    for m in re.finditer(rf"(?<=[{PERSIAN_DIGITS}])( *)%", text):
+        c.add("M03", m.start(), m.end(), "نشانهٔ درصد لاتین «%» با رقم فارسی؛ «٪» بی‌فاصله پس از رقم", after="٪", rule_ids=["PUN-003"])
+    for m in re.finditer(rf"(?<![{PERSIAN_DIGITS}0-9\w\u200E])[-\u2212](?=[{PERSIAN_DIGITS}])", text):
+        c.add("M03", m.start(), m.end(),
+              "نشانهٔ منفی پیش از رقم فارسی در متن راست‌به‌چپ سمت راستِ عدد نمایش داده می‌شود؛ "
+              "«منفی ۵» بنویسید، یا صورت CLDR: LRM و «−» (U+200E U+2212)",
+              after="\u200E\u2212", severity="advisory", force_flag=True, rule_ids=["PUN-003"])
 
 
 def _check_punct(c: _Collector) -> None:
@@ -204,6 +258,9 @@ def _check_punct(c: _Collector) -> None:
         if text[m.start() - 1] in ".…،؛:؟!«(":
             continue  # spaced dots, «... ؟», or a mark cited after another mark
         c.add("M04", m.start(1), m.end(1), f"فاصله پیش از «{m.group(2)}»", after="")
+    for m in re.finditer(rf"(?<=[{PERSIAN_DIGITS}])([ \t]+)(?=٪)", text):
+        c.add("M04", m.start(), m.end(), "فاصله پیش از «٪»؛ نشانهٔ درصد بی‌فاصله پس از رقم می‌آید", after="",
+              rule_ids=["PUN-003"])
     for m in re.finditer(rf"([،؛؟])(?=[{L}])", text):
         c.add("M04", m.start(), m.end(), f"پس از «{m.group()}» فاصله لازم است", after=m.group() + " ")
     for m in re.finditer(rf"(?<=[{L}{ZWNJ}{DIACRITICS}])([ \t]?)([,;?])", text):
@@ -228,6 +285,9 @@ def _check_spaces(c: _Collector) -> None:
         else:
             c.add("M06", m.start(), m.end(), "چند فاصلهٔ پیاپی (شاید فاصلهٔ دو مصراع یا ستون‌بندی باشد)",
                   after=" ", severity="advisory", force_flag=True)
+    for m in _UNIT_RE.finditer(text):
+        c.add("M06", m.end(1), m.end(1), "میان عدد و واحد فاصله بگذارید (۵ کیلو)", after=" ",
+              force_flag=True, severity="advisory", rule_ids=["TRM-001"])
     for m in re.finditer(r"(?<=\S)[ \t]+(?=\r?\n|$)", text):
         if m.group() == "  " and text[m.end(): m.end() + 1] in ("\n", "\r"):
             continue  # Markdown line break
@@ -277,6 +337,10 @@ def _check_affixes(c: _Collector) -> None:
         s = m.end(1)
         after = "" if m.group(1) in NON_JOINING else ZWNJ
         c.add("M08", s, s + 1, "نشانهٔ جمع «ها» با فاصلهٔ کامل از واژه جدا نمی‌شود", after=after, action_class="contextual")
+    for m in re.finditer(rf"([A-Za-z]) (ها(?:ی(?:ی|م|ت|ش|مان|تان|شان)?)?)(?![{L}{ZWNJ}])", text):
+        s = m.end(1)
+        c.add("M08", s, s + 1, "نشانهٔ جمع «ها» پس از واژهٔ لاتین با نیم‌فاصله می‌آید (PDF‌ها)", after=ZWNJ,
+              action_class="contextual")
     for m in _TARIN_RE.finditer(text):
         s = m.end(1)
         after = "" if m.group(1) in NON_JOINING else ZWNJ
@@ -293,20 +357,99 @@ def _check_marks(c: _Collector) -> None:
             if _is_latin(_letter_near(text, m.start() - 1, -1)) or _is_latin(_letter_near(text, m.end(), 1)):
                 continue
             c.add("M09", m.start(), m.end(), "گیومهٔ راست (\") در متن فارسی؛ معمولاً «» به کار می‌رود", severity="advisory")
+        n_open = 0
+        for m in re.finditer("[\u201C\u201D]", text):
+            if _is_latin(_letter_near(text, m.start() - 1, -1)) or _is_latin(_letter_near(text, m.end(), 1)):
+                continue
+            target = "«" if n_open % 2 == 0 else "»"
+            n_open += 1
+            c.add("M09", m.start(), m.end(), f"گیومهٔ لاتین «{m.group()}» در متن فارسی؛ «» به کار می‌رود",
+                  after=target, severity="advisory", force_flag=True)
+        for m in re.finditer("[\u2018\u2019]", text):
+            prev, nxt = text[m.start() - 1: m.start()], text[m.end(): m.end() + 1]
+            if _is_latin(_letter_near(text, m.start() - 1, -1)) or _is_latin(_letter_near(text, m.end(), 1)):
+                continue
+            if prev and nxt and is_persian_letter(prev) and is_persian_letter(nxt):
+                continue  # an apostrophe inside a transliterated word
+            line_start = text.rfind("\n", 0, m.start()) + 1
+            before = text[line_start: m.start()]
+            if before.count("«") > before.count("»"):
+                continue  # a quote inside «…» (PUN-007 allows ‘ ’ for a nested quotation)
+            c.add("M09", m.start(), m.end(), f"گیومهٔ تکی لاتین «{m.group()}» در متن فارسی؛ «» به کار می‌رود، "
+                  "مگر برای نقل‌قول درون نقل‌قول (PUN-007)", severity="advisory")
     for m in re.finditer(rf"(?<=[{L}])ـ+(?=[{L}])", text):
         c.add("M10", m.start(), m.end(),
               "کشیده (ـ) میان حروف؛ اگر به‌جای خط تیره میان دو واژه آمده است، آن را با فاصله یا «–» بنویسید",
               severity="advisory", force_flag=True)
+    _check_controls(c)
+
+
+def _beside_mixed(text: str, i: int) -> bool:
+    """True if the character at i touches Latin text, a digit or a sign: where a direction mark does its job."""
+    for j in (i - 1, i + 1):
+        ch = text[j: j + 1] if 0 <= j < len(text) else ""
+        if ch and (_is_latin(ch) or ch.isdigit() or ch in "+-\u2212%٪()[]/:.,٫٬"):
+            return True
+    return False
+
+
+def _check_controls(c: _Collector) -> None:
+    """M11, in tiers: overrides and unbalanced controls matter; marks and isolates in mixed text are normal."""
+    text = c.text
+    for para_m in re.finditer(r"[^\n]+", text):
+        para, base = para_m.group(), para_m.start()
+        stack: list[int] = []
+        for m in re.finditer("[" + _BIDI_ISOLATE + "\u2069]", para):
+            if m.group() == "\u2069":
+                if stack:
+                    stack.pop()
+                else:
+                    c.add("M11", base + m.start(), base + m.end(), "PDI (U+2069) بدون آغازگر جداساز", after="",
+                          severity="convention", force_flag=True)
+            else:
+                stack.append(m.start())
+        for i in stack:
+            c.add("M11", base + i, base + i + 1,
+                  f"جداساز جهت {_CONTROL_NAMES[para[i]]} (U+{ord(para[i]):04X}) بسته نشده است (PDI U+2069 لازم است)",
+                  severity="convention", force_flag=True)
+        letters = [ch for ch in para if ch.isalpha()]
+        first = letters[0] if letters else ""
+        if _is_latin(first) and sum(1 for ch in letters if not _is_latin(ch)) > len(letters) / 2:
+            c.add("M11", base, base, "بند فارسی با حرف لاتین آغاز می‌شود؛ در HTML یا Markdown ممکن است چپ‌به‌راست "
+                  "نمایش داده شود؛ RLM (U+200F) در آغاز بند یا dir=rtl بگذارید", after="\u200F",
+                  severity="advisory", force_flag=True)
     for m in re.finditer("[" + "".join(_CONTROL_NAMES) + "]", text):
-        c.add("M11", m.start(), m.end(), f"نویسهٔ نادیدنی {_CONTROL_NAMES[m.group()]} (U+{ord(m.group()):04X})",
-              severity="advisory")
+        ch, i = m.group(), m.start()
+        name = f"{_CONTROL_NAMES[ch]} (U+{ord(ch):04X})"
+        if ch in _BIDI_ISOLATE or ch == "\u2069":
+            continue  # balance is checked above; balanced isolates are normal in mixed text
+        if ch in _BIDI_EMBED or ch == "\u202C":
+            c.add("M11", i, i + 1, f"نویسهٔ جهت {name}: جاسازی یا وارونه‌سازی جهت است؛ به‌جای آن جداساز "
+                  "(LRI/RLI … PDI) یا LRM/RLM به کار ببرید", severity="convention", force_flag=True)
+        elif ch in "\u200E\u200F\u061C":
+            if not _beside_mixed(text, i):
+                c.add("M11", i, i + 1, f"نشانهٔ جهت {name} میان حروف فارسی کاری نمی‌کند؛ شاید از رونویسی آمده است",
+                      after="", severity="advisory", force_flag=True)
+        elif ch == "\u200D":
+            prev, nxt = text[i - 1: i], text[i + 1: i + 2]
+            if prev and is_persian_letter(prev) and not (nxt and is_persian_letter(nxt)):
+                continue  # forces the joining form, as in the abbreviation «ه‍.ق»
+            c.add("M11", i, i + 1, f"نویسهٔ نادیدنی {name}", severity="advisory")
+        elif ch == "\uFEFF" and i > 0:
+            c.add("M11", i, i + 1, f"نویسهٔ نادیدنی {name} در میان متن؛ اگر برای جلوگیری از شکستن سطر است، "
+                  "WORD JOINER (U+2060) به کار ببرید", after="", severity="advisory", force_flag=True)
+        else:
+            c.add("M11", i, i + 1, f"نویسهٔ نادیدنی {name}", severity="advisory")
 
 
 def _check_hamza_he(c: _Collector) -> None:
     text = c.text
+    for m in re.finditer("ۀ", text):
+        c.add("M12", m.start(), m.end(), "«ۀ» (U+06C0) را با «ه» و همزهٔ بالا (U+0647 U+0654) بنویسید: «هٔ»؛ "
+              "«ۀ» در یکسان‌سازی یونی‌کد به «ە» (حرف کردی) و همزه شکسته می‌شود و جست‌وجو را خراب می‌کند",
+              after="هٔ", severity="advisory")
     styles = {
-        "ۀ": [m.span() for m in re.finditer("ۀ", text)],
-        "هٔ": [m.span() for m in re.finditer("هٔ", text)],
+        "هٔ": [m.span() for m in re.finditer("ۀ|هٔ", text)],
         "ه‌ی": [m.span() for m in re.finditer(rf"ه{ZWNJ}ی(?![{L}{ZWNJ}])", text)],
     }
     used = {k: v for k, v in styles.items() if v}

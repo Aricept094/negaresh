@@ -229,9 +229,10 @@ TOOLS: dict[str, tuple[type[BaseModel], Any, str]] = {
                     "Without arguments: list writing profiles, corpus scope, limits and review status. With profile_id: "
                     "conventions and preservation policy for that kind of text. Call once at the start of an editing task."),
     "check_mechanics": (CheckMechanicsInput, check_mechanics,
-                        "Run deterministic checks (M01-M16) on Persian text: Arabic letters, presentation forms, digits, punctuation "
+                        "Run deterministic checks (M01-M16) on Persian text: Arabic letters and letters of other languages, presentation forms "
+                        "and non-NFC sequences, digits, number separators (٫ ٬), percent and minus signs, number-unit spacing, punctuation "
                         "spacing and Latin marks, spaces, half-space (ZWNJ) misuse, half-space after «می/نمی» before common verb stems "
-                        "and before «ها/تر/ترین», quotes, kashida, invisible characters, mixed ezafe marks, brackets, preferred spellings "
+                        "and before «ها/تر/ترین», straight and curly quotes, kashida, invisible and bidi control characters, the «ۀ» encoding and mixed ezafe marks, brackets, preferred spellings "
                         "(Academy and Samiee lists), listed expressions to replace (M15) and sentence-shape patterns typical of translated or machine Persian (M16, flags pointing to a rebuild rule). Returns findings with exact code-point offsets, "
                         "candidate patches with rule IDs, auto_patch_set (low-risk, non-overlapping fixes, at most 256, ready for validate_patches) "
                         "and text_revision. Flags need judgement. Check complete_scan. It does not judge grammar, meaning or style, "

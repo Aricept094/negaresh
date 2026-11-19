@@ -2,7 +2,7 @@
   {
     "id": "academic", "title_fa": "دانشگاهی و پژوهشی",
     "default_edit_level": "copyediting",
-    "conventions": {"quotation_marks": "«»", "digits": "persian", "ezafe_after_silent_he": "ۀ"},
+    "conventions": {"quotation_marks": "«»", "digits": "persian", "ezafe_after_silent_he": "هٔ"},
     "mechanics": {"patch": ["M01", "M02", "M04", "M05", "M06", "M07"], "off": []},
     "preserve": ["قیدهای احتیاط (ممکن است، احتمالاً، به نظر می‌رسد)", "ارجاع و انتساب", "عدد، واحد، نماد و فرمول", "اصطلاح تخصصی و واژه‌نامهٔ نویسنده", "جملهٔ مجهول وقتی کنشگر نامعلوم یا بی‌اهمیت است"],
     "notes": "ادعا را قوی‌تر یا ضعیف‌تر نکنید. کنشگری را که متن نگفته است نیفزایید."
@@ -10,7 +10,7 @@
   {
     "id": "professional", "title_fa": "اداری و حرفه‌ای",
     "default_edit_level": "copyediting",
-    "conventions": {"quotation_marks": "«»", "digits": "persian", "ezafe_after_silent_he": "ۀ"},
+    "conventions": {"quotation_marks": "«»", "digits": "persian", "ezafe_after_silent_he": "هٔ"},
     "mechanics": {"patch": ["M01", "M02", "M04", "M05", "M06", "M07"], "off": []},
     "preserve": ["تعهد، مهلت، مبلغ و شرط", "درجهٔ الزام (باید، می‌تواند، بهتر است)", "نام و عنوان رسمی اشخاص و سازمان‌ها"],
     "notes": "روشنی و کوتاهی مطلوب است، ولی تعارف‌های مرسوم نامهٔ اداری خطا نیست."
@@ -18,7 +18,7 @@
   {
     "id": "journalistic", "title_fa": "خبری و روزنامه‌ای",
     "default_edit_level": "copyediting",
-    "conventions": {"quotation_marks": "«»", "digits": "persian", "ezafe_after_silent_he": "ۀ"},
+    "conventions": {"quotation_marks": "«»", "digits": "persian", "ezafe_after_silent_he": "هٔ"},
     "mechanics": {"patch": ["M01", "M02", "M04", "M05", "M06", "M07"], "off": []},
     "preserve": ["نقل‌قول مستقیم، بی هیچ تغییر", "انتساب خبر به منبع", "تفاوت ادعا و واقعیت (گفته می‌شود، به گفتهٔ ...)", "معنای تیتر"],
     "notes": "سخن منبع را به سخن نویسنده بدل نکنید. به گفتهٔ سمیعی، متن خبری برای همگان است: جمله کوتاه و ساده، و هر متن با یک فکر اصلی؛ در متن رادیو و تلویزیون جمله باید چنان کوتاه باشد که شنونده دو سر آن را به هم بپیوندد."
@@ -26,7 +26,7 @@
   {
     "id": "general_nonfiction", "title_fa": "نثر عمومی و توضیحی",
     "default_edit_level": "copyediting",
-    "conventions": {"quotation_marks": "«»", "digits": "persian", "ezafe_after_silent_he": "ۀ"},
+    "conventions": {"quotation_marks": "«»", "digits": "persian", "ezafe_after_silent_he": "هٔ"},
     "mechanics": {"patch": ["M01", "M02", "M04", "M05", "M06", "M07"], "off": []},
     "preserve": ["ادعاها و مثال‌های نویسنده", "لحن نویسنده"],
     "notes": "ادعای تازه نیفزایید."
@@ -50,7 +50,7 @@
   {
     "id": "technical_instructional", "title_fa": "فنی و آموزشی (راهنما، دستورالعمل)",
     "default_edit_level": "copyediting",
-    "conventions": {"quotation_marks": "«»", "digits": "persian", "ezafe_after_silent_he": "ۀ"},
+    "conventions": {"quotation_marks": "«»", "digits": "persian", "ezafe_after_silent_he": "هٔ"},
     "mechanics": {"patch": ["M01", "M02", "M04", "M05", "M06", "M07"], "off": []},
     "preserve": ["ترتیب گام‌ها", "شرط‌ها و هشدارها", "شناسه، کد، فرمان، نام دکمه و مسیر", "تفاوت «باید» و «می‌توانید»", "رقم لاتین در کد و نسخه"],
     "notes": "یک اصطلاح را در سراسر متن ثابت نگه دارید؛ به گفتهٔ سمیعی، در زبان علمی برای یک مفهوم مترادف به کار نمی‌رود، و کتاب درسی زبانی ساده، بی‌تکلف و بی‌ابهام می‌خواهد. برای دستورالعمل گام‌به‌گام کتاب مرجعی در مجموعه نیست."

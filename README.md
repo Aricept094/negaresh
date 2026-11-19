@@ -6,7 +6,7 @@ A Persian (Farsi) writing guide for AI assistants and editors. It has three part
 
 - **A rule set**: 163 rules for Iranian standard Persian. They cover sentence structure and natural word order, verb tense and mood, paragraph flow, removing translated or machine-like Persian, grammar, usage, punctuation, numbers and citations, Academy orthography (نیم‌فاصله), and meaning preservation. Each rule has a test and examples; 157 of them cite the book and page they come from (some also cite a journal article), and the other 6 are marked as editorial practice.
 - **A skill** (standard Agent Skills `SKILL.md` folder) for Claude, Codex and other agents: how to write, copyedit, proofread or naturalize (روان‌سازی) a Persian text with the rules.
-- **An MCP server** (stdio and Streamable HTTP) for Claude, ChatGPT, Codex, Gemini CLI, Cursor, VS Code and any MCP client: deterministic checks (Arabic letters, digits, spacing, half-spaces, quotes, variant spellings, listed calques, and sentence shapes typical of machine Persian), rule search, and validation of edits before they are applied.
+- **An MCP server** (stdio and Streamable HTTP) for Claude, ChatGPT, Codex, Gemini CLI, Cursor, VS Code and any MCP client: deterministic checks (Arabic letters and letters of other languages, digits and number separators, spacing, half-spaces, quotes, invisible direction marks, variant spellings, listed calques, and sentence shapes typical of machine Persian), rule search, and validation of edits before they are applied.
 
 راهنمای نگارش فارسی برای دستیارهای هوش مصنوعی و ویراستاران. این راهنما ۱۶۳ قاعده دارد دربارهٔ ساخت جمله، ترتیب طبیعی اجزا، زمان و وجه فعل، پیوند بندها، زدودن نثر ترجمه‌ای و ماشینی، دستور، کاربرد، نشانه‌گذاری و دستور خط فرهنگستان. یک مهارت (skill) برای Claude و یک سرور MCP محلی برای بررسی‌های مکانیکی هم دارد.
 
@@ -40,11 +40,11 @@ A paragraph from an academic introduction, naturalized with the skill (profile: 
 
 **After**
 
-> اختلال مصرف تنباکو و نیکوتین همچنان یکی از مهم‌ترین اختلالات مزمن و عودکننده در طب اعتیاد به شمار می‌رود. بسیاری از بیماران حتی با انگیزۀ جدی برای ترک به مصرف ادامه می‌دهند، و علت آن تنها وابستگی فیزیولوژیک نیست، بلکه تعامل پیچیدۀ ولع مصرف (craving)، یادگیری شرطی، نشانه‌های محیطی و نقص در کنترل اجرایی است (1, 2).
+> اختلال مصرف تنباکو و نیکوتین همچنان یکی از مهم‌ترین اختلالات مزمن و عودکننده در طب اعتیاد به شمار می‌رود. بسیاری از بیماران حتی با انگیزهٔ جدی برای ترک به مصرف ادامه می‌دهند، و علت آن تنها وابستگی فیزیولوژیک نیست، بلکه تعامل پیچیدهٔ ولع مصرف (craving)، یادگیری شرطی، نشانه‌های محیطی و نقص در کنترل اجرایی است (1, 2).
 >
 > ولع القاشده با نشانه (cue-induced craving) اهمیت ویژه‌ای دارد، زیرا بسیاری از عودهای بالینی در پاسخ به محرک‌های دیداری، بویایی، اجتماعی و موقعیتی مرتبط با سیگار رخ می‌دهند، حتی وقتی علائم حاد ترک چندان برجسته نیستند (3, 4). از این رو درک و تعدیل واکنش‌پذیری به نشانه (cue reactivity) هم از نظر نظری و هم برای درمان اهمیت بسزایی دارد.
 >
-> مطالعات سال‌های اخیر دربارۀ واکنش‌پذیری به نشانه نشان داده‌اند که مواجهه با محرک‌های مرتبط با سیگار می‌تواند هم‌زمان در سطح ذهنی میل آنی به مصرف را افزایش دهد و در سطح عصبی شبکه‌های دخیل در برجستگی محرک، ارزش‌گذاری پاداش، ادراک درونی و کنترل شناختی را درگیر کند (5, 6).
+> مطالعات سال‌های اخیر دربارهٔ واکنش‌پذیری به نشانه نشان داده‌اند که مواجهه با محرک‌های مرتبط با سیگار می‌تواند هم‌زمان در سطح ذهنی میل آنی به مصرف را افزایش دهد و در سطح عصبی شبکه‌های دخیل در برجستگی محرک، ارزش‌گذاری پاداش، ادراک درونی و کنترل شناختی را درگیر کند (5, 6).
 
 **What changed, and why**
 
@@ -55,11 +55,11 @@ A paragraph from an academic introduction, naturalized with the skill (profile: 
 | «در این میان،» at the start of a paragraph | (removed) | GRM-029: an opening connector with no real turn. «زیرا» and «از این رو» mark real cause and result and stay. |
 | «موجب افزایش ... شود» | «... را افزایش دهد» | STY-004: a long verb phrase replaced by the verb. |
 | «به‌طور هم‌زمان» | «هم‌زمان» | STY-004: «به طورِ + adjective» shortened. |
-| «مطالعات مرتبط با ...»، «شبکه‌های مرتبط با ...» | «مطالعات ... دربارۀ ...»، «شبکه‌های دخیل در ...» | STY-009: «مرتبط با» appeared four times. The technical term «محرک‌های مرتبط با سیگار» keeps its wording. |
+| «مطالعات مرتبط با ...»، «شبکه‌های مرتبط با ...» | «مطالعات ... دربارهٔ ...»، «شبکه‌های دخیل در ...» | STY-009: «مرتبط با» appeared four times. The technical term «محرک‌های مرتبط با سیگار» keeps its wording. |
 | «مطالعات ... در سال‌های اخیر نشان داده‌اند» | «مطالعات سال‌های اخیر ... نشان داده‌اند» | GRM-039: the time phrase sits next to the noun it limits, not between subject and verb. |
 | «نه‌تنها از منظر نظری، بلکه از دیدگاه درمانی نیز» | «هم از نظر نظری و هم برای درمان» | USG-023: a simpler pair. The original is also correct if the "not only… but also" stress is wanted. |
 | «بسیاری از موارد عود»، «حتی زمانی که» | «بسیاری از عودها»، «حتی وقتی» | STY-001: words that add nothing. |
-| «انگیزه جدی»، «پیچیده میان»، «از این رو،» | «انگیزۀ جدی»، «پیچیدۀ»، «از این رو» | ORT-019: the ezafe mark after a silent «ه»; no comma after a short connector. |
+| «انگیزه جدی»، «پیچیده میان»، «از این رو،» | «انگیزهٔ جدی»، «پیچیدهٔ»، «از این رو» | ORT-019: the ezafe mark after a silent «ه»; no comma after a short connector. |
 
 **Kept on purpose.** «به شمار می‌رود» stays: it is natural Persian and a mild hedge, and «است» would make the claim stronger (INT-001). «نشان داده‌اند که» stays: in a literature review the report frame ties the claim to its sources (STY-020). «درک و تعدیل ...» stays as a subject, because a general verbal noun with no actor is fine (STY-003). The plural verbs with inanimate subjects («رخ می‌دهند»، «نیستند») are correct and are not changed (GRM-002).
 

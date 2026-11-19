@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased
+
+From a review of the W3C Arabic & Persian Layout Requirements (alreq), the Unicode CLDR 49 data for Persian and a browser render test.
+
+- Ezafe after a silent «ه»: rules, examples, profiles and the README now write «هٔ» (U+0647 U+0654), not «ۀ» (U+06C0). They look the same, but «ۀ» decomposes to Kurdish «ە» and hamza under Unicode normalization (NFD), which breaks search. ORT-019 explains this; «ۀ» is not counted as a spelling error.
+- Checker (mechanics version 2):
+  - M01 flags Arabic-script letters of other languages (ھ ہ ە ے ڤ and others), with the Persian letter where one exists. M02 offers the NFC form of a decomposed letter.
+  - M03 and M04 check numbers written with Persian digits: «٫» for decimals and «٬» for thousands (CLDR), «٪» for «%», no space before «٪», and an advisory for a hyphen used as a minus sign. A date or version with dots is left alone.
+  - M06 flags a digit glued to a unit word («۵کیلو», TRM-001). M08 puts a half-space between a Latin acronym and «ها».
+  - M09 flags curly quotes (“ ”), and ‘ ’ outside «…».
+  - M11 is split into tiers: direction overrides, embeddings and unbalanced isolates are flagged; LRM, RLM and balanced isolates next to Latin text or numbers, and ZWJ in abbreviations such as «ه‍.ش», are no longer flagged. A BOM inside text names U+2060. A Persian paragraph that starts with a Latin word gets an advisory.
+  - M12 suggests «هٔ» for each «ۀ» and treats the two as one style when it checks mixed ezafe marks.
+- Rules: PUN-003 (number separators, percent, negative numbers), PUN-007 (curly quotes), PUN-011 (letters of other languages, NFC, word ligatures are reported, not converted), PUN-012 (control characters in three tiers), TRM-001 (space between number and unit), ORT-003 («PDF‌ها»).
+- Sources: W3C alreq, Unicode CLDR 49 and the Unicode Character Database. They are not yet checked by a human editor, and the rule book says so.
+
 ## 0.3.0
 
 - Sources: rules may now also cite journal articles and editing columns. Eight are added to `corpus/sources.json`; a human editor checked each cited finding against the article. The rule book marks any article source that is not yet checked (`human_checked: false`).

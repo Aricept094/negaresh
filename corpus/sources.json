@@ -173,5 +173,32 @@
     "locator_kind": "table",
     "note": "Findings are cited in the author's own words and were checked against the article by a human editor.",
     "human_checked": true
+  },
+  {
+    "id": "w3c-alreq",
+    "short": "W3C، الزامات صفحه‌آرایی عربی و فارسی (alreq)",
+    "citation": "W3C Internationalization Working Group, Arabic & Persian Layout Requirements (alreq), https://www.w3.org/TR/alreq/ ; github.com/w3c/alreq, commit 670d38e (2026-08-09).",
+    "role": "technical_standard",
+    "locator_kind": "section anchor",
+    "note": "Technical reference read by an AI agent; not yet checked by a human editor.",
+    "human_checked": false
+  },
+  {
+    "id": "unicode-cldr-49",
+    "short": "Unicode CLDR 49، دادهٔ محلی فارسی",
+    "citation": "Unicode Common Locale Data Repository (CLDR) 49, common/main/fa.xml and root.xml, tag release-49, https://github.com/unicode-org/cldr .",
+    "role": "technical_standard",
+    "locator_kind": "file and path",
+    "note": "Technical reference read by an AI agent; not yet checked by a human editor.",
+    "human_checked": false
+  },
+  {
+    "id": "unicode-ucd",
+    "short": "پایگاه دادهٔ نویسه‌های یونی‌کد (UCD)",
+    "citation": "Unicode Consortium, Unicode Character Database (UnicodeData.txt; Unicode Standard Annex #15, Unicode Normalization Forms), https://www.unicode.org/ucd/ .",
+    "role": "technical_standard",
+    "locator_kind": "code point",
+    "note": "Technical reference read by an AI agent; not yet checked by a human editor.",
+    "human_checked": false
   }
 ]

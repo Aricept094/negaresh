@@ -253,3 +253,69 @@ def test_m16_silent_on_natural_prose(text):
 
 def test_m16_off_in_literary_profile():
     assert not [f for f in _check("جلسه برگزار گردید.", "literary")["findings"] if f["check"] == "M16"]
+
+
+# alreq review (2026-11-19): foreign letters, decomposed forms, numbers, units,
+# curly quotes, bidi controls and the heh with hamza encoding.
+L = "‎"
+NEW_FLAGS = [
+    ("این کتاب ھست", "M01", None),            # Urdu heh doachashmee
+    ("واژهٔ ڤ در فارسی نیست", "M01", None),            # Kurdish ve
+    ("آ" "ب سرد است".replace("آ", "آ"), "M02", None),  # decomposed alef madda
+    ("او گفت “سلام” و رفت.", "M09", None),
+    ("قیمت ۱,۲۳۴ تومان است.", "M03", "PUN-003"),
+    ("وزن ۳.۵ کیلو بود.", "M03", "PUN-003"),
+    ("عدد ۱.۲۳۴ آمد.", "M03", "PUN-003"),
+    ("جمعیت ۱۲،۳۴۵ نفر است.", "M03", "PUN-003"),
+    ("رشد ۲% بود.", "M03", "PUN-003"),
+    ("رشد ۲ ٪ بود.", "M04", "PUN-003"),
+    ("دما -۵ درجه بود.", "M03", "PUN-003"),
+    ("وزن ۵کیلو بود.", "M06", "TRM-001"),
+    ("فایل‌های PDF ها را بفرست.", "M08", None),
+    ("سلام" + L + "دنیا", "M11", None),
+    ("متن ‮وارونه‬ است", "M11", None),
+    ("واژهٔ ⁦AI را", "M11", None),
+    ("Python زبانی است که برنامه‌نویسان زیادی آن را دوست دارند.", "M11", None),
+    ("سلام﻿دنیا", "M11", None),
+    ("خانهٔ من".replace("هٔ", "ۀ"), "M12", None),
+]
+
+
+@pytest.mark.parametrize("text,check,rule", NEW_FLAGS)
+def test_alreq_check_fires(text, check, rule):
+    hits = [f for f in _check(text)["findings"] if f["check"] == check]
+    assert hits, [(f["check"], f["text"]) for f in _check(text)["findings"]]
+    if rule:
+        assert any(rule in f["rule_ids"] for f in hits)
+
+
+ALREQ_CLEAN = [
+    "He said “hello” there.",
+    "تاریخ ۱۴۰۳.۰۵.۱۲ است.",
+    "عدد ۱۲٬۳۴۵ و ۱۲٫۵ و ۲٪ درست است.",
+    "growth 2% is fine",
+    "دما " + L + "−۵ درجه بود.",
+    "از ۱۵۰۰-۲۰۰۰ کیلو",
+    "دهه ۵۰ها و ۵ساله و ۱۵م",
+    "فایل‌های PDF‌ها را بفرست.",
+    "سال ۱۳۰۰ ه‍.ش",
+    "واژهٔ " + L + "AI" + L + " را",
+    "واژهٔ ⁦AI⁩ را",
+    "This is English text with one واژه.",
+    "خانهٔ من",
+    "مدیر نوشت: «کارکنان گفته‌اند ‘این طرح اجراشدنی نیست’».",
+]
+
+
+@pytest.mark.parametrize("text", ALREQ_CLEAN)
+def test_alreq_correct_text_is_silent(text):
+    new = {"M01", "M02", "M03", "M04", "M06", "M08", "M09", "M11", "M12"}
+    hits = [(f["check"], f["text"]) for f in _check(text)["findings"] if f["check"] in new]
+    assert not hits, hits
+
+
+def test_heh_hamza_forms_count_as_one_style():
+    text = "خانۀ من و نامهٔ او"
+    msgs = [f["message"] for f in _check(text)["findings"] if f["check"] == "M12"]
+    assert len(msgs) == 1 and "U+06C0" in msgs[0]
+    assert not any("ناهمسانی" in m for m in msgs)
