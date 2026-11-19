@@ -26,6 +26,43 @@ Some rules also cite journal articles and editing columns: corpus studies of wri
 | Proofread | «غلط‌گیری کن» | Characters, spacing, half-spaces, spelling and punctuation only. |
 | Ask | «این درست است؟» | The rule is found and cited. |
 
+## Example: before and after
+
+A paragraph from an academic introduction, naturalized with the skill (profile: academic). The mechanical check found nothing in either version; the changes are sentence rebuilds that the rules ask for. Citations, hedges and technical terms are unchanged.
+
+**Before**
+
+> اختلال مصرف تنباکو و نیکوتین همچنان یکی از مهم‌ترین اختلالات مزمن و عودکننده در طب اعتیاد به شمار می‌رود. در بسیاری از بیماران، حتی با وجود انگیزه جدی برای ترک، تداوم مصرف تنها ناشی از وابستگی فیزیولوژیک نیست، بلکه پیامد تعامل پیچیده میان ولع مصرف (craving)، یادگیری شرطی، نشانه‌های محیطی و نقص در کنترل اجرایی است (1, 2).
+>
+> در این میان، ولع القاشده با نشانه (cue-induced craving) از اهمیت ویژه‌ای برخوردار است، زیرا بسیاری از موارد عود بالینی در پاسخ به محرک‌های دیداری، بویایی، اجتماعی و موقعیتی مرتبط با سیگار رخ می‌دهند، حتی زمانی که علائم حاد ترک چندان برجسته نیستند (3, 4). از این رو، درک و تعدیل واکنش‌پذیری به نشانه (cue reactivity) نه‌تنها از منظر نظری، بلکه از دیدگاه درمانی نیز اهمیت بسزایی دارد.
+>
+> مطالعات مرتبط با واکنش‌پذیری به نشانه در سال‌های اخیر نشان داده‌اند که مواجهه با محرک‌های مرتبط با سیگار می‌تواند به‌طور هم‌زمان، هم در سطح ذهنی موجب افزایش میل آنی به مصرف شود و هم در سطح عصبی، شبکه‌های مرتبط با برجستگی محرک، ارزش‌گذاری پاداش، ادراک درونی و کنترل شناختی را درگیر کند (5, 6).
+
+**After**
+
+> اختلال مصرف تنباکو و نیکوتین همچنان یکی از مهم‌ترین اختلالات مزمن و عودکننده در طب اعتیاد به شمار می‌رود. بسیاری از بیماران حتی با انگیزۀ جدی برای ترک به مصرف ادامه می‌دهند، و علت آن تنها وابستگی فیزیولوژیک نیست، بلکه تعامل پیچیدۀ ولع مصرف (craving)، یادگیری شرطی، نشانه‌های محیطی و نقص در کنترل اجرایی است (1, 2).
+>
+> ولع القاشده با نشانه (cue-induced craving) اهمیت ویژه‌ای دارد، زیرا بسیاری از عودهای بالینی در پاسخ به محرک‌های دیداری، بویایی، اجتماعی و موقعیتی مرتبط با سیگار رخ می‌دهند، حتی وقتی علائم حاد ترک چندان برجسته نیستند (3, 4). از این رو درک و تعدیل واکنش‌پذیری به نشانه (cue reactivity) هم از نظر نظری و هم برای درمان اهمیت بسزایی دارد.
+>
+> مطالعات سال‌های اخیر دربارۀ واکنش‌پذیری به نشانه نشان داده‌اند که مواجهه با محرک‌های مرتبط با سیگار می‌تواند هم‌زمان در سطح ذهنی میل آنی به مصرف را افزایش دهد و در سطح عصبی شبکه‌های دخیل در برجستگی محرک، ارزش‌گذاری پاداش، ادراک درونی و کنترل شناختی را درگیر کند (5, 6).
+
+**What changed, and why**
+
+| Before | After | Rule |
+| --- | --- | --- |
+| «در بسیاری از بیماران ... تداوم مصرف ... ناشی از ... نیست، بلکه پیامد ... است» | «بسیاری از بیماران ... به مصرف ادامه می‌دهند، و علت آن ... نیست، بلکه ... است» | STY-019, STY-003: the patients become the subject and get a verb; the abstract noun «تداوم مصرف» goes. The contrast «تنها ... نیست، بلکه» stays. |
+| «از اهمیت ویژه‌ای برخوردار است» | «اهمیت ویژه‌ای دارد» | STY-019: a padded verb replaced by the plain one. |
+| «در این میان،» at the start of a paragraph | (removed) | GRM-029: an opening connector with no real turn. «زیرا» and «از این رو» mark real cause and result and stay. |
+| «موجب افزایش ... شود» | «... را افزایش دهد» | STY-004: a long verb phrase replaced by the verb. |
+| «به‌طور هم‌زمان» | «هم‌زمان» | STY-004: «به طورِ + adjective» shortened. |
+| «مطالعات مرتبط با ...»، «شبکه‌های مرتبط با ...» | «مطالعات ... دربارۀ ...»، «شبکه‌های دخیل در ...» | STY-009: «مرتبط با» appeared four times. The technical term «محرک‌های مرتبط با سیگار» keeps its wording. |
+| «مطالعات ... در سال‌های اخیر نشان داده‌اند» | «مطالعات سال‌های اخیر ... نشان داده‌اند» | GRM-039: the time phrase sits next to the noun it limits, not between subject and verb. |
+| «نه‌تنها از منظر نظری، بلکه از دیدگاه درمانی نیز» | «هم از نظر نظری و هم برای درمان» | USG-023: a simpler pair. The original is also correct if the "not only… but also" stress is wanted. |
+| «بسیاری از موارد عود»، «حتی زمانی که» | «بسیاری از عودها»، «حتی وقتی» | STY-001: words that add nothing. |
+| «انگیزه جدی»، «پیچیده میان»، «از این رو،» | «انگیزۀ جدی»، «پیچیدۀ»، «از این رو» | ORT-019: the ezafe mark after a silent «ه»; no comma after a short connector. |
+
+**Kept on purpose.** «به شمار می‌رود» stays: it is natural Persian and a mild hedge, and «است» would make the claim stronger (INT-001). «نشان داده‌اند که» stays: in a literature review the report frame ties the claim to its sources (STY-020). «درک و تعدیل ...» stays as a subject, because a general verbal noun with no actor is fine (STY-003). The plural verbs with inanimate subjects («رخ می‌دهند»، «نیستند») are correct and are not changed (GRM-002).
+
 ## Requirements
 
 - For the MCP server: Python 3.11 or later and [uv](https://docs.astral.sh/uv/) (`uvx` must be on the PATH). The server needs no network access while it runs.
