@@ -2,13 +2,61 @@
 
 [![ci](https://github.com/Aricept094/negaresh/actions/workflows/ci.yml/badge.svg)](https://github.com/Aricept094/negaresh/actions/workflows/ci.yml) [![PyPI](https://img.shields.io/pypi/v/negaresh.svg)](https://pypi.org/project/negaresh/) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
+![negaresh: a Persian writing guide for AI assistants and editors](https://raw.githubusercontent.com/Aricept094/negaresh/main/docs/assets/social-preview.png)
+
 A Persian (Farsi) writing guide for AI assistants and editors. It has three parts that work together or alone:
 
 - **A rule set**: 167 rules for Iranian standard Persian. They cover sentence structure and natural word order, verb tense and mood, paragraph flow, removing translated or machine-like Persian, grammar, usage, punctuation, numbers and citations, Academy orthography (نیم‌فاصله), and meaning preservation. Each rule has a test and examples; 161 of them cite the book and page they come from (some also cite a journal article), and the other 6 are marked as editorial practice.
 - **A skill** (standard Agent Skills `SKILL.md` folder) for Claude, Codex and other agents: how to write, copyedit, proofread or naturalize (روان‌سازی) a Persian text with the rules.
 - **An MCP server** (stdio and Streamable HTTP) for Claude, ChatGPT, Codex, Gemini CLI, Cursor, VS Code and any MCP client: deterministic checks (Arabic letters and letters of other languages, digits and number separators, spacing, half-spaces, quotes, invisible direction marks, variant spellings, listed calques, and sentence shapes typical of machine Persian), rule search, and validation of edits before they are applied.
 
-راهنمای نگارش فارسی برای دستیارهای هوش مصنوعی و ویراستاران. این راهنما ۱۶۳ قاعده دارد دربارهٔ ساخت جمله، ترتیب طبیعی اجزا، زمان و وجه فعل، پیوند بندها، زدودن نثر ترجمه‌ای و ماشینی، دستور، کاربرد، نشانه‌گذاری و دستور خط فرهنگستان. یک مهارت (skill) برای Claude و یک سرور MCP محلی برای بررسی‌های مکانیکی هم دارد.
+A Persian section is [below](#به-فارسی).
+
+## At a glance
+
+A typical machine-written sentence, the checker's findings, and the edit. Each change names the rule and the book it comes from.
+
+**Before**
+
+> لازم به ذکر است که این طرح در جلسهٔ دیروز مورد بررسی قرار گرفت و نتایج آن به زودی اعلام می گردد. كارشناسان گزارش ها را خوانده اند.
+
+**After**
+
+> این طرح در جلسهٔ دیروز بررسی شد و نتایج آن به‌زودی اعلام می‌شود. کارشناسان گزارش‌ها را خوانده‌اند.
+
+| Change | Rule | Source | Found by |
+| --- | --- | --- | --- |
+| «لازم به ذکر است که» removed: the sentence is complete without it | STY-020 | Samiee, «نگارش و ویرایش», pp. 176–178 | checker (M16) |
+| «مورد بررسی قرار گرفت» → «بررسی شد» | USG-021 | Samiee, pp. 154–161 | checker (M15) |
+| «می گردد» → «می‌شود» | STY-004, ORT-002 | Samiee, pp. 175–177; Academy «دستور خطّ فارسی», pp. 39–40 | checker (M16, M08) |
+| «كارشناسان» (Arabic «ك») → «کارشناسان» | PUN-011 | Unicode and W3C Persian layout notes (editorial rule) | checker (M01, automatic fix) |
+| «گزارش ها» → «گزارش‌ها» | ORT-003 | Academy, pp. 40–41 | checker (M08) |
+| «خوانده اند» → «خوانده‌اند», «به زودی» → «به‌زودی» | ORT-016, ORT-007 | Academy, pp. 38 and 42–43 | the model, with the rules |
+
+The checker found six of the eight changes on its own and fixes only the safe one (the Arabic letter) by itself; the rest are flags for the model or the editor to decide. The edited sentence gets no findings. A longer, paragraph-level example is in [Example: before and after](#example-before-and-after).
+
+## به فارسی
+
+«نگارش» راهنمای نوشتن فارسی معیار برای دستیارهای هوش مصنوعی و ویراستاران است. ۱۶۷ قاعده دارد دربارهٔ ساخت جمله و ترتیب طبیعی اجزا، زمان و وجه فعل، پیوند بندها، زدودن نثر ترجمه‌ای و ماشینی، دستور، کاربرد، نشانه‌گذاری و دستور خط فرهنگستان. ۱۶۱ قاعده کتاب و صفحه‌ای را که از آن گرفته شده‌اند نام می‌برند؛ شش قاعدهٔ دیگر شیوهٔ ویراستاری‌اند و همین را هم می‌گویند.
+
+منابع: «دستور خطّ فارسی» فرهنگستان (ویراست ۱۴۰۱)، «دستور زبان فارسی ۱ و ۲» انوری و احمدی گیوی، «دستور زبان فارسی امروز» ارژنگ و «نگارش و ویرایش» سمیعی. متن کتاب‌ها در این بسته نیست و مهارت و سرور نمی‌توانند آن‌ها را بخوانند؛ فقط قاعده‌ها را به کار می‌برند.
+
+سه بخش دارد:
+
+- **مهارت (skill)** برای Claude و دستیارهای دیگر: نوشتن، ویرایش، غلط‌گیری و روان‌سازی متن فارسی با همین قاعده‌ها.
+- **سرور MCP** که روی رایانهٔ خودتان اجرا می‌شود و برای کار به اینترنت نیاز ندارد. حرف عربی، نیم‌فاصله، فاصله‌گذاری، رقم، گیومه و چند ساخت رایج نثر ماشینی را پیدا می‌کند و پیش از اعمال اصلاح‌ها، آن‌ها را می‌سنجد.
+- **خود قاعده‌ها** به صورت JSON و کتاب قاعده‌ها به فارسی ([docs/RULEBOOK.md](https://github.com/Aricept094/negaresh/blob/main/docs/RULEBOOK.md)).
+
+نصب در Claude Code:
+
+```
+/plugin marketplace add Aricept094/negaresh
+/plugin install negaresh@negaresh
+```
+
+در Claude.ai فایل `negaresh-skill.zip` را از [آخرین نسخه](https://github.com/Aricept094/negaresh/releases/latest) بگیرید و در Settings → Capabilities → Skills بارگذاری کنید. نصب در ابزارهای دیگر در بخش [Install](#install) آمده است.
+
+پس از نصب کافی است بنویسید «این متن را ویرایش کن»، «روانش کن» یا «غلط‌گیری کن».
 
 ## Sources
 
@@ -194,12 +242,12 @@ negaresh search "نیم‌فاصله می"
 | --- | --- | --- | --- |
 | ORT | Orthography and spacing | 44 | Academy «دستور خطّ فارسی» (1401) |
 | GRM | Grammar, word order, tense and mood | 39 | Anvari and Ahmadi-Givi 1 and 2; Arzhang; Samiee; corpus studies |
-| USG | Usage and calques | 23 | the three grammars; Samiee |
+| USG | Usage and calques | 26 | the three grammars; Samiee |
 | STY | Style and sentence building | 19 | Samiee; editorial synthesis; translation studies |
 | PUN | Punctuation and characters | 18 | Samiee |
 | TRM | Numbers, dates, citations, notes, names | 9 | Samiee |
 | INT | Meaning preservation | 6 | Samiee; editorial synthesis |
-| DSC | Paragraphs and discourse | 5 | Samiee |
+| DSC | Paragraphs and discourse | 6 | Samiee; Anvari and Ahmadi-Givi 2 |
 
 Each rule has a severity (`error`, `convention`, `advisory`) and an evidence class. `sourced` rules name the book and page they come from, and some also name a journal article; `editorial_synthesis` rules are editorial practice with no book behind them. The evidence class tells you how to cite a rule; the severity tells you how firmly to apply it.
 
