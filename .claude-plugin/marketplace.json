@@ -6,7 +6,7 @@
       "name": "negaresh",
       "source": "./",
       "description": "Persian (Farsi) writing guide: rule set, writing and editing skill, and a local MCP server for mechanical checks.",
-      "version": "0.4.0"
+      "version": "0.4.1"
     }
   ]
 }

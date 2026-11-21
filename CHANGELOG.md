@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.1
+
+- Spelling rules checked page by page against the Academy's «دستور خطّ فارسی» (new edition). ORT-012 and ORT-041 write «به‌طوری که» with a half-space, as the book prints it. ORT-043 now covers only plural «ها» and «گر/گری» after a pronounced «ه»; the indefinite «ی» stays joined (گرهی). ORT-042 calls the non-preferred spellings non-preferred, not wrong. Page references fixed in ORT-001, ORT-021 and ORT-026; smaller fixes in ORT-008, ORT-009, ORT-015 (four more prefixes), ORT-033, ORT-035, ORT-038, ORT-039 and ORT-040. The claim that ORT-040 and ORT-041 are new in 1401 is now marked as the editor's view.
+- ORT-019 and ORT-025 give the page numbers in the Anvari and Ahmadi-Givi grammar.
+- Ten sentence rules checked on the book page images, not only the scanned text: DSC-006, GRM-029, GRM-036, GRM-037, GRM-038, GRM-039, STY-001, STY-005, USG-024 and USG-028. Where a rule said more than the book, the extra part is now marked as editorial advice (for example GRM-029 on «برای + مصدر», GRM-037 on «باید»ِ استنباط, USG-024 on intransitive pairs other than کردن / شدن). USG-024 cites the right page for impersonal verbs.
+- Near-duplicate rules: STY-004 and STY-005 keep the principle and point to the lists in USG-016, USG-020 and USG-021; repeated examples are removed.
+- Tests: a cross-rule test checks that no rule's correct example is flagged or patched under another rule.
+
 ## 0.4.0
 
 From a review of the W3C Arabic & Persian Layout Requirements (alreq), the Unicode CLDR 49 data for Persian and a browser render test.
