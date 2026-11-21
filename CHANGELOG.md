@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.2
+
+- The Claude Code plugin no longer starts an MCP server. Before, each open session and the desktop app kept a negaresh server (uvx, uv and two Python processes) running in the background. Now the skill runs the `negaresh` command only when it needs a check, and the command exits when it is done.
+- New commands: `negaresh validate FILE PATCHES.json [--out REVISED]` (the same check as the `validate_patches` tool, on the exact file you checked), `negaresh rule RULE_ID` and `negaresh profile [PROFILE_ID]`. `negaresh check` and `validate` read UTF-8 files and stop with a clear message if a file is not UTF-8.
+- SKILL.md and workflow.md explain the command path next to the MCP path. The command keeps nothing between calls, so it never answers `needs_context`.
+- To keep the MCP tools in every session, add the server yourself: `claude mcp add negaresh -- uvx negaresh serve`. Other clients (Gemini CLI, Cursor, VS Code) are unchanged.
+
 ## 0.4.1
 
 - Spelling rules checked page by page against the Academy's «دستور خطّ فارسی» (new edition). ORT-012 and ORT-041 write «به‌طوری که» with a half-space, as the book prints it. ORT-043 now covers only plural «ها» and «گر/گری» after a pronounced «ه»; the indefinite «ی» stays joined (گرهی). ORT-042 calls the non-preferred spellings non-preferred, not wrong. Page references fixed in ORT-001, ORT-021 and ORT-026; smaller fixes in ORT-008, ORT-009, ORT-015 (four more prefixes), ORT-033, ORT-035, ORT-038, ORT-039 and ORT-040. The claim that ORT-040 and ORT-041 are new in 1401 is now marked as the editor's view.

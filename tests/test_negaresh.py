@@ -219,3 +219,40 @@ def test_chatgpt_tools_report_bad_input_as_errors():
     assert server._chatgpt_call("fetch", {"id": 5}).is_error
     found = json.loads(server._chatgpt_call("search", {"query": "نیم‌فاصله"}).content[0].text)
     assert "#" in found["results"][0]["url"]
+
+
+def test_cli_runs_once_and_validates_patches(tmp_path, capsys):
+    from negaresh import cli
+
+    text = "كتاب ها"
+    draft = tmp_path / "draft.txt"
+    draft.write_text(text, encoding="utf-8")
+    assert cli.main(["check", str(draft)]) == 0
+    assert json.loads(capsys.readouterr().out)["status"] == "ok"
+
+    good = [{"patch_id": "p1", "start": 0, "end": 1, "before": "ك", "after": "ک", "rule_ids": ["ORT-005"]}]
+    patches = tmp_path / "patches.json"
+    patches.write_text(json.dumps(good, ensure_ascii=False), encoding="utf-8")
+    out = tmp_path / "revised.txt"
+    assert cli.main(["validate", str(draft), str(patches), "--out", str(out)]) == 0
+    assert out.read_text(encoding="utf-8") == "کتاب ها"
+    capsys.readouterr()
+
+    bad = [{"patch_id": "p1", "start": 0, "end": 1, "before": "x", "after": "ک"}]
+    patches.write_text(json.dumps(bad), encoding="utf-8")
+    out.unlink()
+    assert cli.main(["validate", str(draft), str(patches), "--out", str(out)]) == 1
+    assert not out.exists()
+    capsys.readouterr()
+
+    patches.write_text("{not json", encoding="utf-8")
+    assert cli.main(["validate", str(draft), str(patches)]) == 2
+
+
+def test_cli_rule_and_profile(capsys):
+    from negaresh import cli
+
+    assert cli.main(["rule", "ORT-002"]) == 0
+    assert json.loads(capsys.readouterr().out)["data"]["rule"]["id"] == "ORT-002"
+    assert cli.main(["profile", "academic"]) == 0
+    assert json.loads(capsys.readouterr().out)["status"] == "ok"

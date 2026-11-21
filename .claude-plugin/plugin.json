@@ -1,7 +1,7 @@
 {
   "name": "negaresh",
-  "version": "0.4.1",
-  "description": "Persian (Farsi) writing guide: a sourced rule set for natural Persian sentence structure, verb and tense choice, paragraph flow, grammar, usage, Academy orthography and punctuation, with a skill for writing and editing and a local MCP server for mechanical checks and patch validation.",
+  "version": "0.4.2",
+  "description": "Persian (Farsi) writing guide: a sourced rule set for natural Persian sentence structure, verb and tense choice, paragraph flow, grammar, usage, Academy orthography and punctuation, with a skill for writing and editing. Mechanical checks and edit validation run on demand through the negaresh command; nothing runs in the background.",
   "author": {
     "name": "negaresh contributors"
   },
@@ -16,6 +16,5 @@
     "proofreading",
     "style"
   ],
-  "skills": "./skills/",
-  "mcpServers": "./.mcp.json"
+  "skills": "./skills/"
 }

@@ -44,7 +44,7 @@ The checker found six of the eight changes on its own and fixes only the safe on
 سه بخش دارد:
 
 - **مهارت (skill)** برای Claude و دستیارهای دیگر: نوشتن، ویرایش، غلط‌گیری و روان‌سازی متن فارسی با همین قاعده‌ها.
-- **سرور MCP** که روی رایانهٔ خودتان اجرا می‌شود و برای کار به اینترنت نیاز ندارد. حرف عربی، نیم‌فاصله، فاصله‌گذاری، رقم، گیومه و چند ساخت رایج نثر ماشینی را پیدا می‌کند و پیش از اعمال اصلاح‌ها، آن‌ها را می‌سنجد.
+- **بررسی‌کنندهٔ خودکار** که روی رایانهٔ خودتان اجرا می‌شود و برای کار به اینترنت نیاز ندارد. در Claude Code مهارت فقط هنگام نیاز آن را اجرا می‌کند و چیزی در پس‌زمینه نمی‌ماند؛ در ابزارهای دیگر به صورت سرور MCP وصل می‌شود. حرف عربی، نیم‌فاصله، فاصله‌گذاری، رقم، گیومه و چند ساخت رایج نثر ماشینی را پیدا می‌کند و پیش از اعمال اصلاح‌ها، آن‌ها را می‌سنجد.
 - **خود قاعده‌ها** به صورت JSON و کتاب قاعده‌ها به فارسی ([docs/RULEBOOK.md](https://github.com/Aricept094/negaresh/blob/main/docs/RULEBOOK.md)).
 
 نصب در Claude Code:
@@ -122,9 +122,9 @@ The server is on [PyPI](https://pypi.org/project/negaresh/) and in the [official
 uvx negaresh serve
 ```
 
-### Claude Code (plugin: skill and MCP server together)
+### Claude Code (plugin)
 
-In Claude Code:
+The plugin installs the skill. It starts no server: when a check is needed, the skill runs `uvx negaresh check` or `uvx negaresh validate`, which exits as soon as it is done. In Claude Code:
 
 ```
 /plugin marketplace add Aricept094/negaresh
@@ -139,6 +139,12 @@ claude plugin marketplace add Aricept094/negaresh
 
 ```bash
 claude plugin install negaresh@negaresh
+```
+
+If you want the MCP tools in every session instead, add the server yourself (it then runs for as long as each session is open):
+
+```bash
+claude mcp add negaresh -- uvx negaresh serve
 ```
 
 ### Claude Desktop
@@ -233,8 +239,22 @@ negaresh check draft.txt --profile academic
 ```
 
 ```bash
+negaresh validate draft.txt patches.json --out revised.txt
+```
+
+```bash
 negaresh search "نیم‌فاصله می"
 ```
+
+```bash
+negaresh rule ORT-002
+```
+
+```bash
+negaresh profile academic
+```
+
+Each command prints the same JSON as the matching MCP tool, runs once and exits. `validate` takes the exact text you checked and a JSON file with a list of patches (or `{"patches": [...], "protected_spans": [...]}`), and writes the revised text only when every patch is valid.
 
 ## Rule families
 

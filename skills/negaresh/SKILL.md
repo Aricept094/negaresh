@@ -12,7 +12,12 @@ description: Write, edit, proofread, naturalize, rewrite or review Persian (Fars
 - `references/rules-<category>.md`: the full rules. Categories: orthography (ORT), punctuation (PUN), grammar (GRM), usage (USG), style (STY), discourse (DSC), terminology (TRM), integrity (INT).
 - Start every sentence-level job with STY-018: a short list of the signs of translated and machine Persian, each pointing to the rule that fixes it.
 - `references/workflow.md`: the editing procedure, edit levels and the report format.
-- MCP server `negaresh` (optional), five tools: `search_rules`, `get_rule`, `get_profile`, `check_mechanics`, `validate_patches`. Tool names can have a client prefix; match on the last part of the name.
+- The `negaresh` command (optional). It runs only when you call it and exits when it is done, so nothing stays in the background. Use it when you can run shell commands:
+  - `uvx negaresh check FILE --profile academic`: the mechanical check (same JSON as `check_mechanics`).
+  - `uvx negaresh validate FILE PATCHES.json --out REVISED_FILE`: the edit check (same JSON as `validate_patches`). FILE is the exact text you checked; PATCHES.json is a list of patches, or `{"patches": [...], "protected_spans": [...]}`. The revised text is written only when every patch is valid.
+  - `uvx negaresh search "نیم‌فاصله می"`, `uvx negaresh rule ORT-002`, `uvx negaresh profile academic`: rule search, one rule, one profile.
+  Write texts and patches to UTF-8 files; do not pass Persian text as a command-line argument except a short search query. The first run downloads the package once; after that it works offline.
+- Or an MCP server `negaresh`, if the client has one connected: five tools, `search_rules`, `get_rule`, `get_profile`, `check_mechanics`, `validate_patches`. Tool names can have a client prefix; match on the last part of the name. The steps below name the MCP tools; with the command, use the matching command.
 
 Each rule has a severity (`error`, `convention`, `advisory`) and an evidence class:
 
@@ -35,7 +40,7 @@ The evidence class only tells you how to cite a rule. How firmly to apply it com
 3. **Mark protected content** before you edit (INT-003, INT-004): direct quotations, verse, religious text (آیه، حدیث، دعا), old texts quoted as they stand, legal and contract wording, code, URLs, names, numbers, dates and citations. Do not change their wording or values. In running text you may still convert Latin digits to Persian digits where INT-004 allows it; never change a number's value.
 4. **Paragraph pass** (copyedit and naturalize). For each paragraph, note in one line its point and how it develops it (DSC-005). A missing point, a summary closer that repeats the opening, or the same shape in every paragraph goes to the report (copyedit) or is fixed (naturalize).
 5. **Short text (light path).** For a short text or one question: read the index, open the one or two rule files you need, edit, and report. No tool call is necessary.
-6. **Long or important text (audited path).** If the MCP server is available:
+6. **Long or important text (audited path).** If the MCP server or the `negaresh` command is available (with the command, keep each chunk in its own file and do not change that file until its patches validate; the command keeps nothing between calls, so it never answers `needs_context`):
    - Call `get_profile` for the profile.
    - Call `check_mechanics` with the text (limit 12,000 code points for each call; split longer text at paragraph borders, and finish check and validation of one chunk before you send the next, because the server keeps only the last 8 texts). It returns findings with offsets in Unicode code points, a `text_revision`, and `auto_patch_set`.
    - `auto_patch_set` holds the low-risk character fixes (Arabic ي/ك, presentation forms, spacing around punctuation, double spaces, wrong half-spaces), already free of overlaps and with rule IDs. They are candidates, not proof: before you apply them, look at each one that falls inside a quotation, verse, a number, a name or code, and drop it if it changes that content.
@@ -43,7 +48,7 @@ The evidence class only tells you how to cite a rule. How firmly to apply it com
    - If `complete_scan` is false or `findings_omitted` is above 0, the list is cut. Send a shorter chunk; do not tell the user that all mechanical fixes were made.
    - The checker sees characters, listed expressions and a few sentence shapes only. No finding means the text is clean of those; it does not mean the sentences are natural Persian. It cannot judge grammar, usage or style. Do those yourself with the rule files or `search_rules` / `get_rule`.
    - Before you give the user the edited text, send all your changes to `validate_patches` with the `text_revision`. Fix each issue it reports. It proves that patches apply cleanly and leave protected spans (URLs, e-mail addresses, code, your own protected spans) unchanged. It does not prove that meaning is kept; that is your job (INT-001, INT-002). If it answers `needs_context`, call `check_mechanics` again on the exact same chunk and retry; do not try to retype the original text.
-7. **Without the MCP server**, do the same checks by hand from `rules-orthography.md` and `rules-punctuation.md`, and tell the user that the mechanical check did not run.
+7. **Without the MCP server or the command**, do the same checks by hand from `rules-orthography.md` and `rules-punctuation.md`, and tell the user that the mechanical check did not run.
 8. **Report.** Give the edited text, then the list of changes that are not plain mechanical fixes, each with a rule ID. Separate corrections (`error`) from conventions and from suggestions (`advisory`). Use the format in `references/workflow.md`.
 
 ## Rebuilding a sentence

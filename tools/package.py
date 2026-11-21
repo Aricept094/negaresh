@@ -24,7 +24,6 @@ OUT = DIST / "negaresh"
 
 INCLUDE = [
     ".claude-plugin",
-    ".mcp.json",
     ".gitignore",
     ".gitattributes",
     ".github",
