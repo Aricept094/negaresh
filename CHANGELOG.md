@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.3
+
+- Expand the corpus to 180 rules. Thirteen page-checked additions are marked as drafts. Updated examples protect quotation fidelity, causal direction, modifier scope and the distinction between promises and completed events.
+
+- The skill runs the command as `uvx --from "negaresh>=0.4.2" negaresh …`. Plain `uvx negaresh` reuses any copy uv has cached, so a machine that had run 0.4.1 or older got a version without `validate`, `rule` and `profile`. The version floor makes uv fetch the new version once; after that it runs offline from the cache.
+
 ## 0.4.2
 
 - The Claude Code plugin no longer starts an MCP server. Before, each open session and the desktop app kept a negaresh server (uvx, uv and two Python processes) running in the background. Now the skill runs the `negaresh` command only when it needs a check, and the command exits when it is done.

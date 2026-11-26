@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "negaresh"
-version = "0.4.2"
+version = "0.4.3"
 description = "Persian (Farsi) writing guide: sourced rule set, mechanical checks and a local MCP server"
 readme = "README.md"
 license = "MIT"

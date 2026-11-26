@@ -12,11 +12,11 @@ description: Write, edit, proofread, naturalize, rewrite or review Persian (Fars
 - `references/rules-<category>.md`: the full rules. Categories: orthography (ORT), punctuation (PUN), grammar (GRM), usage (USG), style (STY), discourse (DSC), terminology (TRM), integrity (INT).
 - Start every sentence-level job with STY-018: a short list of the signs of translated and machine Persian, each pointing to the rule that fixes it.
 - `references/workflow.md`: the editing procedure, edit levels and the report format.
-- The `negaresh` command (optional). It runs only when you call it and exits when it is done, so nothing stays in the background. Use it when you can run shell commands:
-  - `uvx negaresh check FILE --profile academic`: the mechanical check (same JSON as `check_mechanics`).
-  - `uvx negaresh validate FILE PATCHES.json --out REVISED_FILE`: the edit check (same JSON as `validate_patches`). FILE is the exact text you checked; PATCHES.json is a list of patches, or `{"patches": [...], "protected_spans": [...]}`. The revised text is written only when every patch is valid.
-  - `uvx negaresh search "نیم‌فاصله می"`, `uvx negaresh rule ORT-002`, `uvx negaresh profile academic`: rule search, one rule, one profile.
-  Write texts and patches to UTF-8 files; do not pass Persian text as a command-line argument except a short search query. The first run downloads the package once; after that it works offline.
+- The `negaresh` command (optional). It runs only when you call it and exits when it is done, so nothing stays in the background. Use it when you can run shell commands. Run it as `uvx --from "negaresh>=0.4.2" negaresh <command>`; the version floor makes uv fetch a newer copy when an older one is cached. Below, `negaresh` stands for that:
+  - `negaresh check FILE --profile academic`: the mechanical check (same JSON as `check_mechanics`).
+  - `negaresh validate FILE PATCHES.json --out REVISED_FILE`: the edit check (same JSON as `validate_patches`). FILE is the exact text you checked; PATCHES.json is a list of patches, or `{"patches": [...], "protected_spans": [...]}`. The revised text is written only when every patch is valid.
+  - `negaresh search "نیم‌فاصله می"`, `negaresh rule ORT-002`, `negaresh profile academic`: rule search, one rule, one profile.
+  Write texts and patches to UTF-8 files; do not pass Persian text as a command-line argument except a short search query. The first run downloads the package; after that it works offline until a newer version is required.
 - Or an MCP server `negaresh`, if the client has one connected: five tools, `search_rules`, `get_rule`, `get_profile`, `check_mechanics`, `validate_patches`. Tool names can have a client prefix; match on the last part of the name. The steps below name the MCP tools; with the command, use the matching command.
 
 Each rule has a severity (`error`, `convention`, `advisory`) and an evidence class:

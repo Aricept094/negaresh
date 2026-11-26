@@ -97,6 +97,8 @@ def validate(rules: list[dict], sources: dict, profiles: list[dict]) -> None:
 def render_rule(r: dict, sources: dict) -> str:
     lines = [f'<a id="{r["id"].lower()}"></a>', "", f"### {r['id']} — {r['title_fa']}", ""]
     meta = f"{SEVERITY[r['severity']]} · {'منبع‌دار' if r['evidence_class'] == 'sourced' else 'جمع‌بندی ویراستاری (بدون منبع کتابی)'}"
+    if r["status"] == "draft":
+        meta += " · پیش‌نویس"
     if r["profiles"] != ["all"]:
         meta += " · فقط: " + "، ".join(r["profiles"])
     lines += [f"*{meta}* — {r['title_en']}", "", r["guidance"], ""]
