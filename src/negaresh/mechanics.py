@@ -8,14 +8,14 @@ from __future__ import annotations
 
 import re
 import unicodedata
-from functools import lru_cache
+from bisect import bisect_right
 from typing import Any
 
 from .corpus import Corpus, load
-from .patches import _touches
-from .textutil import ARABIC_DIGITS, DIACRITICS, LETTER_CLASS, NON_JOINING, PERSIAN_DIGITS, ZWNJ, is_persian_letter, revision_of
+from .patches import _touches, checked_revision
+from .textutil import ARABIC_DIGITS, DIACRITICS, LETTER_CLASS, NON_JOINING, PERSIAN_DIGITS, ZWNJ, is_persian_letter
 
-MECHANICS_VERSION = "2"
+MECHANICS_VERSION = "3"
 MAX_FINDINGS = 200
 MAX_AUTO_PATCHES = 256  # validate_patches accepts at most 256 patches
 DEFAULT_PATCH_CHECKS = {"M01", "M02", "M06", "M07"}
@@ -83,13 +83,58 @@ def detect_protected(text: str) -> list[dict[str, Any]]:
     return [{"start": m.start(), "end": m.end(), "kind": "auto"} for m in _PROTECT_RE.finditer(text)]
 
 
+def _quote_ranges(text: str, detected: list[dict[str, Any]]) -> list[tuple[int, int]]:
+    """Outermost quotations in logical order. An unclosed quote extends to the end."""
+    closers = {"«": "»", "“": "”", "‘": "’", '"': '"'}
+    stack: list[str] = []
+    ranges: list[tuple[int, int]] = []
+    spans = []
+    for sp in detected:
+        left, right = sp["start"], sp["end"]
+        if text.startswith(("http://", "https://", "www."), left):
+            # A closing prose quotation mark can sit immediately after the URL.
+            while right > left and text[right - 1] in {'"', "”", "’"}:
+                right -= 1
+        spans.append((left, right))
+    span_index = 0
+    start = 0
+    for i, ch in enumerate(text):
+        while span_index < len(spans) and spans[span_index][1] <= i:
+            span_index += 1
+        if span_index < len(spans) and spans[span_index][0] <= i:
+            continue
+        if ch == "’" and i and i + 1 < len(text) and text[i - 1].isalpha() and text[i + 1].isalpha():
+            continue
+        if stack and ch == stack[-1]:
+            stack.pop()
+            if not stack:
+                ranges.append((start, i + 1))
+        elif ch in closers:
+            if not stack:
+                start = i
+            stack.append(closers[ch])
+    if stack:
+        ranges.append((start, len(text)))
+    return ranges
+
+
 class _Collector:
-    def __init__(self, text: str, protected: list[dict[str, Any]], patch_checks: set[str], off: set[str]):
+    def __init__(self, text: str, protected: list[dict[str, Any]], patch_checks: set[str], off: set[str],
+                 quotes: list[tuple[int, int]]):
         self.text = text
         self.protected = protected
         self.patch_checks = patch_checks
         self.off = off
+        self.near_letters = _near_tables(text)
+        self.quotes = quotes
+        self.quote_ends = [end for _, end in self.quotes]
         self.items: list[dict[str, Any]] = []
+
+    def letter_near(self, i: int, step: int) -> str:
+        if not 0 <= i < len(self.text):
+            return ""
+        before, after = self.near_letters
+        return before[i] if step < 0 else after[i]
 
     def _is_protected(self, start: int, end: int, after: str | None = None) -> bool:
         return any(p["end"] > p["start"] and _touches(self.text, start, end, after, p["start"], p["end"])
@@ -102,6 +147,9 @@ class _Collector:
             return
         if after is not None and self._is_protected(start, end, after):
             force_flag = True  # the fix would join text onto a URL or code: offer it, never apply it
+        quote = bisect_right(self.quote_ends, start)
+        if quote < len(self.quotes) and self.quotes[quote][0] < end:
+            force_flag = True
         before = self.text[start:end]
         patch = None
         if end - start > 200:
@@ -129,7 +177,6 @@ def _segment_bounds(text: str, i: int) -> tuple[int, int, bool]:
     return begin, min(ends) if ends else len(text), False
 
 
-@lru_cache(maxsize=4)
 def _near_tables(text: str) -> tuple[list[str], list[str]]:
     """For each position, the nearest letter at or before it and at or after it (one linear pass each way)."""
     n = len(text)
@@ -145,14 +192,6 @@ def _near_tables(text: str) -> tuple[list[str], list[str]]:
             last = text[j]
         after[j] = last
     return before, after
-
-
-def _letter_near(text: str, i: int, step: int) -> str:
-    """The nearest letter before (step=-1) or after (step=1) position i, skipping digits, spaces and marks."""
-    if not 0 <= i < len(text):
-        return ""
-    before, after = _near_tables(text)
-    return before[i] if step < 0 else after[i]
 
 
 def _is_latin(ch: str) -> bool:
@@ -212,7 +251,7 @@ def _check_digits(c: _Collector) -> None:
               after=m.group().translate(str.maketrans(ARABIC_DIGITS, PERSIAN_DIGITS)), force_flag=True)
     has_fa = re.search(f"[{PERSIAN_DIGITS}]", text)
     latin = [m for m in re.finditer(r"(?<![A-Za-z0-9_./:-])[0-9]+(?![A-Za-z0-9_/-])", text)
-             if not _is_latin(_letter_near(text, m.start() - 1, -1))]
+             if not _is_latin(c.letter_near(m.start() - 1, -1))]
     if has_fa and latin:
         m = latin[0]
         c.add("M03", m.start(), m.end(), "آمیختگی رقم فارسی و لاتین در یک متن؛ یک‌دست کنید", severity="advisory")
@@ -354,12 +393,12 @@ def _check_marks(c: _Collector) -> None:
     text = c.text
     if re.search(f"[{L}]", text):
         for m in re.finditer('"', text):
-            if _is_latin(_letter_near(text, m.start() - 1, -1)) or _is_latin(_letter_near(text, m.end(), 1)):
+            if _is_latin(c.letter_near(m.start() - 1, -1)) or _is_latin(c.letter_near(m.end(), 1)):
                 continue
             c.add("M09", m.start(), m.end(), "گیومهٔ راست (\") در متن فارسی؛ معمولاً «» به کار می‌رود", severity="advisory")
         n_open = 0
         for m in re.finditer("[\u201C\u201D]", text):
-            if _is_latin(_letter_near(text, m.start() - 1, -1)) or _is_latin(_letter_near(text, m.end(), 1)):
+            if _is_latin(c.letter_near(m.start() - 1, -1)) or _is_latin(c.letter_near(m.end(), 1)):
                 continue
             target = "«" if n_open % 2 == 0 else "»"
             n_open += 1
@@ -367,7 +406,7 @@ def _check_marks(c: _Collector) -> None:
                   after=target, severity="advisory", force_flag=True)
         for m in re.finditer("[\u2018\u2019]", text):
             prev, nxt = text[m.start() - 1: m.start()], text[m.end(): m.end() + 1]
-            if _is_latin(_letter_near(text, m.start() - 1, -1)) or _is_latin(_letter_near(text, m.end(), 1)):
+            if _is_latin(c.letter_near(m.start() - 1, -1)) or _is_latin(c.letter_near(m.end(), 1)):
                 continue
             if prev and nxt and is_persian_letter(prev) and is_persian_letter(nxt):
                 continue  # an apostrophe inside a transliterated word
@@ -631,7 +670,7 @@ def check(
     mech = profile.get("mechanics", {})
     patch_checks = set(mech.get("patch", DEFAULT_PATCH_CHECKS)) if profile_id else set(DEFAULT_PATCH_CHECKS)
     off = set(mech.get("off", []))
-    c = _Collector(text, protected, patch_checks, off)
+    c = _Collector(text, protected, patch_checks, off, _quote_ranges(text, detected))
     for fn in (_check_letters, _check_digits, _check_punct, _check_spaces, _check_zwnj, _check_affixes,
                _check_marks, _check_hamza_he, _check_brackets):
         fn(c)
@@ -666,8 +705,10 @@ def check(
     auto_omitted = max(0, len(auto_set) - MAX_AUTO_PATCHES)
     auto_set = auto_set[:MAX_AUTO_PATCHES]
     omitted = max(0, len(items) - MAX_FINDINGS)
+    revision = checked_revision(text, protected_spans or [])
     return {
-        "text_revision": revision_of(text),
+        "text_revision": revision,
+        "validation_context": {"text_revision": revision, "protected_spans": protected_spans or []},
         "offset_unit": "unicode_code_points",
         "mechanics_version": MECHANICS_VERSION,
         "complete_scan": omitted == 0,

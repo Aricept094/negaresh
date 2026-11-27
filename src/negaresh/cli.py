@@ -67,7 +67,7 @@ def main(argv: list[str] | None = None) -> int:
     p_valid = sub.add_parser("validate", help="validate edits to a UTF-8 text file (the same check as validate_patches)")
     p_valid.add_argument("file", help="the original text, exactly as it was checked")
     p_valid.add_argument("patches", help="JSON file: a list of patches, or an object with 'patches' and "
-                                         "optional 'protected_spans'")
+                                         "optional 'text_revision' and 'protected_spans'")
     p_valid.add_argument("--out", help="write the revised text to this file when validation passes")
     p_search = sub.add_parser("search", help="search the rules")
     p_search.add_argument("query")
@@ -117,7 +117,7 @@ def main(argv: list[str] | None = None) -> int:
         if not isinstance(spec, dict):
             print(f"negaresh: {args.patches} must hold a list of patches or an object with 'patches'", file=sys.stderr)
             return 2
-        payload = {**spec, "text_revision": revision_of(text), "original_text": text}
+        payload = {"text_revision": revision_of(text), **spec, "original_text": text}
         env, is_error = api.call("validate_patches", payload)
         data = env.get("data") or {}
         valid = not is_error and env.get("status") == "ok" and data.get("valid") is True

@@ -122,7 +122,15 @@ def test_mcp_stdio_roundtrip():
                 await s.initialize()
                 tools = await s.list_tools()
                 names = {t.name for t in tools.tools}
-                res = await s.call_tool("check_mechanics", {"text": "می روم به خانه ي او"})
+                res = await s.call_tool("check_mechanics", {"text": "می روم به خانه ي او",
+                                                            "protected_spans": [{"locator": {"text": "خانه"}}]})
+                checked = json.loads(res.content[0].text)["data"]
+                attempted = await s.call_tool("validate_patches", {
+                    "text_revision": checked["text_revision"],
+                    "patches": [{"patch_id": "p1", "before": "خانه", "after": "شهر", "locator": {"prefix": "به "}}],
+                })
+                issue = json.loads(attempted.content[0].text)["data"]["issues"][0]
+                assert issue["code"] == "protected_span"
                 return names, res
 
     names, res = asyncio.run(run())
@@ -197,7 +205,7 @@ def test_text_too_long_is_limit_exceeded():
 def test_remote_server_keeps_no_texts():
     from negaresh import patches
 
-    patches.HOLD_ENABLED = False
+    token = patches.HOLD_ENABLED.set(False)
     try:
         text = "متنی  تازه برای آزمون."
         data = api.call("check_mechanics", {"text": text})[0]["data"]
@@ -208,7 +216,7 @@ def test_remote_server_keeps_no_texts():
                                                "patches": data["auto_patch_set"]})
         assert env["data"]["valid"]
     finally:
-        patches.HOLD_ENABLED = True
+        patches.HOLD_ENABLED.reset(token)
 
 
 def test_tool_schemas_have_no_refs():

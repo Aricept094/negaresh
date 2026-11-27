@@ -226,6 +226,8 @@ The skill is a standard `SKILL.md` folder: [`skills/negaresh`](https://github.co
 | `validate_patches` | Checks that a set of edits applies cleanly and leaves URLs, code and other protected text unchanged. |
 | `search`, `fetch` | Over HTTP only: the search-and-read pair that ChatGPT connectors use. |
 
+Pass both fields from `check_mechanics.data.validation_context` to `validate_patches` alongside the patches. HTTP clients also send the exact checked chunk as `original_text`. The stdio server can reuse up to eight checked revisions. Quoted material can generate review findings, but automatic patches leave it intact.
+
 All tools are read-only. The server stores no text on disk. Each call takes up to 12,000 Unicode code points.
 
 ## Command line
@@ -241,6 +243,8 @@ negaresh check draft.txt --profile academic
 ```bash
 negaresh validate draft.txt patches.json --out revised.txt
 ```
+
+For edits saved after a check, put `text_revision` and `protected_spans` from its `data.validation_context` in `patches.json` alongside `patches`. A change anywhere in the draft then fails validation. A bare list validates against the file supplied at invocation.
 
 ```bash
 negaresh search "نیم‌فاصله می"

@@ -12,6 +12,8 @@ Tasks:
 
 Profiles: academic, professional, journalistic, general_nonfiction, literary, conversational, technical_instructional, persuasive_marketing_social. If unclear, use general_nonfiction. In literary and conversational text fix only clear typing errors, unless the user asks to naturalize; then keep images, voice and rhythm, follow each rule's exception for literary and colloquial text, and propose rather than apply where a rule says so. Never make colloquial text formal.
 
+When the editing tools are connected, pass both fields of the check’s validation_context to validate_patches with the chosen patches. For original_text_required or text_not_held, add the exact checked chunk as original_text.
+
 Protected content: do not change the wording or values of direct quotations, verse, religious text, legal wording, code, URLs, names, numbers, dates or citations. Converting Latin digits to Persian in running text is allowed (INT-004).
 
 Rebuilding a sentence:

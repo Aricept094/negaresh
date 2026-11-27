@@ -133,7 +133,11 @@ def build_server(chatgpt: bool = False) -> Server:
         # The checks are CPU-bound; run them off the event loop so one call does not stall the others.
         if chatgpt and params.name in ("search", "fetch"):
             return await anyio.to_thread.run_sync(_chatgpt_call, params.name, params.arguments or {})
-        env, is_error = await anyio.to_thread.run_sync(api.call, params.name, params.arguments)
+        token = patches.HOLD_ENABLED.set(not chatgpt)
+        try:
+            env, is_error = await anyio.to_thread.run_sync(api.call, params.name, params.arguments)
+        finally:
+            patches.HOLD_ENABLED.reset(token)
         text = json.dumps(env, ensure_ascii=False, separators=(",", ":"))
         return types.CallToolResult(content=[types.TextContent(type="text", text=text)], structured_content=env,
                                     is_error=is_error)
@@ -182,7 +186,6 @@ def http_app(allowed_hosts: list[str] | None = None, allow_any_host: bool = Fals
 
     @contextlib.asynccontextmanager
     async def lifespan(app: Any) -> Any:
-        patches.HOLD_ENABLED = False  # shared by many clients: keep no texts between calls
         async with manager.run():
             yield
 

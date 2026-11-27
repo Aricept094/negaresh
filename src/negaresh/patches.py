@@ -6,8 +6,11 @@ original. Texts are held in process memory only, keyed by revision.
 
 from __future__ import annotations
 
+import hashlib
+import json
 import threading
 from collections import OrderedDict
+from contextvars import ContextVar
 from typing import Any
 
 from .textutil import revision_of
@@ -15,24 +18,33 @@ from .textutil import revision_of
 MAX_HELD_TEXTS = 8
 # A remote (HTTP) server is shared by many clients and keeps no texts: one client could otherwise read back
 # or evict another client's text. The stdio server serves one client and keeps the last few texts.
-HOLD_ENABLED = True
-_store: "OrderedDict[str, str]" = OrderedDict()
+HOLD_ENABLED = ContextVar("hold_enabled", default=True)
+_store: "OrderedDict[str, tuple[str, list[dict[str, Any]]]]" = OrderedDict()
 _lock = threading.Lock()
 
 
-def hold(text: str) -> str:
-    rev = revision_of(text)
-    if not HOLD_ENABLED:
-        return rev
+def checked_revision(text: str, spans: list[dict[str, Any]]) -> str:
+    revision = revision_of(text)
+    if spans:
+        entries = sorted({(sp["start"], sp["end"], sp["kind"]) for sp in spans})
+        encoded = json.dumps(entries, separators=(",", ":")).encode("ascii")
+        revision += ":spans:" + hashlib.sha256(encoded).hexdigest()
+    return revision
+
+
+def hold(rev: str, text: str, spans: list[dict[str, Any]]) -> None:
+    if not HOLD_ENABLED.get():
+        return
     with _lock:
-        _store[rev] = text
+        _store[rev] = (text, [span.copy() for span in spans])
         _store.move_to_end(rev)
         while len(_store) > MAX_HELD_TEXTS:
             _store.popitem(last=False)
-    return rev
 
 
-def held(revision: str) -> str | None:
+def held(revision: str) -> tuple[str, list[dict[str, Any]]] | None:
+    if not HOLD_ENABLED.get():
+        return None
     with _lock:
         return _store.get(revision)
 

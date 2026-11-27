@@ -104,7 +104,7 @@ class CheckMechanicsInput(_Strict):
 
 
 class ValidatePatchesInput(_Strict):
-    text_revision: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+    text_revision: str = Field(pattern=r"^sha256:[0-9a-f]{64}(:spans:[0-9a-f]{64})?$")
     original_text: str | None = Field(default=None, max_length=MAX_TEXT)
     patches: list[Patch] = Field(min_length=1, max_length=256)
     protected_spans: list[Span] = Field(default_factory=list, max_length=256)
@@ -169,7 +169,7 @@ def get_profile(args: GetProfileInput) -> dict[str, Any]:
             "edit_levels": ["proofreading", "copyediting", "naturalizing", "substantive"],
             "rule_count": len(corpus.rules),
             "categories": sorted({r["category"] for r in corpus.rules.values()}),
-            "limits": {"max_text_code_points": MAX_TEXT, "search_limit": 8, "held_texts": patches.MAX_HELD_TEXTS},
+            "limits": {"max_text_code_points": MAX_TEXT, "search_limit": 8, "held_texts": patches.MAX_HELD_TEXTS if patches.HOLD_ENABLED.get() else 0},
             "review_status": "Reviewed by a human editor.",
             "sources": list(corpus.sources.values()),
         }
@@ -183,33 +183,43 @@ def check_mechanics(args: CheckMechanicsInput) -> dict[str, Any]:
         return envelope("invalid_input", {"span_issues": issues},
                         error={"code": "protected_span_unresolved", "message": "A protected span could not be resolved.",
                                "retryable": True, "suggested_action": "Fix the span locator or give exact offsets."})
-    patches.hold(args.text)
     profile = args.context.profile_id if args.context else None
     data = mechanics.check(args.text, profile_id=profile, protected_spans=spans)
+    patches.hold(data["text_revision"], args.text, spans)
     return envelope("ok", data, truncated=data["findings_omitted"] > 0 or data["auto_patch_set_omitted"] > 0)
 
 
 def validate_patches(args: ValidatePatchesInput) -> dict[str, Any]:
+    stored = patches.held(args.text_revision)
     original = args.original_text
     if original is None:
-        if not patches.HOLD_ENABLED:
+        if not patches.HOLD_ENABLED.get():
             return _error("needs_context", "original_text_required",
                           "This server does not keep texts between calls; send the text you checked as original_text.",
-                          "Retry with original_text set to the exact text you sent to check_mechanics.", retryable=True)
-        original = patches.held(args.text_revision)
+                          "Retry with the exact checked original_text and the fields from validation_context.", retryable=True)
+        original = stored[0] if stored else None
         if original is None:
             return _error("needs_context", "text_not_held", "The server no longer holds this text.",
-                          "Call check_mechanics again with the exact text, then retry with the new text_revision.",
+                          "Send the exact checked original_text with the saved validation_context.",
                           retryable=True)
-    elif revision_of(original) != args.text_revision:
+    elif revision_of(original) != args.text_revision.partition(":spans:")[0]:
         return _error("invalid_input", "revision_mismatch",
                       "original_text does not match text_revision; the text was altered when it was re-sent.",
-                      "Send only text_revision (omit original_text) after check_mechanics, or re-run check_mechanics.")
+                      "Supply the exact checked text, or check the changed text with the same protections and review its new patches.")
     spans, span_issues = patches.resolve_spans(original, [s.model_dump() for s in args.protected_spans])
     if span_issues:
         return envelope("invalid_input", {"span_issues": span_issues},
                         error={"code": "protected_span_unresolved", "message": "A protected span could not be resolved.",
                                "retryable": True, "suggested_action": "Fix the span locator or give exact offsets."})
+    if ":spans:" in args.text_revision:
+        if not spans and stored:
+            spans = stored[1]
+        if not spans:
+            return _error("needs_context", "protected_spans_required", "This revision includes protected spans.",
+                          "Pass the validation_context returned by check_mechanics.", retryable=True)
+        if patches.checked_revision(original, spans) != args.text_revision:
+            return _error("invalid_input", "protected_spans_mismatch", "Protected spans differ from the checked spans.",
+                          "Pass the validation_context returned by check_mechanics.")
     spans = [*spans, *mechanics.detect_protected(original)]
     result = patches.validate(original, [p.model_dump() for p in args.patches], spans, set(load().rules), MAX_TEXT * 2)
     if not args.include_revised_text:
@@ -235,10 +245,10 @@ TOOLS: dict[str, tuple[type[BaseModel], Any, str]] = {
                         "and before «ها/تر/ترین», straight and curly quotes, kashida, invisible and bidi control characters, the «ۀ» encoding and mixed ezafe marks, brackets, preferred spellings "
                         "(Academy and Samiee lists), listed expressions to replace (M15) and sentence-shape patterns typical of translated or machine Persian (M16, flags pointing to a rebuild rule). Returns findings with exact code-point offsets, "
                         "candidate patches with rule IDs, auto_patch_set (low-risk, non-overlapping fixes, at most 256, ready for validate_patches) "
-                        "and text_revision. Flags need judgement. Check complete_scan. It does not judge grammar, meaning or style, "
+                        "and validation_context (text_revision and resolved user protections). Flags need judgement. Check complete_scan. It does not judge grammar, meaning or style, "
                         "and never changes the text."),
     "validate_patches": (ValidatePatchesInput, validate_patches,
-                         "Validate proposed edits against the exact original and return the rebuilt text. Pass text_revision from "
+                         "Validate proposed edits against the exact original and return the rebuilt text. Pass validation_context fields from "
                          "check_mechanics (do not re-send the original; a remote server that keeps no texts asks for original_text). Each patch gives 'before', 'after' and either offsets or a "
                          "locator with adjacent prefix/suffix. Rejects stale, ambiguous, overlapping edits and edits that touch or "
                          "change protected spans (URLs, e-mail, code, given spans). Present the "
