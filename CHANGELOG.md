@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.5
+
+- Preserve checked revisions, user-protected spans and quoted text during editing.
+- Improve Persian rule retrieval and clarify ambiguous replacement wording in USG-023.
+
 ## 0.4.4
 
 - The corpus now has 193 reviewed Persian writing rules. This release adds 13 rules and records final review for all 26 rules that carried draft status across the two review rounds.

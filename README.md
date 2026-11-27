@@ -124,7 +124,7 @@ uvx negaresh serve
 
 ### Claude Code (plugin)
 
-The plugin installs the skill. It starts no server: when a check is needed, the skill runs `uvx --from "negaresh>=0.4.4" negaresh check` or `… validate`, which exits as soon as it is done. The version floor makes uv fetch a CLI that includes the reviewed rule set and spelling corrections. In Claude Code:
+The plugin installs the skill. It starts no server: when a check is needed, the skill runs `uvx --from "negaresh>=0.4.5" negaresh check` or `… validate`, which exits as soon as it is done. The version floor makes uv fetch a CLI that includes the reviewed rule set and spelling corrections. In Claude Code:
 
 ```
 /plugin marketplace add Aricept094/negaresh

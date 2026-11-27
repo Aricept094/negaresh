@@ -1,6 +1,6 @@
 {
   "name": "negaresh",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Persian (Farsi) writing guide: rules for natural Persian sentences, grammar, usage, orthography and punctuation, with mechanical checks.",
   "contextFileName": "GEMINI.md",
   "mcpServers": {
