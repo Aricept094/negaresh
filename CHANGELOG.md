@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.4
+
+- The corpus now has 193 reviewed Persian writing rules. This release adds 13 rules and records final review for all 26 rules that carried draft status across the two review rounds.
+- New guidance covers possessives, causative verbs, questions, exceptions, approximate quantities, conflicting sources, forecasts in headlines, technical descriptions and criticism grounded in the work.
+- The spelling checker respects 11 forms accepted in context, including «طوس», «توفان» and the historical title «آغا». The skill now requests a CLI with these corrections.
+
 ## 0.4.3
 
 - Expand the corpus to 180 rules. Thirteen page-checked additions are marked as drafts. Updated examples protect quotation fidelity, causal direction, modifier scope and the distinction between promises and completed events.

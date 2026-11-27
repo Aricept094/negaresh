@@ -489,11 +489,15 @@ def _check_variants(c: _Collector, corpus: Corpus) -> None:
     academy: dict[str, list[str]] = corpus.lexicon.get("variant_spellings", {})
     samiee: dict[str, list[str]] = corpus.lexicon.get("variant_spellings_samiee", {})
     notes: dict[str, str] = corpus.lexicon.get("variant_notes", {})
+    exclusions = corpus.lexicon.get("variant_review_exclusions", {})
     if not academy and not samiee:
         return
     strip = re.compile(f"[{DIACRITICS}]")
     for m in re.finditer(rf"[{L}{ZWNJ}{DIACRITICS}]+", c.text):
         key = strip.sub("", m.group())
+        # The Academy accepts this spelling in at least one reading of the token.
+        if key in exclusions:
+            continue
         if key in academy:
             preferred, who = academy[key], "فرهنگستان"
         elif key in samiee:

@@ -6,7 +6,7 @@
 
 A Persian (Farsi) writing guide for AI assistants and editors. It has three parts that work together or alone:
 
-- **A rule set**: 180 rules for Iranian standard Persian. They cover sentence structure and natural word order, verb tense and mood, paragraph flow, removing translated or machine-like Persian, grammar, usage, punctuation, numbers and citations, Academy orthography (نیم‌فاصله), and meaning preservation. Each rule has guidance and examples. The corpus marks 174 rules as sourced and 6 as editorial practice.
+- **A rule set**: 193 reviewed rules for Iranian standard Persian. They cover sentence structure and natural word order, verb tense and mood, paragraph flow, removing translated or machine-like Persian, grammar, usage, punctuation, numbers and citations, Academy orthography (نیم‌فاصله), and meaning preservation. Each rule has guidance and examples. The corpus marks 187 rules as sourced and 6 as editorial practice.
 - **A skill** (standard Agent Skills `SKILL.md` folder) for Claude, Codex and other agents: how to write, copyedit, proofread or naturalize (روان‌سازی) a Persian text with the rules.
 - **An MCP server** (stdio and Streamable HTTP) for Claude, ChatGPT, Codex, Gemini CLI, Cursor, VS Code and any MCP client: deterministic checks (Arabic letters and letters of other languages, digits and number separators, spacing, half-spaces, quotes, invisible direction marks, variant spellings, listed calques, and sentence shapes typical of machine Persian), rule search, and validation of edits before they are applied.
 
@@ -37,7 +37,7 @@ The checker found six of the eight changes on its own and fixes only the safe on
 
 ## به فارسی
 
-«نگارش» راهنمای نوشتن فارسی معیار برای دستیارهای هوش مصنوعی و ویراستاران است. ۱۸۰ قاعده دارد دربارهٔ ساخت جمله و ترتیب طبیعی اجزا، زمان و وجه فعل، پیوند بندها، زدودن نثر ترجمه‌ای و ماشینی، دستور، کاربرد، نشانه‌گذاری و دستور خط فرهنگستان. در این مجموعه، ۱۷۴ قاعده منبع‌دارند و شش قاعده جمع‌بندی ویراستاری‌اند.
+«نگارش» راهنمای نوشتن فارسی معیار برای دستیارهای هوش مصنوعی و ویراستاران است. ۱۹۳ قاعدهٔ بررسی‌شده دارد دربارهٔ ساخت جمله و ترتیب طبیعی اجزا، زمان و وجه فعل، پیوند بندها، زدودن نثر ترجمه‌ای و ماشینی، دستور، کاربرد، نشانه‌گذاری و دستور خط فرهنگستان. در این مجموعه، ۱۸۷ قاعده منبع‌دارند و شش قاعده جمع‌بندی ویراستاری‌اند.
 
 منابع: «دستور خطّ فارسی» فرهنگستان (ویراست ۱۴۰۱)، «دستور زبان فارسی ۱ و ۲» انوری و احمدی گیوی، «دستور زبان فارسی امروز» ارژنگ و «نگارش و ویرایش» سمیعی. متن کتاب‌ها در این بسته نیست و مهارت و سرور نمی‌توانند آن‌ها را بخوانند؛ فقط قاعده‌ها را به کار می‌برند.
 
@@ -124,7 +124,7 @@ uvx negaresh serve
 
 ### Claude Code (plugin)
 
-The plugin installs the skill. It starts no server: when a check is needed, the skill runs `uvx --from "negaresh>=0.4.2" negaresh check` or `… validate`, which exits as soon as it is done. The version floor makes uv fetch the new commands even if an older negaresh is cached. In Claude Code:
+The plugin installs the skill. It starts no server: when a check is needed, the skill runs `uvx --from "negaresh>=0.4.4" negaresh check` or `… validate`, which exits as soon as it is done. The version floor makes uv fetch a CLI that includes the reviewed rule set and spelling corrections. In Claude Code:
 
 ```
 /plugin marketplace add Aricept094/negaresh
@@ -260,14 +260,14 @@ Each command prints the same JSON as the matching MCP tool, runs once and exits.
 
 | Prefix | Family | Rules | Main sources |
 | --- | --- | --- | --- |
-| ORT | Orthography and spacing | 44 | Academy «دستور خطّ فارسی» (1401) |
-| GRM | Grammar, word order, tense and mood | 44 | Anvari and Ahmadi-Givi 1 and 2; Arzhang; Samiee; corpus studies |
+| ORT | Orthography and spacing | 45 | Academy «دستور خطّ فارسی» (1401) |
+| GRM | Grammar, word order, tense and mood | 51 | Anvari and Ahmadi-Givi 1 and 2; Arzhang; Samiee; corpus studies |
 | USG | Usage and calques | 26 | the three grammars; Samiee |
 | STY | Style and sentence building | 21 | Samiee; editorial synthesis; translation studies |
 | PUN | Punctuation and characters | 18 | Samiee |
-| TRM | Numbers, dates, citations, notes, names | 10 | Samiee |
-| INT | Meaning preservation | 8 | Samiee; editorial synthesis |
-| DSC | Paragraphs and discourse | 9 | Samiee; Anvari and Ahmadi-Givi 2 |
+| TRM | Numbers, dates, citations, notes, names | 11 | Samiee; Arzhang; Anvari and Ahmadi-Givi 2 |
+| INT | Meaning preservation | 10 | Samiee; editorial synthesis |
+| DSC | Paragraphs and discourse | 11 | Samiee; Anvari and Ahmadi-Givi 2 |
 
 Each rule has a severity (`error`, `convention`, `advisory`) and an evidence class. `sourced` rules name the book and page they come from, and some also name a journal article; `editorial_synthesis` rules reflect editorial judgment, sometimes with citations for context. The evidence class tells you how to cite a rule; the severity tells you how firmly to apply it.
 

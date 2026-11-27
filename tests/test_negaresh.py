@@ -52,6 +52,14 @@ def test_common_words_not_flagged_as_variants():
     assert "M14" not in checks("این خطا در آخر متن است و او در کار غرق شد.")
 
 
+@pytest.mark.parametrize("spelling", [
+    "آغا", "طبرزد", "توفان", "توفانِ", "بوذرجمهر", "طخار", "طخارستان",
+    "توالش", "طوس", "طهماسب", "طهمورث", "صقلاب",
+])
+def test_spelling_accepted_in_context_has_no_word_only_correction(spelling):
+    assert "M14" not in checks(spelling, profile_id="academic")
+
+
 def test_protected_spans_are_skipped():
     text = "نشانی https://example.com/a,b?x=1 را ببینید."
     assert "M05" not in checks(text)
